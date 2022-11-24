@@ -121,12 +121,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Form_Main.cpp" />
+    <ClCompile Include="Form_Search.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyForm.h">
+    <ClInclude Include="Form_Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Form_Search.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Search.resx">
+      <DependentUpon>Form_Search.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
