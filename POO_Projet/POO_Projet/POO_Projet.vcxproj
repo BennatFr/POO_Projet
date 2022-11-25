@@ -121,16 +121,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Connection_DB.cpp" />
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Connection_DB.h" />
     <ClInclude Include="Form_Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Form_Search.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Global_Var.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form_Main.resx">

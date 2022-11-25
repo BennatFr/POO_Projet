@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Form_Search.h"
+#include "Global_Var.h"
 
 namespace POOProjet {
 
@@ -227,14 +228,19 @@ namespace POOProjet {
 private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	POOProjet::Form_Search form_Search;
+	EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
+	Form_Search^ aaa = gcnew Form_Search(clicInfo);
+	aaa->ShowDialog();
+
+
+	/*POOProjet::Form_Search form_Search;
 	form_Search.Text = "Search Commande";
-	form_Search.ShowDialog();
+	form_Search.ShowDialog();*/
 }
 private: System::Void personnel_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	POOProjet::Form_Search form_Search;
-	form_Search.Text = "Search Personnel";
-	form_Search.ShowDialog();
+	EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
+	Form_Search^ aaa = gcnew Form_Search(clicInfo);
+	aaa->ShowDialog();
 }
 };
 }

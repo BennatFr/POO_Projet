@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+
+#include "Global_Var.h"
+
 namespace POOProjet {
 
 	using namespace System;
@@ -18,9 +22,24 @@ namespace POOProjet {
 		Form_Search(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
+		}
+
+		Form_Search(EnumVar::type_Seach title)
+		{
+			InitializeComponent();
+			String^ titleText = "[POO] v1.0 ";
+			//String^ titleText = gcnew String("dzbdjkez");
+			switch (title) {
+			case EnumVar::COMMAND:
+				this->Text = titleText + "Recherche Commande";
+				break;
+			case EnumVar::PERSONNEL:
+				this->Text = titleText + "Recherche Personnel";
+				break;
+			default:
+				this->Text = titleText + "Erreur";
+				break;
+			}
 		}
 
 	protected:
