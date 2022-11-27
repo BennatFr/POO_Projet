@@ -121,11 +121,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BD_Personnel.cpp" />
     <ClCompile Include="Connection_DB.cpp" />
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
+    <ClCompile Include="Global_Var.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BD_Personnel.h" />
     <ClInclude Include="Connection_DB.h" />
     <ClInclude Include="Form_Main.h">
       <FileType>CppForm</FileType>
