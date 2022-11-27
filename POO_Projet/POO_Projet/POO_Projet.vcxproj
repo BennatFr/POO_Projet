@@ -121,15 +121,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BD_Personnel.cpp" />
+    <ClCompile Include="DB_Address.cpp" />
+    <ClCompile Include="DB_Personnel.cpp" />
     <ClCompile Include="Connection_DB.cpp" />
+    <ClCompile Include="Form_Edit.cpp" />
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
     <ClCompile Include="Global_Var.cpp" />
+    <ClCompile Include="Personnel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BD_Personnel.h" />
+    <ClInclude Include="DB_Address.h" />
+    <ClInclude Include="DB_Personnel.h" />
     <ClInclude Include="Connection_DB.h" />
+    <ClInclude Include="Form_Edit.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Form_Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -137,8 +144,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Global_Var.h" />
+    <ClInclude Include="Personnel.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_Edit.resx">
+      <DependentUpon>Form_Edit.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.h</DependentUpon>
     </EmbeddedResource>

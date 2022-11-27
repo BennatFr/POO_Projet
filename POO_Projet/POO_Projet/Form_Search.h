@@ -5,6 +5,8 @@
 
 #include "Global_Var.h"
 #include "Connection_DB.h"
+#include "Form_Edit.h"
+#include "Personnel.h"
 
 namespace POOProjet {
 	using namespace System;
@@ -37,7 +39,10 @@ namespace POOProjet {
 				break;
 			case EnumVar::PERSONNEL:
 				this->Text = titleText + "Recherche Personnel";
-				label_research1->Text = "Id du Personnel";
+				this->label_research1->Text = "Id du Personnel";
+				this->label_research2->Text = "Nom du Personnel";
+				this->label_research3->Text = "Prénom du Personnel";
+				this->dateTimePicker2->Hide();
 				break;
 			default:
 				this->Text = titleText + "Erreur";
@@ -72,6 +77,14 @@ namespace POOProjet {
 	private: EnumVar::type_Seach typeOfResearch;
 	private: System::Windows::Forms::Label^ label_error;
 	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::TextBox^ textBox_research2;
+
+	private: System::Windows::Forms::Label^ label_research2;
+	private: System::Windows::Forms::TextBox^ textBox_research3;
+
+
+	private: System::Windows::Forms::Label^ label_research3;
+
 
 
 	private:
@@ -96,6 +109,10 @@ namespace POOProjet {
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label_error = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->textBox_research2 = (gcnew System::Windows::Forms::TextBox());
+			this->label_research2 = (gcnew System::Windows::Forms::Label());
+			this->textBox_research3 = (gcnew System::Windows::Forms::TextBox());
+			this->label_research3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -127,7 +144,7 @@ namespace POOProjet {
 			// 
 			this->label_research1->AutoSize = true;
 			this->label_research1->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->label_research1->Location = System::Drawing::Point(9, 259);
+			this->label_research1->Location = System::Drawing::Point(6, 256);
 			this->label_research1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label_research1->Name = L"label_research1";
 			this->label_research1->Size = System::Drawing::Size(82, 13);
@@ -136,7 +153,7 @@ namespace POOProjet {
 			// 
 			// textBox_research1
 			// 
-			this->textBox_research1->Location = System::Drawing::Point(9, 275);
+			this->textBox_research1->Location = System::Drawing::Point(9, 271);
 			this->textBox_research1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox_research1->Name = L"textBox_research1";
 			this->textBox_research1->Size = System::Drawing::Size(288, 20);
@@ -180,11 +197,53 @@ namespace POOProjet {
 			this->button2->TabIndex = 7;
 			this->button2->UseVisualStyleBackColor = true;
 			// 
+			// textBox_research2
+			// 
+			this->textBox_research2->Location = System::Drawing::Point(9, 308);
+			this->textBox_research2->Margin = System::Windows::Forms::Padding(2);
+			this->textBox_research2->Name = L"textBox_research2";
+			this->textBox_research2->Size = System::Drawing::Size(288, 20);
+			this->textBox_research2->TabIndex = 8;
+			// 
+			// label_research2
+			// 
+			this->label_research2->AutoSize = true;
+			this->label_research2->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->label_research2->Location = System::Drawing::Point(6, 293);
+			this->label_research2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label_research2->Name = L"label_research2";
+			this->label_research2->Size = System::Drawing::Size(82, 13);
+			this->label_research2->TabIndex = 9;
+			this->label_research2->Text = L"label_research2";
+			// 
+			// textBox_research3
+			// 
+			this->textBox_research3->Location = System::Drawing::Point(9, 345);
+			this->textBox_research3->Margin = System::Windows::Forms::Padding(2);
+			this->textBox_research3->Name = L"textBox_research3";
+			this->textBox_research3->Size = System::Drawing::Size(288, 20);
+			this->textBox_research3->TabIndex = 10;
+			// 
+			// label_research3
+			// 
+			this->label_research3->AutoSize = true;
+			this->label_research3->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->label_research3->Location = System::Drawing::Point(6, 330);
+			this->label_research3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label_research3->Name = L"label_research3";
+			this->label_research3->Size = System::Drawing::Size(82, 13);
+			this->label_research3->TabIndex = 11;
+			this->label_research3->Text = L"label_research3";
+			// 
 			// Form_Search
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(736, 445);
+			this->Controls->Add(this->label_research3);
+			this->Controls->Add(this->textBox_research3);
+			this->Controls->Add(this->label_research2);
+			this->Controls->Add(this->textBox_research2);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label_error);
 			this->Controls->Add(this->dateTimePicker2);
@@ -210,6 +269,7 @@ namespace POOProjet {
 		}
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->label_error->Text = "";
+			String^ sqlRequest;
 			switch (this->typeOfResearch) {
 			case EnumVar::PERSONNEL:
 				std::string ID_Personnel = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
@@ -218,11 +278,20 @@ namespace POOProjet {
 						this->label_error->Text = "L'identifiant n'est pas un nombre";
 						return;
 					}
-					String ^sqlRequest = gcnew String(("SELECT * FROM [POO_Projet].[dbo].[Personnel] WHERE [ID_Personnel] = " + ID_Personnel).c_str());
-					System::Data::DataSet^ result = connection->select(sqlRequest, "Personnel");
-					this->dataGridView1->DataSource = result;
-					this->dataGridView1->DataMember = "Personnel";
+					sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID_Personnel).c_str());
+				} else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "' AND [first_Name] = '" + this->textBox_research3->Text + "'";
+				} else if (this->textBox_research2->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "'";
+				} else if (this->textBox_research3->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] = '" + this->textBox_research3->Text + "'";
+				} else {
+					this->label_error->Text = "Tout les champs de recherche sont vide";
+					return;
 				}
+
+				this->dataGridView1->DataSource = connection->select(sqlRequest, "Personnel");
+				this->dataGridView1->DataMember = "Personnel";
 				break;
 			}
 			//SQL
@@ -237,7 +306,10 @@ namespace POOProjet {
 		//Afficher dans le data grid
 		}
 private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
-	this->label_error->Text = (e->RowIndex).ToString();
+	String^ IDPersonnelSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+	Personnel^ personnel = gcnew Personnel(IDPersonnelSelect);
+	Form_Edit^ formEdit = gcnew Form_Edit(personnel);
+	formEdit->ShowDialog();
 }
 };
 }

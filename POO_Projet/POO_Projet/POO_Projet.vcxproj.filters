@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DB">
+      <UniqueIdentifier>{0fae1afa-752c-4bd8-8828-5b24d994cfb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DB\Fichiers d%27en-tête">
+      <UniqueIdentifier>{bef7582a-c649-43a9-8115-18e617f4a71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DB\Fichiers sources">
+      <UniqueIdentifier>{ed2d0553-0d74-4d01-bb84-0dceed3e629a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DB\Regroupement">
+      <UniqueIdentifier>{e84d3996-2eef-4ee4-9cbe-7bff9c70faac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Form_Main.cpp">
@@ -24,11 +36,20 @@
     <ClCompile Include="Connection_DB.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="BD_Personnel.cpp">
+    <ClCompile Include="Form_Edit.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="DB_Personnel.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Personnel.cpp">
+      <Filter>DB\Regroupement</Filter>
+    </ClCompile>
     <ClCompile Include="Global_Var.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_Address.cpp">
+      <Filter>DB\Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,11 +62,20 @@
     <ClInclude Include="Connection_DB.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Global_Var.h">
+    <ClInclude Include="Form_Edit.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="BD_Personnel.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="DB_Personnel.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Personnel.h">
+      <Filter>DB\Regroupement</Filter>
+    </ClInclude>
+    <ClInclude Include="Global_Var.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Address.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

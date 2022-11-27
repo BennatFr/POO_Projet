@@ -1,8 +1,9 @@
 #pragma once
+#include "Connection_DB.h"
+
 #ifndef GLOBAL_VAR_H
 #define GLOBAL_VAR_H
 
-//#include <string>
 bool is_number(const std::string& s);
 namespace EnumVar {
 
