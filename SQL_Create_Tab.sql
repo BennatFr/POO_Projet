@@ -116,7 +116,7 @@ CREATE TABLE Personnel(
    ID_Personnel INT IDENTITY(1, 1),
    hire_Date DATE NOT NULL,
    ID_Address INT NOT NULL,
-   ID_Personnel_1 INT NOT NULL,
+   ID_Personnel_1 INT,
    ID_People INT NOT NULL,
    PRIMARY KEY(ID_Personnel),
    FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
