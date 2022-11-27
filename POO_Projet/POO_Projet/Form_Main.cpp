@@ -4,9 +4,9 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
+
 [STAThreadAttribute]
-int __clrcall Main(array<String^>^ args)
-{
+int __clrcall Main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	POOProjet::MyForm monFormulaire;

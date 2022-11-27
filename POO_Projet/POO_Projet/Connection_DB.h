@@ -11,4 +11,5 @@ public:
 	Connection_DB(void);
 	System::Data::DataSet^ select(System::String^, System::String^);
 	void execute(System::String^);
+	System::Data::SqlClient::SqlConnection^ getoCnx();
 };

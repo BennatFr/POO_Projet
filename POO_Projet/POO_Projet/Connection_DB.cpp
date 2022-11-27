@@ -1,8 +1,11 @@
 #include "Connection_DB.h"
 
 Connection_DB::Connection_DB(void) {
-	this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
-
+	//PC MAIN DESKTOP-211D050\MSSQLSERVER01
+	//PC PRO LAPTOP-3UJO5NIH
+	this->sCnx = "Data Source=DESKTOP-211D050\MSSQLSERVER01;Initial Catalog=POO_Projet;Integrated Security=True";
+	//this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
+	 
 	this->sSql = "Initialisation";
 
 	this->oCnx = gcnew System::Data::SqlClient::SqlConnection(this->sCnx);
@@ -28,4 +31,8 @@ void Connection_DB::execute(System::String^ sSql) {
 	this->oCnx->Open();
 	this->oCmd->ExecuteNonQuery();
 	this->oCnx->Close();
+}
+
+System::Data::SqlClient::SqlConnection^ Connection_DB::getoCnx() {
+	return this->oCnx;
 }
