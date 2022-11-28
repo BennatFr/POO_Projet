@@ -112,14 +112,12 @@ bool Personnel::save() {
 
 	sqlRequest = "SELECT * FROM Country WHERE name = '" + this->getCountry()->getName() + "'";
 	System::Data::DataSet^ country = this->connection->select(sqlRequest, "Country");
-	this->getCountry()->setIDCountry(Convert::ToInt32(country->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
-	this->getAddress()->setIDCountry(Convert::ToInt32(country->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+	this->setIDCountry(Convert::ToInt32(country->Tables["Country"]->Rows[0]->ItemArray[0]->ToString()));
 
 
 	sqlRequest = "SELECT * FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = '" + this->getCity()->getPostalNumber() + "'";
 	System::Data::DataSet^ city = this->connection->select(sqlRequest, "City");
-	this->getCity()->setIDCity(Convert::ToInt32(city->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
-	this->getAddress()->setIDCity(Convert::ToInt32(city->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+	this->setIDCity(Convert::ToInt32(city->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
 
 	if (this->getPersonnelID() == 0) {
 		//PEOPLE
@@ -127,16 +125,19 @@ bool Personnel::save() {
 		connection->execute(sqlRequest);
 
 		sqlRequest = "SELECT * FROM People WHERE last_Name = '" + this->getPeople()->getLastName() + "' AND first_Name = '" + this->getPeople()->getFirstName() + "'";
-		System::Data::DataSet^ city = this->connection->select(sqlRequest, "People");
-		this->getPeople()->setIDPeople(Convert::ToInt32(city->Tables["People"]->Rows[0]->ItemArray[0]->ToString()));
+		System::Data::DataSet^ people = this->connection->select(sqlRequest, "People");
+		this->setIDPeople(Convert::ToInt32(city->Tables["People"]->Rows[0]->ItemArray[0]->ToString()));
 
 		// Address
 		sqlRequest = "INSERT INTO Address SET (" + this->getAddress()->getStreetNumber() + ", '" + this->getAddress()->getStreet() + "', '" + this->getAddress()->getAdditionnalData() + "', '" + this->getAddress()->getIDAddress() + "', '" + this->getAddress()->getIDCountry() + "')";
 		connection->execute(sqlRequest);
 
-		sqlRequest = "SELECT * FROM Address WHERE street_Number = '" + this->getAddress()->getStreetNumber() + "' AND street = '" + this->getAddress()->getStreet() + "' AND ID_City = '" + this->getAddress()->getIDCity();
-		System::Data::DataSet^ city = this->connection->select(sqlRequest, "People");
-		this->getPeople()->setIDPeople(Convert::ToInt32(city->Tables["People"]->Rows[0]->ItemArray[0]->ToString()));
+		sqlRequest = "SELECT * FROM Address WHERE street_Number = '" + this->getAddress()->getStreetNumber() + "' AND street = '" + this->getAddress()->getStreet() + "' AND ID_City = '" + this->getAddress()->getIDCity() + "' AND ID_Country = '" + this->getAddress()->getIDCountry() + "'";
+		System::Data::DataSet^ address = this->connection->select(sqlRequest, "Address");
+		this->setIDPeople(Convert::ToInt32(city->Tables["Address"]->Rows[0]->ItemArray[0]->ToString()));
+
+		sqlRequest = "INSERT INTO Personnel VALUES ('27-11-2022', '" + this->getAddress()->getIDAddress() + "', "+ System::DBNull::Value +", '"+ this->getPeople()->getIDPeople() + "')";
+		connection->execute(sqlRequest);
 	}
 
 	//PEOPLE
