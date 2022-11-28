@@ -51,6 +51,15 @@
     <ClCompile Include="DB_Address.cpp">
       <Filter>DB\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="DB_City.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_Country.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_People.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -75,6 +84,15 @@
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
     <ClInclude Include="DB_Address.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_City.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Country.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_People.h">
       <Filter>DB\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

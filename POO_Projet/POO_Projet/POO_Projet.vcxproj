@@ -122,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DB_Address.cpp" />
+    <ClCompile Include="DB_City.cpp" />
+    <ClCompile Include="DB_Country.cpp" />
+    <ClCompile Include="DB_People.cpp" />
     <ClCompile Include="DB_Personnel.cpp" />
     <ClCompile Include="Connection_DB.cpp" />
     <ClCompile Include="Form_Edit.cpp" />
@@ -132,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DB_Address.h" />
+    <ClInclude Include="DB_City.h" />
+    <ClInclude Include="DB_Country.h" />
+    <ClInclude Include="DB_People.h" />
     <ClInclude Include="DB_Personnel.h" />
     <ClInclude Include="Connection_DB.h" />
     <ClInclude Include="Form_Edit.h">
