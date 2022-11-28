@@ -120,7 +120,7 @@ CREATE TABLE Personnel(
    ID_People INT NOT NULL,
    PRIMARY KEY(ID_Personnel),
    FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
-   FOREIGN KEY(ID_Personnel_1) REFERENCES Personnel(ID_Personnel),
+   FOREIGN KEY(ID_Superior) REFERENCES Personnel(ID_Personnel),
    FOREIGN KEY(ID_People) REFERENCES People(ID_People)
 );
 
