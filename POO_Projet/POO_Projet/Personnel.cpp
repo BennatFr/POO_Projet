@@ -3,6 +3,12 @@
 using namespace System;
 
 Personnel::Personnel(){
+	this->connection = gcnew Connection_DB();
+	this->personnel = gcnew DB_Personnel();
+	this->address = gcnew DB_Address();
+	this->city = gcnew DB_City();
+	this->country = gcnew DB_Country();
+	this->people = gcnew DB_People();
 }
 
 Personnel::Personnel(System::String^ ID_Personnel){
@@ -64,4 +70,79 @@ DB_Country^ Personnel::getCountry() {
 
 DB_People^ Personnel::getPeople() {
 	return this->people;
+}
+
+void Personnel::setIDPeople(int ID_People)
+{
+	this->getPeople()->setIDPeople(ID_People);
+	this->getPersonnel()->setIDPeople(ID_People);
+}
+
+void Personnel::setIDCity(int ID_City)
+{
+	this->getCity()->setIDCity(ID_City);
+	this->getAddress()->setIDCity(ID_City);
+}
+
+void Personnel::setIDAddress(int ID_Address)
+{
+	this->getPersonnel()->setIDAddress(ID_Address);
+	this->getAddress()->setIDAddress(ID_Address);
+}
+
+void Personnel::setIDCountry(int ID_Country)
+{
+	this->getCountry()->setIDCountry(ID_Country);
+	this->getAddress()->setIDCity(ID_Country);
+}
+
+bool Personnel::save() {
+	// Verif country
+	System::String^ sqlRequest = "SELECT Count(*) FROM Country WHERE name = '"+ this->getCountry()->getName() + "'";
+	System::Data::DataSet^ verif = this->connection->select(sqlRequest, "Country");
+	if (verif->Tables["Country"]->Rows[0]->ItemArray[0]->ToString() == "0") {
+		return false;
+	}
+	// Verif city
+	sqlRequest = "SELECT Count(*) FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = '"+ this->getCity()->getPostalNumber() + "'";
+	verif = this->connection->select(sqlRequest, "City");
+	if (verif->Tables["City"]->Rows[0]->ItemArray[0]->ToString() == "0") {
+		return false;
+	}
+
+	sqlRequest = "SELECT * FROM Country WHERE name = '" + this->getCountry()->getName() + "'";
+	System::Data::DataSet^ country = this->connection->select(sqlRequest, "Country");
+	this->getCountry()->setIDCountry(Convert::ToInt32(country->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+	this->getAddress()->setIDCountry(Convert::ToInt32(country->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+
+
+	sqlRequest = "SELECT * FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = '" + this->getCity()->getPostalNumber() + "'";
+	System::Data::DataSet^ city = this->connection->select(sqlRequest, "City");
+	this->getCity()->setIDCity(Convert::ToInt32(city->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+	this->getAddress()->setIDCity(Convert::ToInt32(city->Tables["City"]->Rows[0]->ItemArray[0]->ToString()));
+
+	if (this->getPersonnelID() == 0) {
+		//PEOPLE
+		sqlRequest = "INSERT INTO People VALUES ('" + this->getPeople()->getLastName() + "', '" + this->getPeople()->getFirstName() + "')";
+		connection->execute(sqlRequest);
+
+		sqlRequest = "SELECT * FROM People WHERE last_Name = '" + this->getPeople()->getLastName() + "' AND first_Name = '" + this->getPeople()->getFirstName() + "'";
+		System::Data::DataSet^ city = this->connection->select(sqlRequest, "People");
+		this->getPeople()->setIDPeople(Convert::ToInt32(city->Tables["People"]->Rows[0]->ItemArray[0]->ToString()));
+
+		// Address
+		sqlRequest = "INSERT INTO Address SET (" + this->getAddress()->getStreetNumber() + ", '" + this->getAddress()->getStreet() + "', '" + this->getAddress()->getAdditionnalData() + "', '" + this->getAddress()->getIDAddress() + "', '" + this->getAddress()->getIDCountry() + "')";
+		connection->execute(sqlRequest);
+
+		sqlRequest = "SELECT * FROM Address WHERE street_Number = '" + this->getAddress()->getStreetNumber() + "' AND street = '" + this->getAddress()->getStreet() + "' AND ID_City = '" + this->getAddress()->getIDCity();
+		System::Data::DataSet^ city = this->connection->select(sqlRequest, "People");
+		this->getPeople()->setIDPeople(Convert::ToInt32(city->Tables["People"]->Rows[0]->ItemArray[0]->ToString()));
+	}
+
+	//PEOPLE
+	sqlRequest = "UPDATE People SET first_Name = '" + this->getPeople()->getFirstName() +"', last_Name = '"+ this->getPeople()->getLastName()  +"' WHERE ID_People = " + this->getPeople()->getIDPeople();
+	connection->execute(sqlRequest);
+	// Address
+	sqlRequest = "UPDATE Address SET street_Number = '"+ this->getAddress()->getStreetNumber() + "', street = '"+ this->getAddress()->getStreet() +"', additionnal_Data = '"+ this->getAddress()->getAdditionnalData() +"', ID_City = '"+ this->getAddress()->getIDAddress() + "', ID_Country = '" + this->getAddress()->getIDCountry() + "' WHERE ID_Address = " + this->getAddress()->getIDAddress();
+	connection->execute(sqlRequest);
 }

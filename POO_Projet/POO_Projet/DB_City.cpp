@@ -31,12 +31,12 @@ void DB_City::setIDCity(int ID_City)
 	this->ID_City = ID_City;
 }
 
-void DB_City::getName(System::String^ name)
+void DB_City::setName(System::String^ name)
 {
 	this->name = name;
 }
 
-void DB_City::getPostalNumber(System::String^ postal_number)
+void DB_City::setPostalNumber(System::String^ postal_number)
 {
 	this->postal_number = postal_number;
 }

@@ -11,7 +11,7 @@ public:
 	System::String^ getName();
 
 	void setIDCountry(int ID_Country);
-	void getName(System::String^ name);
+	void setName(System::String^ name);
 
 	bool verifName(System::String^ name);
 };

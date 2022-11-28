@@ -13,7 +13,7 @@ public:
 	System::String^ getFirstName();
 
 	void setIDPeople(int ID_People);
-	void getLastName(System::String^ last_Name);
-	void getFirstName(System::String^ first_Name);
+	void setLastName(System::String^ last_Name);
+	void setFirstName(System::String^ first_Name);
 };
 

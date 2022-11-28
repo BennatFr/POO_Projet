@@ -34,12 +34,12 @@ void DB_People::setIDPeople(int ID_People)
 	this->ID_People = ID_People;
 }
 
-void DB_People::getLastName(System::String^ last_Name)
+void DB_People::setLastName(System::String^ last_Name)
 {
 	this->last_Name = last_Name;
 }
 
-void DB_People::getFirstName(System::String^ first_Name)
+void DB_People::setFirstName(System::String^ first_Name)
 {
 	this->first_Name = first_Name;
 }

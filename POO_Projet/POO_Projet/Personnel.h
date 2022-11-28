@@ -25,6 +25,13 @@ public:
 	DB_City^ getCity();
 	DB_Country^ getCountry();
 	DB_People^ getPeople();
+
+	void setIDPeople(int ID_People);
+	void setIDCity(int ID_City);
+	void setIDAddress(int ID_Address);
+	void setIDCountry(int ID_Country);
+
+	bool save();
 };
 
 

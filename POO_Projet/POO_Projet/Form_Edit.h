@@ -28,8 +28,38 @@ namespace POOProjet {
 		Form_Edit(Personnel^ personnel)
 		{
 			InitializeComponent();
+			this->personnel = personnel;
 			this->Text = "[POO] v1.0 | Modification Personnel | N°" + personnel->getPersonnelID();
 			this->textBox1->Text = Convert::ToString(personnel->getPersonnel()->getIDPeople());
+			this->label1->Text = "Nom de famille";
+			this->label2->Text = "Prénom";
+			this->label3->Text = "ID du supérieur";
+			this->label4->Text = "Numéro de rue";
+			this->label5->Text = "Nom de la rue";
+			this->label6->Text = "Information complémentaire";
+			this->label7->Text = "Ville";
+			this->label8->Text = "Code postal";
+			this->label9->Text = "Pays";
+
+			this->textBox1->Text = personnel->getPeople()->getLastName();
+			this->textBox2->Text = personnel->getPeople()->getFirstName();
+			this->textBox3->Text = personnel->getPersonnel()->getIDSuperior().ToString();
+			this->textBox4->Text = personnel->getAddress()->getStreetNumber().ToString();
+			this->textBox5->Text = personnel->getAddress()->getStreet();
+			this->textBox6->Text = personnel->getAddress()->getAdditionnalData();
+			this->textBox7->Text = personnel->getCity()->getName();
+			this->textBox8->Text = personnel->getCity()->getPostalNumber();
+			this->textBox9->Text = personnel->getCountry()->getName();
+
+			this->textBox1->MaxLength = 50;
+			this->textBox2->MaxLength = 50;
+			this->textBox3->MaxLength = 10;
+			this->textBox4->MaxLength = 10;
+			this->textBox5->MaxLength = 95;
+			this->textBox6->MaxLength = 50;
+			this->textBox7->MaxLength = 35;
+			this->textBox8->MaxLength = 10;
+			this->textBox9->MaxLength = 56;
 		}
 
 	protected:
@@ -53,24 +83,33 @@ namespace POOProjet {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::TextBox^ textBox6;
 
-	private: System::Windows::Forms::TextBox^ textBox4;
+
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label4;
 
 
 	private: System::Windows::Forms::TextBox^ textBox5;
-	private: System::Windows::Forms::TextBox^ textBox6;
+	private: System::Windows::Forms::TextBox^ textBox4;
+
+
 	private: System::Windows::Forms::Label^ label8;
-
-
-	private: System::Windows::Forms::TextBox^ textBox7;
-	private: System::Windows::Forms::Label^ label7;
-
 	private: System::Windows::Forms::TextBox^ textBox8;
+
+
+
+
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::TextBox^ textBox7;
+
+
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::TextBox^ textBox9;
+	private: System::Windows::Forms::Button^ button2;
 
-
+	private: Personnel^ personnel;
 
 	private:
 		/// <summary>
@@ -93,16 +132,19 @@ namespace POOProjet {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -172,13 +214,13 @@ namespace POOProjet {
 			this->label6->TabIndex = 13;
 			this->label6->Text = L"label6";
 			// 
-			// textBox4
+			// textBox6
 			// 
-			this->textBox4->Location = System::Drawing::Point(13, 259);
-			this->textBox4->Margin = System::Windows::Forms::Padding(4);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(337, 22);
-			this->textBox4->TabIndex = 12;
+			this->textBox6->Location = System::Drawing::Point(13, 259);
+			this->textBox6->Margin = System::Windows::Forms::Padding(4);
+			this->textBox6->Name = L"textBox6";
+			this->textBox6->Size = System::Drawing::Size(337, 22);
+			this->textBox6->TabIndex = 12;
 			// 
 			// label5
 			// 
@@ -206,13 +248,13 @@ namespace POOProjet {
 			this->textBox5->Size = System::Drawing::Size(337, 22);
 			this->textBox5->TabIndex = 9;
 			// 
-			// textBox6
+			// textBox4
 			// 
-			this->textBox6->Location = System::Drawing::Point(13, 167);
-			this->textBox6->Margin = System::Windows::Forms::Padding(4);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(337, 22);
-			this->textBox6->TabIndex = 8;
+			this->textBox4->Location = System::Drawing::Point(13, 167);
+			this->textBox4->Margin = System::Windows::Forms::Padding(4);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(337, 22);
+			this->textBox4->TabIndex = 8;
 			// 
 			// label8
 			// 
@@ -223,13 +265,13 @@ namespace POOProjet {
 			this->label8->TabIndex = 17;
 			this->label8->Text = L"label8";
 			// 
-			// textBox7
+			// textBox8
 			// 
-			this->textBox7->Location = System::Drawing::Point(13, 351);
-			this->textBox7->Margin = System::Windows::Forms::Padding(4);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(337, 22);
-			this->textBox7->TabIndex = 16;
+			this->textBox8->Location = System::Drawing::Point(13, 351);
+			this->textBox8->Margin = System::Windows::Forms::Padding(4);
+			this->textBox8->Name = L"textBox8";
+			this->textBox8->Size = System::Drawing::Size(337, 22);
+			this->textBox8->TabIndex = 16;
 			// 
 			// label7
 			// 
@@ -240,39 +282,69 @@ namespace POOProjet {
 			this->label7->TabIndex = 15;
 			this->label7->Text = L"label7";
 			// 
-			// textBox8
+			// textBox7
 			// 
-			this->textBox8->Location = System::Drawing::Point(13, 305);
-			this->textBox8->Margin = System::Windows::Forms::Padding(4);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(337, 22);
-			this->textBox8->TabIndex = 14;
+			this->textBox7->Location = System::Drawing::Point(13, 305);
+			this->textBox7->Margin = System::Windows::Forms::Padding(4);
+			this->textBox7->Name = L"textBox7";
+			this->textBox7->Size = System::Drawing::Size(337, 22);
+			this->textBox7->TabIndex = 14;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(490, 318);
+			this->button1->Location = System::Drawing::Point(506, 322);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(182, 55);
 			this->button1->TabIndex = 18;
-			this->button1->Text = L"button1";
+			this->button1->Text = L"Save";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form_Edit::button1_Click);
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(14, 379);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(44, 16);
+			this->label9->TabIndex = 20;
+			this->label9->Text = L"label9";
+			// 
+			// textBox9
+			// 
+			this->textBox9->Location = System::Drawing::Point(13, 399);
+			this->textBox9->Margin = System::Windows::Forms::Padding(4);
+			this->textBox9->Name = L"textBox9";
+			this->textBox9->Size = System::Drawing::Size(337, 22);
+			this->textBox9->TabIndex = 19;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(506, 383);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(182, 55);
+			this->button2->TabIndex = 21;
+			this->button2->Text = L"Delete";
+			this->button2->UseVisualStyleBackColor = true;
 			// 
 			// Form_Edit
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(557, 316);
+			this->ClientSize = System::Drawing::Size(700, 449);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label8);
-			this->Controls->Add(this->textBox7);
-			this->Controls->Add(this->label7);
 			this->Controls->Add(this->textBox8);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->textBox7);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->textBox5);
-			this->Controls->Add(this->textBox6);
+			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->label2);
@@ -288,5 +360,23 @@ namespace POOProjet {
 
 		}
 #pragma endregion
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	this->personnel->getPeople()->setLastName(this->textBox1->Text);
+	this->personnel->getPeople()->setFirstName(this->textBox2->Text);
+	this->personnel->getPersonnel()->setIDSuperior(Convert::ToInt32(this->textBox3->Text));
+	this->personnel->getAddress()->setStreetNumber(Convert::ToInt32(this->textBox4->Text));
+	this->personnel->getAddress()->setStreet(this->textBox5->Text);
+	this->personnel->getAddress()->setAdditionnalData(this->textBox6->Text);
+	this->personnel->getCity()->setName(this->textBox7->Text);
+	this->personnel->getCity()->setPostalNumber(this->textBox8->Text);
+	this->personnel->getCountry()->setName(this->textBox9->Text);
+	if (this->personnel->save()) {
+		MessageBox::Show("Les données de l'utilisateur ont bien été sauvegardées.", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	} else {
+		MessageBox::Show("Le nom du pays ou de la ville n'est pas valide !", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	
+}
 };
 }

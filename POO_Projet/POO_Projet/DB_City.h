@@ -13,8 +13,8 @@ public:
 	System::String^ getPostalNumber();
 
 	void setIDCity(int ID_City);
-	void getName(System::String^ name);
-	void getPostalNumber(System::String^ postal_number);
+	void setName(System::String^ name);
+	void setPostalNumber(System::String^ postal_number);
 
 	bool verifName(System::String^ name);
 	bool verifPostalNumber(System::String^ postal_number);
