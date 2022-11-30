@@ -1,8 +1,8 @@
-INSERT INTO Methode_Payment( type) VALUES
+INSERT INTO Methode_Payment(type) VALUES
 ('PP'),
 ('CB'),
 ('E');
-INSERT INTO City (name, postal_Number) VALUES
+INSERT INTO City(name, postal_Number) VALUES
 ('Paris', '75'),
 ('Lyon', ' 69'),
 ('Nice', ' 06'),
@@ -33,7 +33,7 @@ INSERT INTO People (first_name,last_name)VALUES
 ('Jane','Green'), 
 ('Louis','Green'), 
 ('Phillip','Turner'), 
-('Bruno','Lemaire),
+('Bruno','Lemaire'),
 ('Jean','Rousseau'), 
 ('Jules','Blanchard'), 
 ('Noe','Perez'), 
@@ -50,12 +50,12 @@ INSERT INTO Bill (client_first_name,client_last_name)VALUES
 ('Adrien','Jackson'), 
 ('Alan','Walker'),
 ('Robinson','Cruosé');
-INSERT INTO Bill(personnel_first_name,personnel_last_name) VALUES
+INSERT INTO Bill(personnel_Fisrt_Name,personnel_Last_Name) VALUES
 ('Peter','Young'), 
 ('Jane','Green'), 
 ('Louis','Green'), 
 ('Phillip','Turner'), 
-('Bruno','Lemaire),
+('Bruno','Lemaire'),
 ('Jean','Rousseau'), 
 ('Jules','Blanchard'), 
 ('Noe','Perez'), 
@@ -78,7 +78,7 @@ INSERT INTO Bill(bill_Date) VALUES
 ('2022-03-12'),
 ('2020-06-18'),
 ('2022-04-20');
-INSERT INTO Bill_Contain (price_without_taxes,price_with_tax) VALUES
+INSERT INTO Bill_Contain(price,VAT) VALUES
 ('10.35','0.2'),
 ('20.12','0.2'),
 ('30.99','0.2'),
@@ -137,32 +137,32 @@ INSERT INTO Bill_Item(name,type) VALUES
 ('processeur','composant_électronique'),
 ('carte_graphique','composant_électronique'),
 ('carte_mère','composant_électronique'),
-('micro_controlleur,'composant_électronique'),
+('micro_controlleur','composant_électronique'),
 ('LED','composant_électronique'),
 ('Ecran_LCD','composant_électronique'),
 ('Batterie','composant_électronique'),
-(résistance','composant_électronique'),
-INSERT INTO Address (street_number,street,name,additional_Data) VALUES
+('résistance','composant_électronique');
+INSERT INTO Address (street_number,street,additionnal_Data) VALUES
 ('56','Rue Arnaud Caci','Batiment 2'),
-('68','Chemin Du moulin'),
-('35',Rue Pasteur','Batiment 2'),
+('68','Chemin Du moulin','Batiment1'),
+('35','Rue Pasteur','Batiment 2'),
 ('652','Place Victor Hugo','Batiment 2'),
-('4','Rue du stade'),
-('964','Route de la gare'),
+('4','Rue du stade','Batiment1'),
+('964','Route de la gare','Batiment1'),
 ('455','Boulevard Principal','Batiment 2'),
-('852','Place de l'église'),
+('852','Place de l église','Batiment1'),
 ('620','Route de la fontaine','Batiment 2'),
 ('951','Route des jardins','Batiment 2'),
-('6','Rue du château'),
-('23','Rue de la mairie'),
+('6','Rue du château','Batiment1'),
+('23','Rue de la mairie','Batiment1'),
 ('167','Rue étoile','Batiment 2'),
-('105','Allée cassini'),
+('105','Allée cassini','Batiment1'),
 ('98','Allée verdin','Batiment 2'),
-('3','Chemin de turin'),
+('3','Chemin de turin','Batiment1'),
 ('1','Chemin adrien','Batiment 2'),
-('5','Boulevard cannes'),
+('5','Boulevard cannes','Batiment1'),
 ('28','Boulevard henry','Batiment 2'),
-('14','Boulevard martin');
+('14','Boulevard martin','Batiment1');
 INSERT INTO Client(birthdate,first_buy_website) VALUES
 ('1991-12-07','2021-11-08'),
 ('1988-02-01','2021-06-30'),
@@ -175,7 +175,7 @@ INSERT INTO Client(birthdate,first_buy_website) VALUES
 ('1997-01-01','2019-04-12'),
 ('1998-01-18','2021-11-25');
 INSERT INTO Command(reference,date_Estimation,date_Issue) VALUES
-('JHSM2020NICE','2022-11-29',2022-10-19')
+('JHSM2020NICE','2022-11-29','2022-10-19'),
 ('CLPA2021PARIS','2022-12-05','2022-07-02'),
 ('ADBR2022BREST','2022-12-23','2022-06-28'),
 ('LODU2016REIMS','2023-01-10','2022-07-04'),
@@ -185,7 +185,7 @@ INSERT INTO Command(reference,date_Estimation,date_Issue) VALUES
 ('ADJA2015ANGERS','2023-01-15','2022-07-16'),
 ('ALWA2029DIJON','2022-12-04','2022-11-25'),
 ('ROCR2020GRENOBLE','2022-12-15','2022-08-25');
-INSER INTO Command_Contain(quantity,discount) VALUES
+INSERT INTO Command_Contain(quantity,discount) VALUES
 ('1','0.10'),
 ('2','0.14'),
 ('3','0.16'),
@@ -212,11 +212,11 @@ INSERT INTO Item (name ,reference,replenishment,stock) VALUES
 ('processeur','GHI','2','10'),
 ('carte_graphique','JKL','3','10'),
 ('carte_mère','MNO','15','50'),
-('micro_controlleur,'PQR','13','20'),
+('micro_controlleur','PQR','13','20'),
 ('LED','STW','14','34'),
 ('Ecran_LCD','XYZ','6','25'),
 ('Batterie','BDA','19','18'),
-(résistance','AEZ','18','33');
+('résistance','AEZ','18','33');
 INSERT INTO Payment(Payment_Date) VALUES
 ('2022-10-02'),
 ('2022-11-03'),
@@ -228,18 +228,18 @@ INSERT INTO Payment(Payment_Date) VALUES
 ('2022-10-13'),
 ('2022-11-02'),
 ('2022-10-25'),
-('2022-10-27'),
+('2022-10-27');
 INSERT INTO Type(name) VALUES
 ('cable_hdmi'),
 ('prise'),
 ('processeur'),
 ('carte_graphique'),
 ('carte_mère'),
-('micro_controlleur),
-('LED'),
+('micro_controlleur'),
+('led'),
 ('Ecran_LCD'),
 ('Batterie'),
-(résistance');
+('résistance');
 INSERT INTO Personnel(hire_Date) VALUES
 ('2005-06-16'),
 ('2019-06-15'),
@@ -263,8 +263,8 @@ INSERT INTO	Command (settlement_Balance) VALUES
 ('2022-10-13'),
 ('2022-11-02'),
 ('2022-10-25'),
-('2022-10-27'),
-INSERT INTO Get_Client_Adress(is_Billing) VALUES
+('2022-10-27');
+INSERT INTO Get_Client_Address(is_Billing) VALUES
 ('True'),
 ('False'),
 ('True'),
@@ -275,7 +275,6 @@ INSERT INTO Get_Client_Adress(is_Billing) VALUES
 ('False'),
 ('True'),
 ('False');
-
 
 
 
