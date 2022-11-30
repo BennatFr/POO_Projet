@@ -20,11 +20,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{ABF27017-A351-45BC-86B8-4D44A5C6DCEF}</ProjectGuid>
+    <ProjectGuid>{716CA8E1-FD78-4824-AACF-1B504C8E027C}</ProjectGuid>
     <EnableManagedPackageReferenceSupport>true</EnableManagedPackageReferenceSupport>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>POOProjet</RootNamespace>
+    <RootNamespace>TestListChainées</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -122,47 +122,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
-    <ClCompile Include="DB_Address.cpp" />
-    <ClCompile Include="DB_City.cpp" />
-    <ClCompile Include="DB_Country.cpp" />
-    <ClCompile Include="DB_People.cpp" />
-    <ClCompile Include="DB_Personnel.cpp" />
-    <ClCompile Include="Connection_DB.cpp" />
-    <ClCompile Include="Form_Edit.cpp" />
-    <ClCompile Include="Form_Main.cpp" />
-    <ClCompile Include="Form_Search.cpp" />
-    <ClCompile Include="Global_Var.cpp" />
-    <ClCompile Include="Personnel.cpp" />
+    <ClCompile Include="List_Address.cpp" />
+    <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
-    <ClInclude Include="DB_Address.h" />
-    <ClInclude Include="DB_City.h" />
-    <ClInclude Include="DB_Country.h" />
-    <ClInclude Include="DB_People.h" />
-    <ClInclude Include="DB_Personnel.h" />
-    <ClInclude Include="Connection_DB.h" />
-    <ClInclude Include="Form_Edit.h">
+    <ClInclude Include="List_Address.h" />
+    <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Form_Main.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Form_Search.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Global_Var.h" />
-    <ClInclude Include="Personnel.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form_Edit.resx">
-      <DependentUpon>Form_Edit.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Main.resx">
-      <DependentUpon>Form_Main.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Search.resx">
-      <DependentUpon>Form_Search.h</DependentUpon>
+    <EmbeddedResource Include="MyForm.resx">
+      <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

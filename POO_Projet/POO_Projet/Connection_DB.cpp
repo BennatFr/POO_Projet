@@ -24,6 +24,9 @@ System::Data::DataSet^ Connection_DB::select(System::String^ sSql, System::Strin
 
 	return this->oDs;
 }
+Row^ Connection_DB::selectRow(System::String^ sSql, System::String^ sDataTableName) {
+	return gcnew Row(this->select(sSql, sDataTableName), sDataTableName);
+}
 void Connection_DB::execute(System::String^ sSql) {
 	this->sSql = sSql;
 	this->oCmd->CommandText = this->sSql;
