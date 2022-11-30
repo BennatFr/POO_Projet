@@ -14,9 +14,6 @@
     <Filter Include="DB\Fichiers sources">
       <UniqueIdentifier>{ed2d0553-0d74-4d01-bb84-0dceed3e629a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DB\Regroupement">
-      <UniqueIdentifier>{e84d3996-2eef-4ee4-9cbe-7bff9c70faac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Regroupement">
       <UniqueIdentifier>{382ec8e2-c33a-44ec-b659-0ab42adaafb3}</UniqueIdentifier>
     </Filter>

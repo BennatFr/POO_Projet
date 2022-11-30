@@ -17,7 +17,6 @@ private:
 	int save();
 public:
 	Address();
-	Address(int idAddress);
 	Address(int idAddress, bool clientAddress);
 	Address(DB_Address^ address, DB_City^ city, DB_Country^ country);
 	Address(DB_Address^ address, DB_City^ city, DB_Country^ country, DB_Client_Address^ client_Address);

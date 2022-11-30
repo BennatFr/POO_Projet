@@ -9,7 +9,7 @@ Personnel::Personnel(){
 }
 
 Personnel::Personnel(int ID_Personnel){
-	this->address = gcnew Address(ID_Personnel);
+	this->address = gcnew Address(ID_Personnel, false);
 
 	//SELECT Personnel.ID_People, Personnel.ID_Personnel, Personnel.hire_Date, people.last_Name, People.first_Name FROM Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People
 	System::String^ sqlRequest = "SELECT Personnel.ID_Personnel, Personnel.ID_People, Personnel.ID_Superior, Personnel.ID_Address, Personnel.hire_Date, people.last_Name, People.first_Name FROM (SELECT * FROM Personnel WHERE ID_Personnel = "+ ID_Personnel +") AS Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People";

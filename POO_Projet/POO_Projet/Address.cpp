@@ -7,10 +7,6 @@ Address::Address() {
     this->country = gcnew DB_Country;
 }
 
-Address::Address(int idAddress) {
-    Address(idAddress, false);
-}
-
 Address::Address(int idAddress, bool clientAddress) {
     System::String^ sqlRequest;
     if (clientAddress) {
@@ -102,7 +98,7 @@ int Address::save() {
             sqlRequest = "INSERT INTO Country VALUES ('"+ this->getCountry()->getName() + "')";
             connection->execute(sqlRequest);
             sqlRequest = "SELECT TOP 1 * FROM Country ORDER BY ID_Country DESC";
-            Row ^ result = connection->selectRow(sqlRequest, "Country", 0);
+            result = connection->selectRow(sqlRequest, "Country", 0);
             this->setIDCountry(result->getInt(0));
         } else {
             sqlRequest = "UPDATE Country SET name = '"+ this->getCountry()->getName() +"' WHERE ID_Country = " + this->getCountry()->getIDCountry();
@@ -117,7 +113,7 @@ int Address::save() {
             sqlRequest = "INSERT INTO City VALUES ('" + this->getCity()->getName() + "', '" + this->getCity()->getPostalNumber() + "')";
             connection->execute(sqlRequest);
             sqlRequest = "SELECT TOP 1 * FROM City ORDER BY ID_City DESC";
-            Row^ result = connection->selectRow(sqlRequest, "City", 0);
+            result = connection->selectRow(sqlRequest, "City", 0);
             this->setIDCity(result->getInt(0));
         }
         else {
@@ -132,6 +128,28 @@ int Address::insert() {
     System::String^ sqlRequest;
     this->save();
     if (this->getAddress() != nullptr) {
+        if (this->getAddress()->getIDCity() == 0) {
+            sqlRequest = "SELECT Count(*) FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = " + this->getCity()->getPostalNumber() + "'";
+            Row^ result = connection->selectRow(sqlRequest, "City", 0);
+            if (result->getInt(0) == 0) {
+                sqlRequest = "INSERT INTO City VALUES ('" + this->getCity()->getName() + "', '" + this->getCity()->getPostalNumber() + "')";
+                connection->execute(sqlRequest);
+            }
+            sqlRequest = "SELECT TOP 1 * FROM City ORDER BY ID_City DESC";
+            result = connection->selectRow(sqlRequest, "City", 0);
+            this->setIDCity(result->getInt(0));
+        }
+        if (this->getAddress()->getIDCountry() == 0) {
+            sqlRequest = "SELECT * FROM Country WHERE name = '" + this->getCountry()->getName() + "'";
+            Row^ result = connection->selectRow(sqlRequest, "Country", 0);
+            if (result->getInt(0) == 0) {
+                sqlRequest = "INSERT INTO Country VALUES ('" + this->getCountry()->getName() + "')";
+                            connection->execute(sqlRequest);
+            }
+            sqlRequest = "SELECT TOP 1 * FROM Country ORDER BY ID_Country DESC";
+            result = connection->selectRow(sqlRequest, "Country", 0);
+            this->setIDCountry(result->getInt(0));
+        }
         sqlRequest = "INSERT INTO Address VALUES (" + this->getAddress()->getStreetNumber() + ", '"+ this->getAddress()->getStreet() +"', '" + this->getAddress()->getAdditionnalData() + "', "+ this->getAddress()->getIDCity() + ", " + this->getAddress()->getIDCountry() + ")";
         connection->execute(sqlRequest);
         sqlRequest = "SELECT TOP 1 * FROM Address ORDER BY ID_Address DESC";
