@@ -264,6 +264,17 @@ INSERT INTO	Command (settlement_Balance) VALUES
 ('2022-11-02'),
 ('2022-10-25'),
 ('2022-10-27'),
+INSERT INTO Get_Client_Adress(is_Billing) VALUES
+('True'),
+('False'),
+('True'),
+('False'),
+('True'),
+('False'),
+('True'),
+('False'),
+('True'),
+('False');
 
 
 
