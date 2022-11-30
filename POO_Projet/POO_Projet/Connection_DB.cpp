@@ -15,6 +15,7 @@ Connection_DB::Connection_DB(void) {
 
 	this->oCmd->CommandType = System::Data::CommandType::Text;
 }
+
 System::Data::DataSet^ Connection_DB::select(System::String^ sSql, System::String^ sDataTableName) {
 	this->oDs->Clear();
 	this->sSql = sSql;
@@ -24,9 +25,15 @@ System::Data::DataSet^ Connection_DB::select(System::String^ sSql, System::Strin
 
 	return this->oDs;
 }
+
 Row^ Connection_DB::selectRow(System::String^ sSql, System::String^ sDataTableName) {
 	return gcnew Row(this->select(sSql, sDataTableName), sDataTableName);
 }
+
+Row^ Connection_DB::selectRow(System::String^ sSql, System::String^ sDataTableName, int row) {
+	return gcnew Row(this->select(sSql, sDataTableName), sDataTableName, row);
+}
+
 void Connection_DB::execute(System::String^ sSql) {
 	this->sSql = sSql;
 	this->oCmd->CommandText = this->sSql;

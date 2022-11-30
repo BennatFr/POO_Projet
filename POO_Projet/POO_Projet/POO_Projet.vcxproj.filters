@@ -75,6 +75,12 @@
     <ClCompile Include="Address.cpp">
       <Filter>Regroupement\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="DB_Client_Address.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Row.cpp">
+      <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -112,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="Address.h">
       <Filter>Regroupement\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Client_Address.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Row.h">
+      <Filter>Fichiers de ressources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

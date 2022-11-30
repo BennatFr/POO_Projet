@@ -7,7 +7,7 @@
 
 ref class Personnel {
 private:
-	Connection_DB^ connection;
+	Connection_DB^ connection = gcnew Connection_DB();
 	DB_Personnel^ personnel = gcnew DB_Personnel();
 	Address^ address = gcnew Address();
 	DB_People^ people = gcnew DB_People();
@@ -27,7 +27,8 @@ public:
 	void setIDPeople(int ID_People);
 	void setIDAddress(int ID_Address);
 
-	bool save();
+	int insert();
+	int update();
 };
 
 

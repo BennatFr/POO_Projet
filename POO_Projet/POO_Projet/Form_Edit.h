@@ -44,12 +44,12 @@ namespace POOProjet {
 			this->textBox1->Text = personnel->getPeople()->getLastName();
 			this->textBox2->Text = personnel->getPeople()->getFirstName();
 			this->textBox3->Text = personnel->getPersonnel()->getIDSuperior().ToString();
-			this->textBox4->Text = personnel->getAddress()->getStreetNumber().ToString();
-			this->textBox5->Text = personnel->getAddress()->getStreet();
-			this->textBox6->Text = personnel->getAddress()->getAdditionnalData();
-			this->textBox7->Text = personnel->getCity()->getName();
-			this->textBox8->Text = personnel->getCity()->getPostalNumber();
-			this->textBox9->Text = personnel->getCountry()->getName();
+			this->textBox4->Text = personnel->getAddress()->getAddress()->getStreetNumber().ToString();
+			this->textBox5->Text = personnel->getAddress()->getAddress()->getStreet();
+			this->textBox6->Text = personnel->getAddress()->getAddress()->getAdditionnalData();
+			this->textBox7->Text = personnel->getAddress()->getCity()->getName();
+			this->textBox8->Text = personnel->getAddress()->getCity()->getPostalNumber();
+			this->textBox9->Text = personnel->getAddress()->getCountry()->getName();
 
 			this->textBox1->MaxLength = 50;
 			this->textBox2->MaxLength = 50;
@@ -365,18 +365,22 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	this->personnel->getPeople()->setLastName(this->textBox1->Text);
 	this->personnel->getPeople()->setFirstName(this->textBox2->Text);
 	this->personnel->getPersonnel()->setIDSuperior(Convert::ToInt32(this->textBox3->Text));
-	this->personnel->getAddress()->setStreetNumber(Convert::ToInt32(this->textBox4->Text));
-	this->personnel->getAddress()->setStreet(this->textBox5->Text);
-	this->personnel->getAddress()->setAdditionnalData(this->textBox6->Text);
-	this->personnel->getCity()->setName(this->textBox7->Text);
-	this->personnel->getCity()->setPostalNumber(this->textBox8->Text);
-	this->personnel->getCountry()->setName(this->textBox9->Text);
-	if (this->personnel->save()) {
+	this->personnel->getAddress()->getAddress()->setStreetNumber(Convert::ToInt32(this->textBox4->Text));
+	this->personnel->getAddress()->getAddress()->setStreet(this->textBox5->Text);
+	this->personnel->getAddress()->getAddress()->setAdditionnalData(this->textBox6->Text);
+	this->personnel->getAddress()->getCity()->setName(this->textBox7->Text);
+	this->personnel->getAddress()->getCity()->setPostalNumber(this->textBox8->Text);
+	this->personnel->getAddress()->getCountry()->setName(this->textBox9->Text);
+	if (this->Text == "[POO] v1.0 | Modification Personnel | N°0") {
+		this->personnel->insert();
+	} else {
+		this->personnel->update();
+	}
+	/*if (this->personnel->save()) {
 		MessageBox::Show("Les données de l'utilisateur ont bien été sauvegardées.", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	} else {
 		MessageBox::Show("Le nom du pays ou de la ville n'est pas valide !", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
-	
+	}*/
 }
 };
 }

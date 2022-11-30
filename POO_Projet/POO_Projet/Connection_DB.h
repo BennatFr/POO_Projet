@@ -12,7 +12,9 @@ private:
 public:
 	Connection_DB(void);
 	System::Data::DataSet^ select(System::String^, System::String^);
-	Row^ selectRow(System::String^, System::String^);
+
+	Row^ selectRow(System::String^ sSql, System::String^ sDataTableName);
+	Row^ selectRow(System::String^ sSql, System::String^ sDataTableName, int row);
 	void execute(System::String^);
 	System::Data::SqlClient::SqlConnection^ getoCnx();
 };

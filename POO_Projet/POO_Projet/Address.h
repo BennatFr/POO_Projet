@@ -13,6 +13,8 @@ private:
 	DB_City^ city;
 	DB_Country^ country;
 	DB_Client_Address^ client_Address = nullptr;
+
+	int save();
 public:
 	Address();
 	Address(int idAddress);
@@ -25,9 +27,16 @@ public:
 	DB_Country^ getCountry();
 	DB_Client_Address^ getClientAddress();
 
-	void setAddress(DB_Address^ p);
-	void setCity(DB_City^ p);
-	void setCountry(DB_Country^ p);
-	void setClientAddress(DB_Client_Address^ p);
+	void setAddress(DB_Address^ address);
+	void setCity(DB_City^ city);
+	void setCountry(DB_Country^ country);
+	void setClientAddress(DB_Client_Address^ client_Address);
+
+	void setIDAddress(int id);
+	void setIDCountry(int id);
+	void setIDCity(int id);
+
+	int insert();
+	int update();
 };
 
