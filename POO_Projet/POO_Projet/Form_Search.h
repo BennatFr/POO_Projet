@@ -83,6 +83,7 @@ namespace POOProjet {
 
 
 	private: System::Windows::Forms::Label^ label_research3;
+	private: System::Windows::Forms::Button^ button3;
 
 
 
@@ -111,6 +112,7 @@ namespace POOProjet {
 			this->label_research2 = (gcnew System::Windows::Forms::Label());
 			this->textBox_research3 = (gcnew System::Windows::Forms::TextBox());
 			this->label_research3 = (gcnew System::Windows::Forms::Label());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -129,7 +131,7 @@ namespace POOProjet {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(780, 486);
+			this->button1->Location = System::Drawing::Point(730, 486);
 			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(136, 48);
@@ -222,11 +224,23 @@ namespace POOProjet {
 			this->label_research3->TabIndex = 11;
 			this->label_research3->Text = L"label_research3";
 			// 
+			// button3
+			// 
+			this->button3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.Image")));
+			this->button3->Location = System::Drawing::Point(871, 486);
+			this->button3->Margin = System::Windows::Forms::Padding(4);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(45, 47);
+			this->button3->TabIndex = 12;
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form_Search::button3_Click);
+			// 
 			// Form_Search
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(981, 548);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label_research3);
 			this->Controls->Add(this->textBox_research3);
 			this->Controls->Add(this->label_research2);
@@ -293,6 +307,32 @@ private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender,
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	Form_Edit^ formEdit = gcnew Form_Edit(gcnew Personnel());
 	formEdit->ShowDialog();
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->dataGridView1->SelectedCells->Count == 0) {
+		MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	int row = this->dataGridView1->SelectedCells[0]->RowIndex;
+	if (this->dataGridView1->Rows->Count-1 <= row) {
+		MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	String^ IDPersonnelSelect = this->dataGridView1->Rows[row]->Cells[0]->Value->ToString();
+	if (IDPersonnelSelect == "") {
+		MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	else {
+		System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect , "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+		if (result == System::Windows::Forms::DialogResult::Yes) {
+			Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
+			personnel->del();
+			System::Windows::Forms::DialogResult result = MessageBox::Show("Une erreur est survenue", "Erreur !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+		} else {
+
+		}
+	}
 }
 };
 }
