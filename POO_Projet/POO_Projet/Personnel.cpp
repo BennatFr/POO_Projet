@@ -114,5 +114,14 @@ int Personnel::update() {
 }
 
 int Personnel::del() {
+	System::String^ sqlRequest;
+	sqlRequest = "DELETE FROM Personnel WHERE ID_Address = " + this->getPersonnel()->getIDPersonnel();
+	connection->execute(sqlRequest);
+
+	sqlRequest = "DELETE FROM Address WHERE ID_Address = " + this->getAddress()->getAddress()->getIDAddress();
+	connection->execute(sqlRequest);
+
+	sqlRequest = "DELETE FROM People WHERE ID_People = " + this->getPeople()->getIDPeople();
+	connection->execute(sqlRequest);
 	return 0;
 }

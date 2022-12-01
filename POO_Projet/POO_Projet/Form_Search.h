@@ -8,6 +8,9 @@
 #include "Form_Edit.h"
 #include "Personnel.h"
 
+typedef System::Void (*recherche)(void);
+
+
 namespace POOProjet {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -268,31 +271,8 @@ namespace POOProjet {
 			this->connection = gcnew Connection_DB();
 		}
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			String^ sqlRequest;
-			switch (this->typeOfResearch) {
-			case EnumVar::PERSONNEL:
-				std::string ID_Personnel = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
-				if (ID_Personnel != "") {
-					if (!is_number(ID_Personnel)) {
-						MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						return;
-					}
-					sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID_Personnel).c_str());
-				} else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
-					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "' AND [first_Name] = '" + this->textBox_research3->Text + "'";
-				} else if (this->textBox_research2->Text != "") {
-					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "'";
-				} else if (this->textBox_research3->Text != "") {
-					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] = '" + this->textBox_research3->Text + "'";
-				} else {
-					MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					return;
-				}
-
-				this->dataGridView1->DataSource = connection->select(sqlRequest, "Personnel");
-				this->dataGridView1->DataMember = "Personnel";
-				break;
-			}
+			POOProjet::Form_Search::recherche ptr = ^POOProjet::Form_Search::recherche;
+			recherche();
 		}
 private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 	String^ IDPersonnelSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
@@ -328,11 +308,41 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 		if (result == System::Windows::Forms::DialogResult::Yes) {
 			Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
 			personnel->del();
-			System::Windows::Forms::DialogResult result = MessageBox::Show("Une erreur est survenue", "Erreur !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
-		} else {
-
+			System::Windows::Forms::DialogResult result = MessageBox::Show("Le personnel n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			recherche();
 		}
 	}
 }
+	   System::Void recherche() {
+		   String^ sqlRequest;
+		   switch (this->typeOfResearch) {
+		   case EnumVar::PERSONNEL:
+			   std::string ID_Personnel = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
+			   if (ID_Personnel != "") {
+				   if (!is_number(ID_Personnel)) {
+					   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					   return;
+				   }
+				   sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID_Personnel).c_str());
+			   }
+			   else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
+				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "' AND [first_Name] = '" + this->textBox_research3->Text + "'";
+			   }
+			   else if (this->textBox_research2->Text != "") {
+				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "'";
+			   }
+			   else if (this->textBox_research3->Text != "") {
+				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] = '" + this->textBox_research3->Text + "'";
+			   }
+			   else {
+				   MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+
+			   this->dataGridView1->DataSource = connection->select(sqlRequest, "Personnel");
+			   this->dataGridView1->DataMember = "Personnel";
+			   break;
+		   }
+	   }
 };
 }
