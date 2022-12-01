@@ -2,13 +2,13 @@
 
 DB_Personnel::DB_Personnel() {
     this->ID_Personnel = 0;
-    this->hire_Date = "";
+    this->hire_Date = System::DateTime();
     this->ID_Address = 0;
     this->ID_Superior = 0;
     this->ID_People = 0;
 }
 
-DB_Personnel::DB_Personnel(int ID_Personnel, System::String^ hire_Date, int ID_Address, int ID_Superior, int ID_People) {
+DB_Personnel::DB_Personnel(int ID_Personnel, System::DateTime hire_Date, int ID_Address, int ID_Superior, int ID_People) {
     this->ID_Personnel = ID_Personnel;
     this->hire_Date = hire_Date;
     this->ID_Address = ID_Address;
@@ -24,7 +24,7 @@ int DB_Personnel::getIDPersonnel() {
     return this->ID_Personnel;
 }
 
-System::String^ DB_Personnel::getHireDate() {
+System::DateTime DB_Personnel::getHireDate() {
     return this->hire_Date;
 }
 
@@ -44,7 +44,7 @@ void DB_Personnel::setIDPersonnel(int ID_Personnel) {
     this->ID_Personnel = ID_Personnel;
 }
 
-void DB_Personnel::setHireDate(System::String^ hire_Date) {
+void DB_Personnel::setHireDate(System::DateTime hire_Date) {
     this->hire_Date = hire_Date;
 }
 

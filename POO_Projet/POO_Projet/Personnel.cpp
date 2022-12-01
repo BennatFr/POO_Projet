@@ -15,7 +15,7 @@ Personnel::Personnel(int ID_Personnel){
 	System::String^ sqlRequest = "SELECT Personnel.ID_Personnel, Personnel.ID_People, Personnel.ID_Superior, Personnel.ID_Address, Personnel.hire_Date, people.last_Name, People.first_Name FROM (SELECT * FROM Personnel WHERE ID_Personnel = "+ ID_Personnel +") AS Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People";
 	Row^ result = connection->selectRow(sqlRequest, "Personnel",0);
 	//int ID_Personnel, System::String^ hire_Date, int ID_Address, int ID_Superior, int ID_People
-	this->personnel = gcnew DB_Personnel(result->getInt(0), result->getString(4), result->getInt(3), result->getInt(2), result->getInt(1));
+	this->personnel = gcnew DB_Personnel(result->getInt(0), result->getDateTime(4), result->getInt(3), result->getInt(2), result->getInt(1));
 	//int ID_People, System::String^ last_Name, System::String^ first_Name
 	this->people = gcnew DB_People(result->getInt(1), result->getString(5), result->getString(6));
 }

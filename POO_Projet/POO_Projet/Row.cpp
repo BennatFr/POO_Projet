@@ -59,3 +59,7 @@ int Row::getInt(int column) {
 bool Row::getBool(int column) {
 	return System::Convert::ToBoolean(this->getString(column));
 }
+
+System::DateTime Row::getDateTime(int column) {
+	return System::Convert::ToDateTime(this->getString(column));
+}

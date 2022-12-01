@@ -17,4 +17,6 @@ public:
 	Row^ selectRow(System::String^ sSql, System::String^ sDataTableName, int row);
 	void execute(System::String^);
 	System::Data::SqlClient::SqlConnection^ getoCnx();
+
+	bool isConnected();
 };

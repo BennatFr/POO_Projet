@@ -122,8 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="DB_Address.cpp" />
     <ClCompile Include="DB_City.cpp" />
+    <ClCompile Include="DB_Client.cpp" />
     <ClCompile Include="DB_Client_Address.cpp" />
     <ClCompile Include="DB_Country.cpp" />
     <ClCompile Include="DB_People.cpp" />
@@ -133,13 +135,16 @@
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
     <ClCompile Include="Global_Var.cpp" />
+    <ClCompile Include="List_Address.cpp" />
     <ClCompile Include="Personnel.cpp" />
     <ClCompile Include="Row.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
+    <ClInclude Include="Client.h" />
     <ClInclude Include="DB_Address.h" />
     <ClInclude Include="DB_City.h" />
+    <ClInclude Include="DB_Client.h" />
     <ClInclude Include="DB_Client_Address.h" />
     <ClInclude Include="DB_Country.h" />
     <ClInclude Include="DB_People.h" />
@@ -155,6 +160,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Global_Var.h" />
+    <ClInclude Include="List_Address.h" />
     <ClInclude Include="Personnel.h" />
     <ClInclude Include="Row.h" />
   </ItemGroup>

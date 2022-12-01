@@ -8,9 +8,6 @@
 #include "Form_Edit.h"
 #include "Personnel.h"
 
-typedef System::Void (*recherche)(void);
-
-
 namespace POOProjet {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -44,8 +41,14 @@ namespace POOProjet {
 				this->label_research1->Text = "Id du Personnel";
 				this->label_research2->Text = "Nom du Personnel";
 				this->label_research3->Text = "Prénom du Personnel";
+				this->dateTimePicker1->Hide();
 				this->dateTimePicker2->Hide();
 				break;
+			case EnumVar::CLIENT:
+				this->Text = titleText + "Recherche Client";
+				this->label_research1->Text = "Id du Client";
+				this->label_research2->Text = "Nom du Client";
+				this->label_research3->Text = "Prénom du Client";
 			default:
 				this->Text = titleText + "Erreur";
 				break;
@@ -271,7 +274,6 @@ namespace POOProjet {
 			this->connection = gcnew Connection_DB();
 		}
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			POOProjet::Form_Search::recherche ptr = ^POOProjet::Form_Search::recherche;
 			recherche();
 		}
 private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
@@ -315,34 +317,45 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 	   System::Void recherche() {
 		   String^ sqlRequest;
+		   std::string ID = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
 		   switch (this->typeOfResearch) {
-		   case EnumVar::PERSONNEL:
-			   std::string ID_Personnel = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
-			   if (ID_Personnel != "") {
-				   if (!is_number(ID_Personnel)) {
-					   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					   return;
+			   case EnumVar::PERSONNEL:
+				
+				if (ID != "") {
+					if (!is_number(ID)) {
+						MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						return;
+					}
+					sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID).c_str());
+				}
+				else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%' AND [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
+				}
+				else if (this->textBox_research2->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%'";
+				}
+				else if (this->textBox_research3->Text != "") {
+					sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
+				}
+				else {
+					MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return;
+				}
+				this->dataGridView1->DataSource = connection->select(sqlRequest, "Personnel");
+				this->dataGridView1->DataMember = "Personnel";
+				break;
+			   case EnumVar::CLIENT:
+				   if (ID != "") {
+					   if (!is_number(ID)) {
+						   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						   return;
+					   }
+					   sqlRequest = gcnew String(("SELECT ID_Client, last_Name, first_Name, birthdate, first_Buy_Website FROM (SELECT * FROM Client WHERE ID_Client = "+ ID +") as Client INNER JOIN People ON CLient.ID_People = People.ID_People;").c_str());
 				   }
-				   sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID_Personnel).c_str());
-			   }
-			   else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
-				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "' AND [first_Name] = '" + this->textBox_research3->Text + "'";
-			   }
-			   else if (this->textBox_research2->Text != "") {
-				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] = '" + this->textBox_research2->Text + "'";
-			   }
-			   else if (this->textBox_research3->Text != "") {
-				   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] = '" + this->textBox_research3->Text + "'";
-			   }
-			   else {
-				   MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				   return;
-			   }
-
-			   this->dataGridView1->DataSource = connection->select(sqlRequest, "Personnel");
-			   this->dataGridView1->DataMember = "Personnel";
-			   break;
-		   }
+				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Client");
+				   this->dataGridView1->DataMember = "Client";
+				   break;
+			}
 	   }
 };
 }

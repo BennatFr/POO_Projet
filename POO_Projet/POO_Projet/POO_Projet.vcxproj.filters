@@ -34,6 +34,15 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="List">
+      <UniqueIdentifier>{5a0d09b2-74ef-4d7e-bc6a-5439c699f206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="List\Fichiers d%27en-tête">
+      <UniqueIdentifier>{a621ca43-0850-463c-b3c2-4b2613316bc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="List\Fichiers sources">
+      <UniqueIdentifier>{d79f8ead-5ae5-4ac7-afa1-400f921c58c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Form_Main.cpp">
@@ -78,6 +87,15 @@
     <ClCompile Include="Row.cpp">
       <Filter>Fichiers de ressources</Filter>
     </ClCompile>
+    <ClCompile Include="DB_Client.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Regroupement\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="List_Address.cpp">
+      <Filter>List\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -121,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="Row.h">
       <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Client.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Regroupement\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="List_Address.h">
+      <Filter>List\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

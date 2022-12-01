@@ -3,8 +3,8 @@
 Connection_DB::Connection_DB(void) {
 	//PC MAIN DESKTOP-211D050
 	//PC PRO LAPTOP-3UJO5NIH
-	//this->sCnx = "Data Source=DESKTOP-211D050;Initial Catalog=POO_Projet;Integrated Security=True";
-	this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
+	this->sCnx = "Data Source=DESKTOP-211D050;Initial Catalog=POO_Projet;Integrated Security=True";
+	//this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
 	 
 	this->sSql = "Initialisation";
 
@@ -45,4 +45,8 @@ void Connection_DB::execute(System::String^ sSql) {
 
 System::Data::SqlClient::SqlConnection^ Connection_DB::getoCnx() {
 	return this->oCnx;
+}
+
+bool Connection_DB::isConnected() {
+	return this->oCnx->State == System::Data::ConnectionState::Open;
 }
