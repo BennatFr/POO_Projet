@@ -361,26 +361,54 @@ namespace POOProjet {
 		}
 #pragma endregion
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-
+	if (this->textBox1->Text == "") {
+		MessageBox::Show("Le nom de famille est obligatoire ", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 	this->personnel->getPeople()->setLastName(this->textBox1->Text);
+	if (this->textBox2->Text == "") {
+		MessageBox::Show("Le prénom est obligatoire ", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 	this->personnel->getPeople()->setFirstName(this->textBox2->Text);
 	this->personnel->getPersonnel()->setIDSuperior(Convert::ToInt32(this->textBox3->Text));
 	this->personnel->getAddress()->getAddress()->setStreetNumber(Convert::ToInt32(this->textBox4->Text));
 	this->personnel->getAddress()->getAddress()->setStreet(this->textBox5->Text);
 	this->personnel->getAddress()->getAddress()->setAdditionnalData(this->textBox6->Text);
-	this->personnel->getAddress()->getCity()->setName(this->textBox7->Text);
-	this->personnel->getAddress()->getCity()->setPostalNumber(this->textBox8->Text);
-	this->personnel->getAddress()->getCountry()->setName(this->textBox9->Text);
-	if (this->Text == "[POO] v1.0 | Modification Personnel | N°0") {
-		this->personnel->insert();
-	} else {
-		this->personnel->update();
+	if (this->textBox7->Text == "") {
+		MessageBox::Show("La ville est obligatoire ", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
 	}
-	/*if (this->personnel->save()) {
-		MessageBox::Show("Les données de l'utilisateur ont bien été sauvegardées.", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	this->personnel->getAddress()->getCity()->setName(this->textBox7->Text);
+	if (this->textBox8->Text == "") {
+		MessageBox::Show("Le code postal est obligatoire ", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	this->personnel->getAddress()->getCity()->setPostalNumber(this->textBox8->Text);
+	if (this->textBox9->Text == "") {
+		MessageBox::Show("Le pays est obligatoire ", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	this->personnel->getAddress()->getCountry()->setName(this->textBox9->Text);
+	int output;
+	if (this->Text == "[POO] v1.0 | Modification Personnel | N°0") {
+		output = this->personnel->insert();
 	} else {
-		MessageBox::Show("Le nom du pays ou de la ville n'est pas valide !", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}*/
+		output = this->personnel->update();
+	}
+	switch (output) {
+	case 0:
+		MessageBox::Show("Les données de l'utilisateur ont bien été sauvegardées.", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close();
+		break;
+	case 1:
+		MessageBox::Show("L'identifiant du supérieur n'existe pas", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		break;
+	default:
+		MessageBox::Show("Une erreur est survenue", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		break;
+
+	}
 }
 };
 }

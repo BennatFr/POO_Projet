@@ -3,8 +3,8 @@
 Connection_DB::Connection_DB(void) {
 	//PC MAIN DESKTOP-211D050
 	//PC PRO LAPTOP-3UJO5NIH
-	this->sCnx = "Data Source=DESKTOP-211D050;Initial Catalog=POO_Projet;Integrated Security=True";
-	//this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
+	//this->sCnx = "Data Source=DESKTOP-211D050;Initial Catalog=POO_Projet;Integrated Security=True";
+	this->sCnx = "Data Source=LAPTOP-3UJO5NIH;Initial Catalog=POO_Projet;Integrated Security=True";
 	 
 	this->sSql = "Initialisation";
 
@@ -17,7 +17,7 @@ Connection_DB::Connection_DB(void) {
 }
 
 System::Data::DataSet^ Connection_DB::select(System::String^ sSql, System::String^ sDataTableName) {
-	this->oDs->Clear();
+	this->oDs = gcnew System::Data::DataSet();
 	this->sSql = sSql;
 	this->oCmd->CommandText = this->sSql;
 	this->oDA->SelectCommand = this->oCmd;

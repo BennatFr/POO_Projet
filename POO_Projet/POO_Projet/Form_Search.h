@@ -282,6 +282,10 @@ namespace POOProjet {
 		}
 private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 	String^ IDPersonnelSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+	if (IDPersonnelSelect == "") {
+		MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 	Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
 	Form_Edit^ formEdit = gcnew Form_Edit(personnel);
 	formEdit->ShowDialog();

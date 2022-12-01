@@ -101,8 +101,9 @@ int Address::save() {
             result = connection->selectRow(sqlRequest, "Country", 0);
             this->setIDCountry(result->getInt(0));
         } else {
-            sqlRequest = "UPDATE Country SET name = '"+ this->getCountry()->getName() +"' WHERE ID_Country = " + this->getCountry()->getIDCountry();
-            connection->execute(sqlRequest);
+            sqlRequest = "SELECT * FROM Country WHERE name = '"+ this->getCountry()->getName()+ "'";
+            result = connection->selectRow(sqlRequest, "Country", 0);
+            this->setIDCountry(result->getInt(0));
         }
     }
 

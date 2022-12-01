@@ -62,15 +62,21 @@ void Personnel::setIDAddress(int ID_Address) {
 }
 
 int Personnel::insert() {
+	System::String^ sqlRequest;
+	Row^ result;
+	sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + this->getPersonnel()->getIDSuperior();
+	result = connection->selectRow(sqlRequest, "Personnel", 0);
+	if (result->getInt(0) == 0) {
+		return 1;
+	}
 	this->getAddress()->insert();
 	this->setIDAddress(this->getAddress()->getAddress()->getIDAddress());
-	System::String^ sqlRequest;
 
 	if (this->getPeople() != nullptr) {
 		sqlRequest = "INSERT INTO People VALUES ('" + this->getPeople()->getLastName() + "', '" + this->getPeople()->getFirstName() + "')";
 		connection->execute(sqlRequest);
 		sqlRequest = "SELECT TOP 1 * FROM People ORDER BY ID_People DESC";
-		Row^ result = connection->selectRow(sqlRequest, "People", 0);
+		result = connection->selectRow(sqlRequest, "People", 0);
 		this->setIDPeople(result->getInt(0));
 	}
 
@@ -78,16 +84,22 @@ int Personnel::insert() {
 		sqlRequest = "INSERT INTO Personnel VALUES ('" + this->getPersonnel()->getHireDate() + "', " + this->getPersonnel()->getIDAddress() + ", " + this->getPersonnel()->getIDSuperior() + ", " + this->getPersonnel()->getIDPeople() + ")";
 		connection->execute(sqlRequest);
 		sqlRequest = "SELECT TOP 1 * FROM Personnel ORDER BY ID_Personnel DESC";
-		Row^ result = connection->selectRow(sqlRequest, "Personnel", 0);
+		result = connection->selectRow(sqlRequest, "Personnel", 0);
 		this->getPersonnel()->setIDPersonnel(result->getInt(0));
 	}
 	return 0;
 }
 
 int Personnel::update() {
+	System::String^ sqlRequest;
+	Row^ result;
+	sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + this->getPersonnel()->getIDSuperior();
+	result = connection->selectRow(sqlRequest, "Personnel", 0);
+	if (result->getInt(0) == 0) {
+		return 1;
+	}
 	this->getAddress()->update();
 	this->setIDAddress(this->getAddress()->getAddress()->getIDAddress());
-	System::String^ sqlRequest;
 
 	if (this->getPeople() != nullptr) {
 		sqlRequest = "UPDATE People SET last_Name = '" + this->getPeople()->getLastName() + "', first_name = '" + this->getPeople()->getFirstName() + "' WHERE ID_People = " + this->getPeople()->getIDPeople();
@@ -98,5 +110,9 @@ int Personnel::update() {
 		sqlRequest = "UPDATE Personnel SET hire_Date = '" + this->getPersonnel()->getHireDate() + "', ID_Address = " + this->getPersonnel()->getIDAddress() + ", ID_People = " + this->getPersonnel()->getIDPeople() + ", ID_Superior = " + this->getPersonnel()->getIDSuperior() + " WHERE ID_Personnel = " + this->getPersonnel()->getIDPersonnel();
 		connection->execute(sqlRequest);
 	}
+	return 0;
+}
+
+int Personnel::del() {
 	return 0;
 }
