@@ -31,9 +31,5 @@ public:
 	int insert();
 	int update();
 	int del();
-
-	int insertWithAddress();
-	int updateWithAddress();
-	int delWithAddress();
 };
 

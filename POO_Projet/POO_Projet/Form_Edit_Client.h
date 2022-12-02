@@ -327,7 +327,7 @@ private: System::Windows::Forms::Button^ button5;
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->client->save();
+		this->client->insert();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridView1->Rows->Add();

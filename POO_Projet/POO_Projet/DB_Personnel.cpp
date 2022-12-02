@@ -2,7 +2,7 @@
 
 DB_Personnel::DB_Personnel() {
     this->ID_Personnel = 0;
-    this->hire_Date = System::DateTime();
+    this->hire_Date = System::DateTime(System::DateTime::Today);
     this->ID_Address = 0;
     this->ID_Superior = 0;
     this->ID_People = 0;

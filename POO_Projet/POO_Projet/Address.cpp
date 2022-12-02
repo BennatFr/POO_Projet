@@ -159,6 +159,12 @@ int Address::insert() {
 		Row^ result = connection->selectRow(sqlRequest, "Address", 0);
 		this->setIDAddress(result->getInt(0));
 	}
+
+	if (this->getClientAddress() != nullptr) {
+		this->get
+
+	}
+
 	return 0;
 }
 

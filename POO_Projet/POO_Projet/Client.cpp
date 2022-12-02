@@ -16,7 +16,7 @@ Client::Client(int ID_Client) {
 	sqlRequest = "SELECT * FROM (SELECT * FROM Client WHERE ID_Client = " + ID_Client + ") as Client INNER JOIN People ON CLient.ID_People = People.ID_People";
 	Row^ result = connection->selectRow(sqlRequest, "Client", 0);
 	//int ID_Client, System::DateTime birthdate, System::DateTime first_Buy_Website, int ID_People
-	this->client = gcnew DB_Client(ID_Client, result->getDateTime(1), result->getDateTime(2), result->getInt(3));
+ 	this->client = gcnew DB_Client(ID_Client, result->getDateTime(1), result->getDateTime(2), result->getInt(3));
 	//int ID_People, System::String^ last_Name, System::String^ first_Name
 	this->people = gcnew DB_People(result->getInt(3), result->getString(5), result->getString(6));
 }
@@ -60,29 +60,37 @@ void Client::setIDAddress(int ID_Address) {
 }
 
 int Client::insert() {
-	return 0;
+	System::String^ sqlRequest;
+	Row^ result;
+	sqlRequest = "SELECT Count(*) FROM Client WHERE ID_Client = " + this->getClientID();
+	result = connection->selectRow(sqlRequest, "Client", 0);
+	if (result->getInt(0) == 0) {
+		return 1;
+	}
+
+	if (this->getPeople() != nullptr) {
+		sqlRequest = "INSERT INTO People VALUES ('" + this->getPeople()->getLastName() + "', '" + this->getPeople()->getFirstName() + "')";
+		connection->execute(sqlRequest);
+		sqlRequest = "SELECT TOP 1 * FROM People ORDER BY ID_People DESC";
+		result = connection->selectRow(sqlRequest, "People", 0);
+		this->setIDPeople(result->getInt(0));
+	}
 }
 
 int Client::update() {
 	return 0;
 }
 
-int Client::del()
-{
-	return 0;
-}
+int Client::del() {
+	for (int i = 0; i < this->getListAddress()->getSize(); i++) {
+		this->getListAddress()->get(i)->del();
+	}
+	System::String^ sqlRequest;
 
-int Client::insertWithAddress()
-{
+	sqlRequest = "DELETE FROM People WHERE ID_People = " + this->getPeople()->getIDPeople();
+	connection->execute(sqlRequest);
+	sqlRequest = "DELETE FROM Client WHERE ID_Client = " + this->getClient()->getIDClient();
+	connection->execute(sqlRequest);
 	return 0;
-}
-
-int Client::updateWithAddress()
-{
-	return 0;
-}
-
-int Client::delWithAddress()
-{
-	return 0;
+	
 }
