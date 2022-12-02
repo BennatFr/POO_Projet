@@ -35,7 +35,7 @@ namespace POOProjet {
 
 			this->personnel = personnel;
 			this->Text = "[POO] v1.0 | Modification Personnel | N°" + personnel->getPersonnelID();
-			this->textBox1->Text = Convert::ToString(personnel->getPersonnel()->getIDPeople());
+
 			this->label1->Text = "Nom de famille";
 			this->label2->Text = "Prénom";
 			this->label3->Text = "ID du supérieur";
@@ -56,6 +56,7 @@ namespace POOProjet {
 			this->textBox7->Text = personnel->getAddress()->getCity()->getName();
 			this->textBox8->Text = personnel->getAddress()->getCity()->getPostalNumber();
 			this->textBox9->Text = personnel->getAddress()->getCountry()->getName();
+			this->dateTimePicker1->Value = personnel->getPersonnel()->getHireDate();
 
 			this->textBox1->MaxLength = 50;
 			this->textBox2->MaxLength = 50;

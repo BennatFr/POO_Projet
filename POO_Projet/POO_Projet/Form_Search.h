@@ -6,7 +6,9 @@
 #include "Global_Var.h"
 #include "Connection_DB.h"
 #include "Form_Edit.h"
+#include "Form_Edit_Client.h"
 #include "Personnel.h"
+#include "Client.h"
 
 namespace POOProjet {
 	using namespace System;
@@ -277,14 +279,24 @@ namespace POOProjet {
 			recherche();
 		}
 private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
-	String^ IDPersonnelSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
-	if (IDPersonnelSelect == "") {
+	String^ IDSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+	if (IDSelect == "") {
 		MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
-	Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
-	Form_Edit^ formEdit = gcnew Form_Edit(personnel);
-	formEdit->ShowDialog();
+	switch (this->typeOfResearch) {
+	case EnumVar::PERSONNEL: {
+		Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDSelect));
+		Form_Edit^ formEdit = gcnew Form_Edit(personnel);
+		formEdit->ShowDialog();
+		break;
+		}
+		case EnumVar::CLIENT:
+			Client^ client = gcnew Client(Convert::ToInt32(IDSelect));
+			Form_Edit_Client^ formEditClient = gcnew Form_Edit_Client(client);
+			formEditClient->ShowDialog();
+			break;
+	}
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	Form_Edit^ formEdit = gcnew Form_Edit(gcnew Personnel());

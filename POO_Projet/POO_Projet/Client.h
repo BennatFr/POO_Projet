@@ -1,8 +1,8 @@
 #pragma once
 
-#include "DB_Client.h";
-#include "DB_People.h";
-#include "List_Address.h";
+#include "DB_Client.h"
+#include "DB_People.h"
+#include "List_Address.h"
 
 ref class Client {
 private:
@@ -13,6 +13,8 @@ private:
 public:
 	Client();
 	Client(int ID_Client);
+
+	int getClientID();
 
 	DB_Client^ getClient();
 	DB_People^ getPeople();

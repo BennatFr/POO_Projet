@@ -21,6 +21,11 @@ Client::Client(int ID_Client) {
 	this->people = gcnew DB_People(result->getInt(3), result->getString(5), result->getString(6));
 }
 
+int Client::getClientID()
+{
+	return this->getClient()->getIDClient();
+}
+
 DB_Client^ Client::getClient() {
 	return this->client;
 }

@@ -132,6 +132,7 @@
     <ClCompile Include="DB_Personnel.cpp" />
     <ClCompile Include="Connection_DB.cpp" />
     <ClCompile Include="Form_Edit.cpp" />
+    <ClCompile Include="Form_Edit_Client.cpp" />
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
     <ClCompile Include="Global_Var.cpp" />
@@ -153,6 +154,9 @@
     <ClInclude Include="Form_Edit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Form_Edit_Client.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Form_Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -167,6 +171,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form_Edit.resx">
       <DependentUpon>Form_Edit.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Edit_Client.resx">
+      <DependentUpon>Form_Edit_Client.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.h</DependentUpon>
