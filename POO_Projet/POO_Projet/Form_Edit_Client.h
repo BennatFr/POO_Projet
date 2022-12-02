@@ -35,10 +35,10 @@ namespace POOProjet {
 			this->label2->Text = "Prénom";
 			this->label3->Text = "Date d'anniversaire";
 			this->label4->Text = "Date Premier achat site";
-			this->label5->Text = "Addresse de Livraison";
-			this->label6->Text = "Addresse de facturation";
+			this->label5->Text = "Adresse de Livraison";
+			this->label6->Text = "Adresse de facturation";
 			this->dataGridView1->ColumnCount = 7;
-			this->dataGridView1->Columns[0]->Name = "ID Addresse";
+			this->dataGridView1->Columns[0]->Name = "ID Adresse";
 			this->dataGridView1->Columns[1]->Name = "Numéro de rue";
 			this->dataGridView1->Columns[2]->Name = "Rue";
 			this->dataGridView1->Columns[3]->Name = "Ville";
@@ -48,7 +48,7 @@ namespace POOProjet {
 			this->dataGridView1->Columns[0]->ReadOnly = true;
 
 			this->dataGridView2->ColumnCount = 7;
-			this->dataGridView2->Columns[0]->Name = "ID Addresse";
+			this->dataGridView2->Columns[0]->Name = "ID Adresse";
 			this->dataGridView2->Columns[1]->Name = "Numéro de rue";
 			this->dataGridView2->Columns[2]->Name = "Rue";
 			this->dataGridView2->Columns[3]->Name = "Ville";
@@ -69,8 +69,9 @@ namespace POOProjet {
 			this->dateTimePicker2->MinDate = DateTime(2000, 1, 1);
 			this->dateTimePicker2->MaxDate = DateTime::Today;
 
-			rechercheAddress();
-
+			if (client->getClientID() != 0) {
+				rechercheAddress();
+			}
 		}
 
 	protected:
@@ -327,7 +328,29 @@ private: System::Windows::Forms::Button^ button5;
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->client->insert();
+		if (this->client->getClientID() == 0) {
+
+			 client->getPeople()->setLastName(this->textBox1->Text);
+			 client->getPeople()->setFirstName(this->textBox2->Text);
+			 client->getClient()->setBirthdate(this->dateTimePicker1->Value);
+			 client->getClient()->setFirstBuyWebsite(this->dateTimePicker2->Value);
+
+			 /*
+			 dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
+			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
+			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
+			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
+			dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
+			dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
+			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();*/
+
+			 this->client->setListAddress(gcnew List_Address());
+			 getAddressFromGrid(this->dataGridView1, false);
+			 getAddressFromGrid(this->dataGridView2, true);
+
+			this->client->insert();
+		}
+		
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridView1->Rows->Add();
@@ -385,7 +408,7 @@ private: System::Windows::Forms::Button^ button5;
 			}
 			index = dataGridView->Rows->Count;
 			dataGridView->Rows->Add();
-			dataGridView->Rows[index]->Cells["ID Addresse"]->Value = address->getAddress()->getIDAddress();
+			dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
 			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
 			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
 			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
@@ -394,5 +417,26 @@ private: System::Windows::Forms::Button^ button5;
 			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
 		}
 	}
+
+	System::Void getAddressFromGrid(System::Windows::Forms::DataGridView^ dataGridView, bool bill) {
+		System::Windows::Forms::DataGridViewRow^ row;
+		int IDAddress;
+		for (int i = 0; i < dataGridView->Rows->Count; i++) {
+			row = dataGridView->Rows[i];
+			if (row->Cells["Numéro de rue"]->Value->ToString() == nullptr || row->Cells["Rue"]->Value->ToString() == nullptr || row->Cells["Ville"]->Value->ToString() == nullptr || row->Cells["Code postal"]->Value->ToString() == nullptr || row->Cells["Pays"]->Value->ToString() == nullptr || row->Cells["Numéro de rue"]->Value->ToString() == "" || row->Cells["Rue"]->Value->ToString() == "" || row->Cells["Ville"]->Value->ToString() == "" || row->Cells["Code postal"]->Value->ToString() == "" || row->Cells["Pays"]->Value->ToString() == "") {
+				MessageBox::Show("Une ou plusieurs adresse ont des données manquantes.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+			if (row->Cells["ID Adresse"]->Value == "") {
+				IDAddress = 0;
+			}
+			else {
+				IDAddress = Convert::ToInt32(row->Cells["ID Adresse"]->Value);
+			}
+			Address^ tempo = gcnew Address(gcnew DB_Address(IDAddress, Convert::ToInt32(row->Cells["Numéro de rue"]->Value->ToString()), row->Cells["Rue"]->Value->ToString(), row->Cells["Information additionnel"]->Value->ToString(), 0, 0), gcnew DB_City(0, row->Cells["Ville"]->Value->ToString(), row->Cells["Code postal"]->Value->ToString()), gcnew DB_Country(0, row->Cells["Pays"]->Value->ToString()), gcnew DB_Client_Address(0, 0, false));
+			this->client->getListAddress()->setLast(tempo);
+		}
+	}
+
 };
 }

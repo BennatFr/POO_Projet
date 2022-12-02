@@ -127,7 +127,7 @@ int Address::save() {
 	return 0;
 }
 
-int Address::insert() {
+int Address::insert(int ID_Client) {
 	System::String^ sqlRequest;
 	this->save();
 	if (this->getAddress() != nullptr) {
@@ -161,8 +161,8 @@ int Address::insert() {
 	}
 
 	if (this->getClientAddress() != nullptr) {
-		this->get
-
+		sqlRequest = "INSERT INTO Get_Client_Address VALUES (" + ID_Client + ", " + this->getAddress()->getIDAddress() + ", " + this->getClientAddress()->isBilling() + ")";
+		connection->execute(sqlRequest);
 	}
 
 	return 0;

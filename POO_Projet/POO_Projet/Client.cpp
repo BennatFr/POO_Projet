@@ -64,7 +64,7 @@ int Client::insert() {
 	Row^ result;
 	sqlRequest = "SELECT Count(*) FROM Client WHERE ID_Client = " + this->getClientID();
 	result = connection->selectRow(sqlRequest, "Client", 0);
-	if (result->getInt(0) == 0) {
+	if (result->getInt(0) != 0) {
 		return 1;
 	}
 
@@ -75,6 +75,22 @@ int Client::insert() {
 		result = connection->selectRow(sqlRequest, "People", 0);
 		this->setIDPeople(result->getInt(0));
 	}
+
+	if (this->getClient() != nullptr) {
+		sqlRequest = "INSERT INTO Client VALUES ('" + this->getClient()->getBirthdate() + "', '" + this->getClient()->getFirstBuyWebsite() + "', " + this->getClient()->getIDPeople() +")";
+		connection->execute(sqlRequest);
+		sqlRequest = "SELECT TOP 1 * FROM Client ORDER BY ID_Client DESC";
+		result = connection->selectRow(sqlRequest, "Client", 0);
+		this->getClient()->setIDClient(result->getInt(0));
+	}
+
+	for (int i = 0; i < this->getListAddress()->getSize(); i++) {
+		if (this->getListAddress()->get(i)->getAddress()->getIDAddress() == 0) {
+			this->getListAddress()->get(i)->insert(this->getClientID());
+		} else {
+			this->getListAddress()->get(i)->update();
+		}
+	}	
 }
 
 int Client::update() {

@@ -35,7 +35,7 @@ public:
 	void setIDCountry(int id);
 	void setIDCity(int id);
 
-	int insert();
+	int insert(int ID_Client);
 	int update();
 	int del();
 };

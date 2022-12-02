@@ -69,7 +69,7 @@ int Personnel::insert() {
 	if (result->getInt(0) == 0) {
 		return 1;
 	}
-	this->getAddress()->insert();
+	this->getAddress()->insert(0);
 	this->setIDAddress(this->getAddress()->getAddress()->getIDAddress());
 
 	if (this->getPeople() != nullptr) {
