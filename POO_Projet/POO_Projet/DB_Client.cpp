@@ -2,8 +2,8 @@
 
 DB_Client::DB_Client() {
 	this->ID_Client = 0;
-	this->birthdate = System::DateTime();
-	this->first_Buy_Website = System::DateTime();
+	this->birthdate = System::DateTime(System::DateTime::Today);
+	this->first_Buy_Website = System::DateTime(System::DateTime::Today);
 	this->ID_People = 0;
 }
 

@@ -10,10 +10,10 @@ Client::Client(int ID_Client) {
 	System::String^ sqlRequest = "SELECT * FROM Get_Client_Address WHERE ID_Client = " + ID_Client;
 	System::Data::DataSet^ dataSet = connection->select(sqlRequest, "Get_Client_Address");
 	for (int i = 0; i < dataSet->Tables["Get_Client_Address"]->Rows->Count; i++) {
-		int ID_Address = System::Convert::ToInt32(dataSet->Tables["Get_Client_Address"]->Rows[i]->ItemArray[0]->ToString());
+		int ID_Address = System::Convert::ToInt32(dataSet->Tables["Get_Client_Address"]->Rows[i]->ItemArray[1]->ToString());
 		list_Address->setLast(gcnew Address(ID_Address, true));
 	}
-	sqlRequest = "SELECT * FROM (SELECT * FROM Client WHERE ID_Client = "+ ID_Client +") as Client INNER JOIN People ON CLient.ID_People = People.ID_People";
+	sqlRequest = "SELECT * FROM (SELECT * FROM Client WHERE ID_Client = " + ID_Client + ") as Client INNER JOIN People ON CLient.ID_People = People.ID_People";
 	Row^ result = connection->selectRow(sqlRequest, "Client", 0);
 	//int ID_Client, System::DateTime birthdate, System::DateTime first_Buy_Website, int ID_People
 	this->client = gcnew DB_Client(ID_Client, result->getDateTime(1), result->getDateTime(2), result->getInt(3));

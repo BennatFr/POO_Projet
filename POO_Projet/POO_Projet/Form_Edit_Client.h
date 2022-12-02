@@ -28,10 +28,6 @@ namespace POOProjet {
 		Form_Edit_Client(Client^ client) {
 			InitializeComponent();
 
-			if (client->getClientID() == 0) {
-				this->button2->Hide();
-			}
-
 			this->client = client;
 			this->Text = "[POO] v1.0 | Modification Client | N°" + client->getClientID();
 
@@ -41,11 +37,48 @@ namespace POOProjet {
 			this->label4->Text = "Date Premier achat site";
 			this->label5->Text = "Addresse de Livraison";
 			this->label6->Text = "Addresse de facturation";
+			this->dataGridView1->ColumnCount = 7;
+			this->dataGridView1->Columns[0]->Name = "ID Addresse";
+			this->dataGridView1->Columns[1]->Name = "Numéro de rue";
+			this->dataGridView1->Columns[2]->Name = "Rue";
+			this->dataGridView1->Columns[3]->Name = "Ville";
+			this->dataGridView1->Columns[4]->Name = "Code postal";
+			this->dataGridView1->Columns[5]->Name = "Pays";
+			this->dataGridView1->Columns[6]->Name = "Information additionnel";
+
+			this->dataGridView2->ColumnCount = 7;
+			this->dataGridView2->Columns[0]->Name = "ID Addresse";
+			this->dataGridView2->Columns[1]->Name = "Numéro de rue";
+			this->dataGridView2->Columns[2]->Name = "Rue";
+			this->dataGridView2->Columns[3]->Name = "Ville";
+			this->dataGridView2->Columns[4]->Name = "Code postal";
+			this->dataGridView2->Columns[5]->Name = "Pays";
+			this->dataGridView2->Columns[6]->Name = "Information additionnel";
 
 			this->textBox1->Text = client->getPeople()->getLastName();
 			this->textBox2->Text = client->getPeople()->getFirstName();
 			this->dateTimePicker1->Value = client->getClient()->getBirthdate();
 			this->dateTimePicker2->Value = client->getClient()->getFirstBuyWebsite();
+			Address^ address;
+			System::Windows::Forms::DataGridView^ dataGridView;
+			int index;
+			for (int i = 0; i < client->getListAddress()->getSize(); i++) {
+				address = client->getListAddress()->get(i);
+				if (address->getClientAddress()->isBilling()) {
+					dataGridView = this->dataGridView1;
+				} else {
+					dataGridView = this->dataGridView2;
+				}
+				index = dataGridView->Rows->Count;
+				dataGridView->Rows->Add();
+				dataGridView->Rows[index]->Cells["ID Addresse"]->Value = address->getAddress()->getIDAddress();
+				dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
+				dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
+				dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
+				dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
+				dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
+				dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
+			}
 
 			this->textBox1->MaxLength = 50;
 			this->textBox2->MaxLength = 50;
@@ -81,14 +114,14 @@ namespace POOProjet {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+
 	protected:
 
 	private:
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -110,7 +143,6 @@ namespace POOProjet {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
@@ -122,7 +154,6 @@ namespace POOProjet {
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(599, 25);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(967, 318);
@@ -135,7 +166,6 @@ namespace POOProjet {
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Location = System::Drawing::Point(599, 365);
 			this->dataGridView2->Name = L"dataGridView2";
-			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->RowHeadersWidth = 51;
 			this->dataGridView2->RowTemplate->Height = 24;
 			this->dataGridView2->Size = System::Drawing::Size(967, 318);
@@ -229,24 +259,14 @@ namespace POOProjet {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(204, 66);
 			this->button1->TabIndex = 12;
-			this->button1->Text = L"button1";
+			this->button1->Text = L"Sauvegarder";
 			this->button1->UseVisualStyleBackColor = true;
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(1152, 700);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(204, 66);
-			this->button2->TabIndex = 13;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
 			// 
 			// Form_Edit_Client
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1578, 778);
-			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -269,5 +289,5 @@ namespace POOProjet {
 
 		}
 #pragma endregion
-};
+	};
 }
