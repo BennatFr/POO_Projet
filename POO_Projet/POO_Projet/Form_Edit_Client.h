@@ -45,6 +45,7 @@ namespace POOProjet {
 			this->dataGridView1->Columns[4]->Name = "Code postal";
 			this->dataGridView1->Columns[5]->Name = "Pays";
 			this->dataGridView1->Columns[6]->Name = "Information additionnel";
+			this->dataGridView1->Columns[0]->ReadOnly = true;
 
 			this->dataGridView2->ColumnCount = 7;
 			this->dataGridView2->Columns[0]->Name = "ID Addresse";
@@ -54,31 +55,12 @@ namespace POOProjet {
 			this->dataGridView2->Columns[4]->Name = "Code postal";
 			this->dataGridView2->Columns[5]->Name = "Pays";
 			this->dataGridView2->Columns[6]->Name = "Information additionnel";
+			this->dataGridView1->Columns[0]->ReadOnly = true;
 
 			this->textBox1->Text = client->getPeople()->getLastName();
 			this->textBox2->Text = client->getPeople()->getFirstName();
 			this->dateTimePicker1->Value = client->getClient()->getBirthdate();
 			this->dateTimePicker2->Value = client->getClient()->getFirstBuyWebsite();
-			Address^ address;
-			System::Windows::Forms::DataGridView^ dataGridView;
-			int index;
-			for (int i = 0; i < client->getListAddress()->getSize(); i++) {
-				address = client->getListAddress()->get(i);
-				if (address->getClientAddress()->isBilling()) {
-					dataGridView = this->dataGridView1;
-				} else {
-					dataGridView = this->dataGridView2;
-				}
-				index = dataGridView->Rows->Count;
-				dataGridView->Rows->Add();
-				dataGridView->Rows[index]->Cells["ID Addresse"]->Value = address->getAddress()->getIDAddress();
-				dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
-				dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
-				dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
-				dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
-				dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
-				dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
-			}
 
 			this->textBox1->MaxLength = 50;
 			this->textBox2->MaxLength = 50;
@@ -86,6 +68,8 @@ namespace POOProjet {
 			this->dateTimePicker1->MaxDate = DateTime::Today;
 			this->dateTimePicker2->MinDate = DateTime(2000, 1, 1);
 			this->dateTimePicker2->MaxDate = DateTime::Today;
+
+			rechercheAddress();
 
 		}
 
@@ -114,6 +98,10 @@ namespace POOProjet {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
+private: System::Windows::Forms::Button^ button4;
+private: System::Windows::Forms::Button^ button5;
 
 	protected:
 
@@ -143,6 +131,10 @@ namespace POOProjet {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
@@ -152,7 +144,7 @@ namespace POOProjet {
 			this->dataGridView1->AllowUserToAddRows = false;
 			this->dataGridView1->AllowUserToDeleteRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(599, 25);
+			this->dataGridView1->Location = System::Drawing::Point(599, 28);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
@@ -164,7 +156,7 @@ namespace POOProjet {
 			this->dataGridView2->AllowUserToAddRows = false;
 			this->dataGridView2->AllowUserToDeleteRows = false;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Location = System::Drawing::Point(599, 365);
+			this->dataGridView2->Location = System::Drawing::Point(599, 378);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowHeadersWidth = 51;
 			this->dataGridView2->RowTemplate->Height = 24;
@@ -238,7 +230,7 @@ namespace POOProjet {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(596, 6);
+			this->label5->Location = System::Drawing::Point(596, 9);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(44, 16);
 			this->label5->TabIndex = 10;
@@ -247,7 +239,7 @@ namespace POOProjet {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(596, 346);
+			this->label6->Location = System::Drawing::Point(596, 359);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(44, 16);
 			this->label6->TabIndex = 11;
@@ -255,18 +247,63 @@ namespace POOProjet {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(1362, 700);
+			this->button1->Location = System::Drawing::Point(1362, 714);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(204, 66);
+			this->button1->Size = System::Drawing::Size(204, 52);
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Sauvegarder";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(1410, 2);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(156, 23);
+			this->button2->TabIndex = 13;
+			this->button2->Text = L"Ajouter une addresse";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(1410, 352);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(156, 23);
+			this->button3->TabIndex = 14;
+			this->button3->Text = L"Ajouter une addresse";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(1222, 2);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(172, 23);
+			this->button4->TabIndex = 15;
+			this->button4->Text = L"Supprimer une addresse";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button4_Click);
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(1222, 352);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(172, 23);
+			this->button5->TabIndex = 16;
+			this->button5->Text = L"Supprimer une addresse";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button5_Click);
 			// 
 			// Form_Edit_Client
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1578, 778);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -289,5 +326,73 @@ namespace POOProjet {
 
 		}
 #pragma endregion
-	};
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->client->save();
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dataGridView1->Rows->Add();
+	}
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dataGridView2->Rows->Add();
+	}
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		deleteRow(this->dataGridView1);
+	}
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		deleteRow(this->dataGridView2);
+	}
+
+
+	System::Void deleteRow(System::Windows::Forms::DataGridView^ dataGridView) {
+		if (dataGridView->SelectedCells->Count == 0) {
+			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+		int row = dataGridView->SelectedCells[0]->RowIndex;
+		if (dataGridView->Rows->Count <= row) {
+			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+		String^ IDAddressSelect = dataGridView->Rows[row]->Cells[0]->Value->ToString();
+		if (IDAddressSelect == "") {
+			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+		else {
+			System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer l'address n°" + IDAddressSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::Yes) {
+				Address^ address = gcnew Address(Convert::ToInt32(IDAddressSelect), true);
+				address->getClientAddress()->setIdClient(this->client->getClientID());
+				address->del();
+				System::Windows::Forms::DialogResult result = MessageBox::Show("L'addresse n°" + IDAddressSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+		rechercheAddress();
+	}
+	System::Void rechercheAddress() {
+		this->dataGridView1->Rows->Clear();
+		this->dataGridView2->Rows->Clear();
+		this->client->setListAddress((gcnew Client(this->client->getClientID()))->getListAddress());
+		Address^ address;
+		System::Windows::Forms::DataGridView^ dataGridView;
+		int index;
+		for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
+			address = this->client->getListAddress()->get(i);
+			if (address->getClientAddress()->isBilling()) {
+				dataGridView = this->dataGridView1;
+			} else {
+				dataGridView = this->dataGridView2;
+			}
+			index = dataGridView->Rows->Count;
+			dataGridView->Rows->Add();
+			dataGridView->Rows[index]->Cells["ID Addresse"]->Value = address->getAddress()->getIDAddress();
+			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
+			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
+			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
+			dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
+			dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
+			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
+		}
+	}
+};
 }
