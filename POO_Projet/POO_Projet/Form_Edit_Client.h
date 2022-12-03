@@ -34,8 +34,8 @@ namespace POOProjet {
 			this->label1->Text = "Nom de famille";
 			this->label2->Text = "Prénom";
 			this->label3->Text = "Date d'anniversaire";
-			this->label4->Text = "Date Premier achat site";
-			this->label5->Text = "Adresse de Livraison";
+			this->label4->Text = "Date premier achat site";
+			this->label5->Text = "Adresse de livraison";
 			this->label6->Text = "Adresse de facturation";
 			this->dataGridView1->ColumnCount = 7;
 			this->dataGridView1->Columns[0]->Name = "ID Adresse";
@@ -101,8 +101,8 @@ namespace POOProjet {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button3;
-private: System::Windows::Forms::Button^ button4;
-private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ button5;
 
 	protected:
 
@@ -328,29 +328,27 @@ private: System::Windows::Forms::Button^ button5;
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		client->getPeople()->setLastName(this->textBox1->Text);
+		client->getPeople()->setFirstName(this->textBox2->Text);
+		client->getClient()->setBirthdate(this->dateTimePicker1->Value);
+		client->getClient()->setFirstBuyWebsite(this->dateTimePicker2->Value);
+
+		this->client->setListAddress(gcnew List_Address());
+		getAddressFromGrid(this->dataGridView1, 0);
+		getAddressFromGrid(this->dataGridView2, 1);
+		int result;
 		if (this->client->getClientID() == 0) {
-
-			 client->getPeople()->setLastName(this->textBox1->Text);
-			 client->getPeople()->setFirstName(this->textBox2->Text);
-			 client->getClient()->setBirthdate(this->dateTimePicker1->Value);
-			 client->getClient()->setFirstBuyWebsite(this->dateTimePicker2->Value);
-
-			 /*
-			 dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
-			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
-			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
-			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
-			dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
-			dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
-			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();*/
-
-			 this->client->setListAddress(gcnew List_Address());
-			 getAddressFromGrid(this->dataGridView1, false);
-			 getAddressFromGrid(this->dataGridView2, true);
-
-			this->client->insert();
+			result = this->client->insert();
+		} else {
+			result = this->client->update();
 		}
-		
+		if (result == 0) {
+			MessageBox::Show("Les données de l'utilisateur ont bien été sauvegardées.", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			this->Close();
+		} else {
+			MessageBox::Show("Une erreur est survenue.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridView1->Rows->Add();
@@ -366,77 +364,82 @@ private: System::Windows::Forms::Button^ button5;
 	}
 
 
-	System::Void deleteRow(System::Windows::Forms::DataGridView^ dataGridView) {
-		if (dataGridView->SelectedCells->Count == 0) {
-			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-		int row = dataGridView->SelectedCells[0]->RowIndex;
-		if (dataGridView->Rows->Count <= row) {
-			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-		String^ IDAddressSelect = dataGridView->Rows[row]->Cells[0]->Value->ToString();
-		if (IDAddressSelect == "") {
-			MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-		else {
-			System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer l'address n°" + IDAddressSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
-			if (result == System::Windows::Forms::DialogResult::Yes) {
-				Address^ address = gcnew Address(Convert::ToInt32(IDAddressSelect), true);
-				address->getClientAddress()->setIdClient(this->client->getClientID());
-				address->del();
-				System::Windows::Forms::DialogResult result = MessageBox::Show("L'addresse n°" + IDAddressSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			}
-		}
-		rechercheAddress();
-	}
-	System::Void rechercheAddress() {
-		this->dataGridView1->Rows->Clear();
-		this->dataGridView2->Rows->Clear();
-		this->client->setListAddress((gcnew Client(this->client->getClientID()))->getListAddress());
-		Address^ address;
-		System::Windows::Forms::DataGridView^ dataGridView;
-		int index;
-		for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
-			address = this->client->getListAddress()->get(i);
-			if (address->getClientAddress()->isBilling()) {
-				dataGridView = this->dataGridView1;
-			} else {
-				dataGridView = this->dataGridView2;
-			}
-			index = dataGridView->Rows->Count;
-			dataGridView->Rows->Add();
-			dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
-			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
-			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
-			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
-			dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
-			dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
-			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
-		}
-	}
+		   System::Void deleteRow(System::Windows::Forms::DataGridView^ dataGridView) {
+			   if (dataGridView->SelectedCells->Count == 0) {
+				   MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+			   int row = dataGridView->SelectedCells[0]->RowIndex;
+			   if (dataGridView->Rows->Count <= row) {
+				   MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+			   String^ IDAddressSelect = dataGridView->Rows[row]->Cells[0]->Value->ToString();
+			   if (IDAddressSelect == "") {
+				   MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+			   else {
+				   System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer l'address n°" + IDAddressSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				   if (result == System::Windows::Forms::DialogResult::Yes) {
+					   Address^ address = gcnew Address(Convert::ToInt32(IDAddressSelect), true);
+					   address->getClientAddress()->setIdClient(this->client->getClientID());
+					   address->del();
+					   System::Windows::Forms::DialogResult result = MessageBox::Show("L'addresse n°" + IDAddressSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				   }
+			   }
+			   rechercheAddress();
+		   }
+		   System::Void rechercheAddress() {
+			   this->dataGridView1->Rows->Clear();
+			   this->dataGridView2->Rows->Clear();
+			   this->client->setListAddress((gcnew Client(this->client->getClientID()))->getListAddress());
+			   Address^ address;
+			   System::Windows::Forms::DataGridView^ dataGridView;
+			   int index;
+			   for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
+				   address = this->client->getListAddress()->get(i);
+				   if (!address->getClientAddress()->isBilling()) {
+					   dataGridView = this->dataGridView1;
+				   }
+				   else {
+					   dataGridView = this->dataGridView2;
+				   }
+				   index = dataGridView->Rows->Count;
+				   dataGridView->Rows->Add();
+				   dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
+				   dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
+				   dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
+				   dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
+				   dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
+				   dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
+				   dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
+			   }
+		   }
 
-	System::Void getAddressFromGrid(System::Windows::Forms::DataGridView^ dataGridView, bool bill) {
-		System::Windows::Forms::DataGridViewRow^ row;
-		int IDAddress;
-		for (int i = 0; i < dataGridView->Rows->Count; i++) {
-			row = dataGridView->Rows[i];
-			if (row->Cells["Numéro de rue"]->Value->ToString() == nullptr || row->Cells["Rue"]->Value->ToString() == nullptr || row->Cells["Ville"]->Value->ToString() == nullptr || row->Cells["Code postal"]->Value->ToString() == nullptr || row->Cells["Pays"]->Value->ToString() == nullptr || row->Cells["Numéro de rue"]->Value->ToString() == "" || row->Cells["Rue"]->Value->ToString() == "" || row->Cells["Ville"]->Value->ToString() == "" || row->Cells["Code postal"]->Value->ToString() == "" || row->Cells["Pays"]->Value->ToString() == "") {
-				MessageBox::Show("Une ou plusieurs adresse ont des données manquantes.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				return;
-			}
-			if (row->Cells["ID Adresse"]->Value == "") {
-				IDAddress = 0;
-			}
-			else {
-				IDAddress = Convert::ToInt32(row->Cells["ID Adresse"]->Value);
-			}
-			Address^ tempo = gcnew Address(gcnew DB_Address(IDAddress, Convert::ToInt32(row->Cells["Numéro de rue"]->Value->ToString()), row->Cells["Rue"]->Value->ToString(), row->Cells["Information additionnel"]->Value->ToString(), 0, 0), gcnew DB_City(0, row->Cells["Ville"]->Value->ToString(), row->Cells["Code postal"]->Value->ToString()), gcnew DB_Country(0, row->Cells["Pays"]->Value->ToString()), gcnew DB_Client_Address(0, 0, false));
-			this->client->getListAddress()->setLast(tempo);
-		}
-	}
+		   System::Void getAddressFromGrid(System::Windows::Forms::DataGridView^ dataGridView, int bill) {
+			   System::Windows::Forms::DataGridViewRow^ row;
+			   int IDAddress;
+			   for (int i = 0; i < dataGridView->Rows->Count; i++) {
+				   row = dataGridView->Rows[i];
+				   if (row->Cells["Numéro de rue"]->Value->ToString() == nullptr || row->Cells["Rue"]->Value->ToString() == nullptr || row->Cells["Ville"]->Value->ToString() == nullptr || row->Cells["Code postal"]->Value->ToString() == nullptr || row->Cells["Pays"]->Value->ToString() == nullptr || row->Cells["Numéro de rue"]->Value->ToString() == "" || row->Cells["Rue"]->Value->ToString() == "" || row->Cells["Ville"]->Value->ToString() == "" || row->Cells["Code postal"]->Value->ToString() == "" || row->Cells["Pays"]->Value->ToString() == "") {
+					   MessageBox::Show("Une ou plusieurs adresse ont des données manquantes.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					   return;
+				   }
+				   if (row->Cells["ID Adresse"]->Value == "") {
+					   IDAddress = 0;
+				   }
+				   else {
+					   IDAddress = Convert::ToInt32(row->Cells["ID Adresse"]->Value);
+				   }
+				   DB_Address^ address = gcnew DB_Address(IDAddress, Convert::ToInt32(row->Cells["Numéro de rue"]->Value->ToString()), row->Cells["Rue"]->Value->ToString(), row->Cells["Information additionnel"]->Value->ToString(), 0, 0);
+				   DB_City^ city = gcnew DB_City(0, row->Cells["Ville"]->Value->ToString(), row->Cells["Code postal"]->Value->ToString());
+				   DB_Country^ country = gcnew DB_Country(0, row->Cells["Pays"]->Value->ToString());
+				   DB_Client_Address^ clientAddress = gcnew DB_Client_Address(0, 0, bill);
+				   Address^ tempo = gcnew Address(address, city, country, clientAddress);
+				   this->client->getListAddress()->setLast(tempo);
+			   }
+		   }
 
-};
+	};
 }

@@ -132,7 +132,7 @@ int Address::insert(int ID_Client) {
 	this->save();
 	if (this->getAddress() != nullptr) {
 		if (this->getAddress()->getIDCity() == 0) {
-			sqlRequest = "SELECT Count(*) FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = " + this->getCity()->getPostalNumber() + "'";
+			sqlRequest = "SELECT Count(*) FROM City WHERE name = '" + this->getCity()->getName() + "' AND postal_Number = '" + this->getCity()->getPostalNumber() + "'";
 			Row^ result = connection->selectRow(sqlRequest, "City", 0);
 			if (result->getInt(0) == 0) {
 				sqlRequest = "INSERT INTO City VALUES ('" + this->getCity()->getName() + "', '" + this->getCity()->getPostalNumber() + "')";
@@ -161,7 +161,7 @@ int Address::insert(int ID_Client) {
 	}
 
 	if (this->getClientAddress() != nullptr) {
-		sqlRequest = "INSERT INTO Get_Client_Address VALUES (" + ID_Client + ", " + this->getAddress()->getIDAddress() + ", " + this->getClientAddress()->isBilling() + ")";
+		sqlRequest = "INSERT INTO Get_Client_Address VALUES (" + ID_Client + ", " + this->getAddress()->getIDAddress() + ", " + System::Convert::ToInt32(this->getClientAddress()->isBilling()) + ")";
 		connection->execute(sqlRequest);
 	}
 

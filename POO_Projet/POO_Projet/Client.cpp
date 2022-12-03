@@ -87,13 +87,34 @@ int Client::insert() {
 	for (int i = 0; i < this->getListAddress()->getSize(); i++) {
 		if (this->getListAddress()->get(i)->getAddress()->getIDAddress() == 0) {
 			this->getListAddress()->get(i)->insert(this->getClientID());
-		} else {
+		}
+		else {
 			this->getListAddress()->get(i)->update();
 		}
-	}	
+	}
+	return 0;
 }
 
 int Client::update() {
+	System::String^ sqlRequest;
+	Row^ result;
+	if (this->getPeople() != nullptr) {
+		sqlRequest = "UPDATE People SET last_Name = '"+ this->getPeople()->getLastName() + "',first_Name = '"+ this->getPeople()->getFirstName() +"' WHERE ID_People = " + this->getPeople()->getIDPeople();
+		connection->execute(sqlRequest);
+	}
+	if (this->getClient() != nullptr) {
+		sqlRequest = "UPDATE Client SET birthdate = '"+ this->getClient()->getBirthdate() + "', first_Buy_Website = '" + this->getClient()->getFirstBuyWebsite() + "', ID_People = " + this->getClient()->getIDPeople() + "  WHERE ID_Client = " + this->getClient()->getIDClient();
+		connection->execute(sqlRequest);
+	}
+
+	for (int i = 0; i < this->getListAddress()->getSize(); i++) {
+		if (this->getListAddress()->get(i)->getAddress()->getIDAddress() == 0) {
+			this->getListAddress()->get(i)->insert(this->getClientID());
+		}
+		else {
+			this->getListAddress()->get(i)->update();
+		}
+	}
 	return 0;
 }
 
@@ -103,9 +124,9 @@ int Client::del() {
 	}
 	System::String^ sqlRequest;
 
-	sqlRequest = "DELETE FROM People WHERE ID_People = " + this->getPeople()->getIDPeople();
-	connection->execute(sqlRequest);
 	sqlRequest = "DELETE FROM Client WHERE ID_Client = " + this->getClient()->getIDClient();
+	connection->execute(sqlRequest);
+	sqlRequest = "DELETE FROM People WHERE ID_People = " + this->getPeople()->getIDPeople();
 	connection->execute(sqlRequest);
 	return 0;
 	

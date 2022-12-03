@@ -331,8 +331,8 @@ namespace POOProjet {
 		else {
 			System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 			if (result == System::Windows::Forms::DialogResult::Yes) {
-				Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
-				personnel->del();
+				Client^ client = gcnew Client(Convert::ToInt32(IDPersonnelSelect));
+				client->del();
 				System::Windows::Forms::DialogResult result = MessageBox::Show("Le personnel n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				recherche();
 			}
