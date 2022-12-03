@@ -419,7 +419,6 @@ namespace POOProjet {
 		default:
 			MessageBox::Show("Une erreur est survenue", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			break;
-
 		}
 	}
 };

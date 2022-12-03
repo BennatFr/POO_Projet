@@ -7,8 +7,10 @@
 #include "Connection_DB.h"
 #include "Form_Edit.h"
 #include "Form_Edit_Client.h"
+#include "Form_Edit_Stock.h"
 #include "Personnel.h"
 #include "Client.h"
+#include "Item.h"
 
 namespace POOProjet {
 	using namespace System;
@@ -299,10 +301,20 @@ namespace POOProjet {
 			break;
 		}
 		case EnumVar::CLIENT:
+		{
 			Client^ client = gcnew Client(Convert::ToInt32(IDSelect));
 			Form_Edit_Client^ formEditClient = gcnew Form_Edit_Client(client);
 			formEditClient->ShowDialog();
 			break;
+		}
+			
+		case EnumVar::STOCK: {
+			Item^ item = gcnew Item(Convert::ToInt32(IDSelect));
+			Form_Edit_Stock^ formEditStock = gcnew Form_Edit_Stock(item);
+			formEditStock->ShowDialog();
+			break;
+		}
+			
 		}
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -317,6 +329,12 @@ namespace POOProjet {
 		{
 			Form_Edit_Client^ formEditClient = gcnew Form_Edit_Client(gcnew Client());
 			formEditClient->ShowDialog();
+			break;
+		}
+		case EnumVar::STOCK:
+		{
+			Form_Edit_Stock^ formEditStock = gcnew Form_Edit_Stock(gcnew Item());
+			formEditStock->ShowDialog();
 			break;
 		}
 		}

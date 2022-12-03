@@ -111,6 +111,9 @@
     <ClCompile Include="DB_Price.cpp">
       <Filter>DB\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Form_Edit_Stock.cpp">
+      <Filter>Form\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="DB_Price.h">
       <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Form_Edit_Stock.h">
+      <Filter>Form\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

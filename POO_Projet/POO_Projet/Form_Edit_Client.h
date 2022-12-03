@@ -55,7 +55,7 @@ namespace POOProjet {
 			this->dataGridView2->Columns[4]->Name = "Code postal";
 			this->dataGridView2->Columns[5]->Name = "Pays";
 			this->dataGridView2->Columns[6]->Name = "Information additionnel";
-			this->dataGridView1->Columns[0]->ReadOnly = true;
+			this->dataGridView2->Columns[0]->ReadOnly = true;
 
 			this->textBox1->Text = client->getPeople()->getLastName();
 			this->textBox2->Text = client->getPeople()->getFirstName();

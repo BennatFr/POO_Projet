@@ -24,5 +24,12 @@ public:
 	void setPrice(DB_Price^ price);
 	void setItem(DB_Item^ item);
 	void setType(DB_Type^ type);
+
+	int getItemID();
+	void setIDType(int ID_Type);
+	void setIDItem(int ID_Item);
+
+	int insert();
+	int update();
 };
 
