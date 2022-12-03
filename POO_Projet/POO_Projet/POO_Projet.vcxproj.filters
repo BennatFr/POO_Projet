@@ -114,6 +114,9 @@
     <ClCompile Include="Form_Edit_Stock.cpp">
       <Filter>Form\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Form_Command.cpp">
+      <Filter>Form\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -183,6 +186,9 @@
       <Filter>DB\Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Form_Edit_Stock.h">
+      <Filter>Form\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Form_Command.h">
       <Filter>Form\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

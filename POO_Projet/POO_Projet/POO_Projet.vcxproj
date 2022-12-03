@@ -134,6 +134,7 @@
     <ClCompile Include="Connection_DB.cpp" />
     <ClCompile Include="DB_Price.cpp" />
     <ClCompile Include="DB_Type.cpp" />
+    <ClCompile Include="Form_Command.cpp" />
     <ClCompile Include="Form_Edit.cpp" />
     <ClCompile Include="Form_Edit_Client.cpp" />
     <ClCompile Include="Form_Edit_Stock.cpp" />
@@ -159,6 +160,9 @@
     <ClInclude Include="Connection_DB.h" />
     <ClInclude Include="DB_Price.h" />
     <ClInclude Include="DB_Type.h" />
+    <ClInclude Include="Form_Command.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Form_Edit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -181,6 +185,9 @@
     <ClInclude Include="Row.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_Command.resx">
+      <DependentUpon>Form_Command.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Edit.resx">
       <DependentUpon>Form_Edit.h</DependentUpon>
     </EmbeddedResource>

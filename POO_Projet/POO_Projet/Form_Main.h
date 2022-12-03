@@ -61,6 +61,8 @@ namespace POOProjet {
 	private: System::Windows::Forms::ToolStripMenuItem^ articlesLesMoinsVendusToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ valeurCommercialeDuStockToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ valeurDachatDuStockToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ nouvelleCommandeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ rechercheToolStripMenuItem;
 
 
 
@@ -91,6 +93,8 @@ namespace POOProjet {
 			this->valeurCommercialeDuStockToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->valeurDachatDuStockToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->facture_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nouvelleCommandeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->rechercheToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -111,6 +115,10 @@ namespace POOProjet {
 			// 
 			// commande_ToolStripMenuItem
 			// 
+			this->commande_ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->nouvelleCommandeToolStripMenuItem,
+					this->rechercheToolStripMenuItem
+			});
 			this->commande_ToolStripMenuItem->Name = L"commande_ToolStripMenuItem";
 			this->commande_ToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->commande_ToolStripMenuItem->Text = L"Commande";
@@ -203,6 +211,19 @@ namespace POOProjet {
 			this->facture_ToolStripMenuItem->Size = System::Drawing::Size(58, 20);
 			this->facture_ToolStripMenuItem->Text = L"Facture";
 			// 
+			// nouvelleCommandeToolStripMenuItem
+			// 
+			this->nouvelleCommandeToolStripMenuItem->Name = L"nouvelleCommandeToolStripMenuItem";
+			this->nouvelleCommandeToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->nouvelleCommandeToolStripMenuItem->Text = L"Nouvelle Commande";
+			this->nouvelleCommandeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::nouvelleCommandeToolStripMenuItem_Click);
+			// 
+			// rechercheToolStripMenuItem
+			// 
+			this->rechercheToolStripMenuItem->Name = L"rechercheToolStripMenuItem";
+			this->rechercheToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->rechercheToolStripMenuItem->Text = L"Recherche";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -251,5 +272,8 @@ namespace POOProjet {
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
 	}
+private: System::Void nouvelleCommandeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }
