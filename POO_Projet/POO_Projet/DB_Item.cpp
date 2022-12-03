@@ -35,23 +35,23 @@ System::String^ DB_Item::getName() {
 }
 
 float DB_Item::getReplenishment() {
-	this->replenishment;
+	return this->replenishment;
 }
 
 float DB_Item::getStock() {
-	this->stock;
+	return this->stock;
 }
 
 float DB_Item::getQuantity() {
-	this->quantity;
+	return this->quantity;
 }
 
 float DB_Item::getDiscount() {
-	this->discount;
+	return this->discount;
 }
 
 int DB_Item::getIDType() {
-	this->ID_Type;
+	return this->ID_Type;
 }
 
 void DB_Item::setIDItem(int ID_Item) {

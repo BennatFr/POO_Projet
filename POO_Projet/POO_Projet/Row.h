@@ -19,6 +19,7 @@ public:
 
 	System::String^ getString(int column);
 	int getInt(int column);
+	float getFloat(int column);
 	bool getBool(int column);
 	System::DateTime getDateTime(int column);
 };

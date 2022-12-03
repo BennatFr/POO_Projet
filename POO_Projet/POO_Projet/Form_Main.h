@@ -15,11 +15,9 @@ namespace POOProjet {
 	/// <summary>
 	/// Description résumée de MyForm
 	/// </summary>
-	public ref class MyForm : public System::Windows::Forms::Form
-	{
+	public ref class MyForm : public System::Windows::Forms::Form {
 	public:
-		MyForm(void)
-		{
+		MyForm(void) {
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -30,10 +28,8 @@ namespace POOProjet {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~MyForm()
-		{
-			if (components)
-			{
+		~MyForm() {
+			if (components) {
 				delete components;
 			}
 		}
@@ -72,15 +68,14 @@ namespace POOProjet {
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
 		/// le contenu de cette méthode avec l'éditeur de code.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void) {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->commande_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->personnel_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -140,6 +135,7 @@ namespace POOProjet {
 			this->stock_ToolStripMenuItem->Name = L"stock_ToolStripMenuItem";
 			this->stock_ToolStripMenuItem->Size = System::Drawing::Size(48, 20);
 			this->stock_ToolStripMenuItem->Text = L"Stock";
+			this->stock_ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::stock_ToolStripMenuItem_Click);
 			// 
 			// statistique_ToolStripMenuItem
 			// 
@@ -215,7 +211,7 @@ namespace POOProjet {
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximumSize = System::Drawing::Size(416, 72);
 			this->MinimumSize = System::Drawing::Size(416, 72);
 			this->Name = L"MyForm";
@@ -228,27 +224,32 @@ namespace POOProjet {
 
 		}
 #pragma endregion
-private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
-	Form_Search^ formSearch = gcnew Form_Search(clicInfo);
-	formSearch->ShowDialog();
+	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
+		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+		formSearch->ShowDialog();
 
 
-	/*POOProjet::Form_Search form_Search;
-	form_Search.Text = "Search Commande";
-	form_Search.ShowDialog();*/
-}
-private: System::Void personnel_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
-	Form_Search^ formSearch = gcnew Form_Search(clicInfo);
-	formSearch->ShowDialog();
-}
-private: System::Void client_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::CLIENT);
-	Form_Search^ formSearch = gcnew Form_Search(clicInfo);
-	formSearch->ShowDialog();
-}
+		/*POOProjet::Form_Search form_Search;
+		form_Search.Text = "Search Commande";
+		form_Search.ShowDialog();*/
+	}
+	private: System::Void personnel_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
+		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+		formSearch->ShowDialog();
+	}
+	private: System::Void client_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::CLIENT);
+		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+		formSearch->ShowDialog();
+	}
+	private: System::Void stock_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::STOCK);
+		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+		formSearch->ShowDialog();
+	}
 };
 }

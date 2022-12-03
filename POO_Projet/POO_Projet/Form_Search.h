@@ -21,16 +21,13 @@ namespace POOProjet {
 	/// <summary>
 	/// Description résumée de Form_Search
 	/// </summary>
-	public ref class Form_Search : public System::Windows::Forms::Form
-	{
+	public ref class Form_Search : public System::Windows::Forms::Form {
 	public:
-		Form_Search(void)
-		{
+		Form_Search(void) {
 			InitializeComponent();
 		}
 
-		Form_Search(EnumVar::type_Seach typeOfResearch)
-		{
+		Form_Search(EnumVar::type_Seach typeOfResearch) {
 			InitializeComponent();
 			String^ titleText = "[POO] v1.0 ";
 			this->typeOfResearch = typeOfResearch;
@@ -51,6 +48,16 @@ namespace POOProjet {
 				this->label_research1->Text = "Id du Client";
 				this->label_research2->Text = "Nom du Client";
 				this->label_research3->Text = "Prénom du Client";
+				this->dateTimePicker1->Hide();
+				this->dateTimePicker2->Hide();
+				break;
+			case EnumVar::STOCK:
+				this->Text = titleText + "Recherche Stock";
+				this->label_research1->Text = "Id de l'article";
+				this->label_research2->Text = "Nom de l'article";
+				this->label_research3->Text = "Référence de l'article";
+				this->dateTimePicker1->Hide();
+				this->dateTimePicker2->Hide();
 				break;
 			default:
 				this->Text = titleText + "Erreur";
@@ -62,10 +69,8 @@ namespace POOProjet {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Form_Search()
-		{
-			if (components)
-			{
+		~Form_Search() {
+			if (components) {
 				delete components;
 			}
 		}
@@ -107,8 +112,7 @@ namespace POOProjet {
 		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
 		/// le contenu de cette méthode avec l'éditeur de code.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void) {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form_Search::typeid));
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -271,6 +275,7 @@ namespace POOProjet {
 			this->PerformLayout();
 
 		}
+
 #pragma endregion
 	private: System::Void Form_Search_Load(System::Object^ sender, System::EventArgs^ e) {
 		//Initialiser la connection
@@ -286,7 +291,8 @@ namespace POOProjet {
 			return;
 		}
 		switch (this->typeOfResearch) {
-		case EnumVar::PERSONNEL: {
+		case EnumVar::PERSONNEL:
+		{
 			Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDSelect));
 			Form_Edit^ formEdit = gcnew Form_Edit(personnel);
 			formEdit->ShowDialog();
@@ -301,12 +307,14 @@ namespace POOProjet {
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		switch (this->typeOfResearch) {
-		case EnumVar::PERSONNEL: {
+		case EnumVar::PERSONNEL:
+		{
 			Form_Edit^ formEdit = gcnew Form_Edit(gcnew Personnel());
 			formEdit->ShowDialog();
 			break;
 		}
-		case EnumVar::CLIENT: {
+		case EnumVar::CLIENT:
+		{
 			Form_Edit_Client^ formEditClient = gcnew Form_Edit_Client(gcnew Client());
 			formEditClient->ShowDialog();
 			break;
@@ -327,8 +335,7 @@ namespace POOProjet {
 		if (IDPersonnelSelect == "") {
 			MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
-		}
-		else {
+		} else {
 			System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 			if (result == System::Windows::Forms::DialogResult::Yes) {
 				Client^ client = gcnew Client(Convert::ToInt32(IDPersonnelSelect));
@@ -338,29 +345,26 @@ namespace POOProjet {
 			}
 		}
 	}
+
+		   // FONCTION 
 		   System::Void recherche() {
 			   String^ sqlRequest;
 			   std::string ID = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
+			   if (ID != "" && !is_number(ID)) {
+				   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
 			   switch (this->typeOfResearch) {
 			   case EnumVar::PERSONNEL:
-
 				   if (ID != "") {
-					   if (!is_number(ID)) {
-						   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						   return;
-					   }
 					   sqlRequest = gcnew String(("SELECT [POO_Projet].[dbo].[Personnel].[ID_Personnel], [POO_Projet].[dbo].[People].[last_Name], [POO_Projet].[dbo].[People].[first_Name], [POO_Projet].[dbo].[Personnel].[hire_Date] FROM [POO_Projet].[dbo].[Personnel] JOIN [POO_Projet].[dbo].[People] ON [POO_Projet].[dbo].[Personnel].[ID_People] = [POO_Projet].[dbo].[People].[ID_People] WHERE [ID_Personnel] = " + ID).c_str());
-				   }
-				   else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
+				   } else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
 					   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%' AND [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
-				   }
-				   else if (this->textBox_research2->Text != "") {
+				   } else if (this->textBox_research2->Text != "") {
 					   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%'";
-				   }
-				   else if (this->textBox_research3->Text != "") {
+				   } else if (this->textBox_research3->Text != "") {
 					   sqlRequest = "SELECT [Personnel].[ID_Personnel], [People].[last_Name], [People].[first_Name], [Personnel].[hire_Date] FROM [Personnel] JOIN [People] ON [Personnel].[ID_People] = [People].[ID_People] WHERE [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
-				   }
-				   else {
+				   } else {
 					   MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					   return;
 				   }
@@ -369,27 +373,26 @@ namespace POOProjet {
 				   break;
 			   case EnumVar::CLIENT:
 				   if (ID != "") {
-					   if (!is_number(ID)) {
-						   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						   return;
-					   }
 					   sqlRequest = gcnew String(("SELECT ID_Client, last_Name, first_Name, birthdate, first_Buy_Website FROM (SELECT * FROM Client WHERE ID_Client = " + ID + ") as Client INNER JOIN People ON CLient.ID_People = People.ID_People;").c_str());
-				   }
-				   else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
+				   } else if (this->textBox_research2->Text != "" && this->textBox_research3->Text != "") {
 					   sqlRequest = "SELECT ID_Client, last_Name, first_Name, birthdate, first_Buy_Website FROM Client JOIN [People] ON Client.ID_People = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%' AND [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
-				   }
-				   else if (this->textBox_research2->Text != "") {
+				   } else if (this->textBox_research2->Text != "") {
 					   sqlRequest = "SELECT ID_Client, last_Name, first_Name, birthdate, first_Buy_Website FROM Client JOIN [People] ON Client.ID_People = [People].[ID_People] WHERE [last_Name] LIKE  '" + this->textBox_research2->Text + "%'";
-				   }
-				   else if (this->textBox_research3->Text != "") {
+				   } else if (this->textBox_research3->Text != "") {
 					   sqlRequest = "SELECT ID_Client, last_Name, first_Name, birthdate, first_Buy_Website FROM Client JOIN [People] ON Client.ID_People = [People].[ID_People] WHERE [first_Name] LIKE  '" + this->textBox_research3->Text + "%'";
-				   }
-				   else {
+				   } else {
 					   MessageBox::Show("Tout les champs de recherche sont vide", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					   return;
 				   }
 				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Client");
 				   this->dataGridView1->DataMember = "Client";
+				   break;
+			   case EnumVar::STOCK:
+				   if (ID != "") {
+					   sqlRequest = gcnew String(("SELECT ID_Item, Type.name as type, Item.name, reference, stock, replenishment FROM (SELECT * FROM Item WHERE ID_Item = " + ID + ") as Item INNER JOIN Type ON Item.ID_Type = Type.ID_Type;").c_str());
+				   }
+				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Stock");
+				   this->dataGridView1->DataMember = "Stock";
 				   break;
 			   }
 		   }

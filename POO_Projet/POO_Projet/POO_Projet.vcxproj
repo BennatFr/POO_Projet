@@ -128,14 +128,18 @@
     <ClCompile Include="DB_Client.cpp" />
     <ClCompile Include="DB_Client_Address.cpp" />
     <ClCompile Include="DB_Country.cpp" />
+    <ClCompile Include="DB_Item.cpp" />
     <ClCompile Include="DB_People.cpp" />
     <ClCompile Include="DB_Personnel.cpp" />
     <ClCompile Include="Connection_DB.cpp" />
+    <ClCompile Include="DB_Price.cpp" />
+    <ClCompile Include="DB_Type.cpp" />
     <ClCompile Include="Form_Edit.cpp" />
     <ClCompile Include="Form_Edit_Client.cpp" />
     <ClCompile Include="Form_Main.cpp" />
     <ClCompile Include="Form_Search.cpp" />
     <ClCompile Include="Global_Var.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="List_Address.cpp" />
     <ClCompile Include="Personnel.cpp" />
     <ClCompile Include="Row.cpp" />
@@ -148,9 +152,12 @@
     <ClInclude Include="DB_Client.h" />
     <ClInclude Include="DB_Client_Address.h" />
     <ClInclude Include="DB_Country.h" />
+    <ClInclude Include="DB_Item.h" />
     <ClInclude Include="DB_People.h" />
     <ClInclude Include="DB_Personnel.h" />
     <ClInclude Include="Connection_DB.h" />
+    <ClInclude Include="DB_Price.h" />
+    <ClInclude Include="DB_Type.h" />
     <ClInclude Include="Form_Edit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -164,6 +171,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Global_Var.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="List_Address.h" />
     <ClInclude Include="Personnel.h" />
     <ClInclude Include="Row.h" />

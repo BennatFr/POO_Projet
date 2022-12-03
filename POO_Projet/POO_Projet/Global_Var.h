@@ -7,7 +7,7 @@
 bool is_number(const std::string& s);
 namespace EnumVar {
 
-	enum type_Seach { COMMAND, PERSONNEL, CLIENT, STATS, FACTURE };
+	enum type_Seach { COMMAND, PERSONNEL, CLIENT, STOCK, STATS, FACTURE };
 };
 
 #endif
