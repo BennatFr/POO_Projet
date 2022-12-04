@@ -56,5 +56,27 @@ void Command::setListPayment(List_Payment^ list_Payment) {
 }
 
 void Command::setIDCommand(int ID_Command) {
-    throw gcnew System::NotImplementedException();
+    this->getCommand()->setIDCommand(ID_Command);
+    for (int i = 0; i < this->list_Payment->getSize(); i++) {
+        this->list_Payment->get(i)->getPayment()->setIDCommand(ID_Command);
+    }
+}
+
+void Command::save() {
+    System::String^ sqlRequest;
+    Row^ result;
+    if (this->getCommandID() == 0) {
+        sqlRequest = "INSERT INTO Command VALUES ( '" + this->getCommand()->getReference() + "', '" + this->getCommand()->getDateEstimation() + "', '" + this->getCommand()->getDateIssue() + "','" + this->getCommand()->getSettlement() + "',"+this->getCommand()->getIDClient() + ")";
+        connection->execute(sqlRequest);
+        sqlRequest = "SELECT TOP 1 * FROM Command ORDER BY ID_Command DESC";
+        result = connection->selectRow(sqlRequest, "Command", 0);
+        this->setIDCommand(result->getInt(0));
+
+        /*for (int i = 0; i < this->getListItem()->getSize(); i++) {
+            Item^ item = this->getListItem()->get(i);
+            sqlRequest = "INSERT INTO Command VALUES ( '" + this->getCommand()->getReference() + "', '" + this->getCommand()->getDateEstimation() + "', '" + this->getCommand()->getDateIssue() + "','" + this->getCommand()->getSettlement() + "'," + this->getCommand()->getIDClient() + ")";
+            connection->execute(sqlRequest);
+        }*/
+    }
+    
 }

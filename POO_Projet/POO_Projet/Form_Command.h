@@ -24,7 +24,6 @@ namespace POOProjet {
 
 			this->command = gcnew Command();
 
-			
 		}
 
 	protected:
@@ -125,6 +124,7 @@ namespace POOProjet {
 	private: System::Windows::Forms::Label^ label22;
 	private: System::Windows::Forms::Label^ label24;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker_payment1;
+private: System::Windows::Forms::Button^ button6;
 
 
 	protected:
@@ -199,6 +199,7 @@ namespace POOProjet {
 			this->numericUpDown_payment1 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->listBox_payment = (gcnew System::Windows::Forms::ListBox());
 			this->dataGridView_payment = (gcnew System::Windows::Forms::DataGridView());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_client1))->BeginInit();
@@ -648,6 +649,7 @@ namespace POOProjet {
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->button6);
 			this->tabPage3->Controls->Add(this->label24);
 			this->tabPage3->Controls->Add(this->dateTimePicker_payment1);
 			this->tabPage3->Controls->Add(this->label23);
@@ -731,12 +733,13 @@ namespace POOProjet {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(1237, 558);
+			this->button3->Location = System::Drawing::Point(1227, 558);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
 			this->button3->TabIndex = 8;
-			this->button3->Text = L"Facturé";
+			this->button3->Text = L"Facturer";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form_Command::button3_Click);
 			// 
 			// label12
 			// 
@@ -750,7 +753,7 @@ namespace POOProjet {
 			// TotalHT2
 			// 
 			this->TotalHT2->AutoSize = true;
-			this->TotalHT2->Location = System::Drawing::Point(997, 563);
+			this->TotalHT2->Location = System::Drawing::Point(462, 563);
 			this->TotalHT2->Name = L"TotalHT2";
 			this->TotalHT2->Size = System::Drawing::Size(79, 13);
 			this->TotalHT2->TabIndex = 6;
@@ -760,7 +763,7 @@ namespace POOProjet {
 			// 
 			this->TotalTTC2->AutoSize = true;
 			this->TotalTTC2->ForeColor = System::Drawing::Color::Red;
-			this->TotalTTC2->Location = System::Drawing::Point(1117, 563);
+			this->TotalTTC2->Location = System::Drawing::Point(582, 563);
 			this->TotalTTC2->Name = L"TotalTTC2";
 			this->TotalTTC2->Size = System::Drawing::Size(85, 13);
 			this->TotalTTC2->TabIndex = 5;
@@ -789,7 +792,7 @@ namespace POOProjet {
 			this->listBox_payment->FormattingEnabled = true;
 			this->listBox_payment->Location = System::Drawing::Point(6, 19);
 			this->listBox_payment->Name = L"listBox_payment";
-			this->listBox_payment->Size = System::Drawing::Size(155, 251);
+			this->listBox_payment->Size = System::Drawing::Size(155, 212);
 			this->listBox_payment->TabIndex = 2;
 			// 
 			// dataGridView_payment
@@ -801,6 +804,16 @@ namespace POOProjet {
 			this->dataGridView_payment->Name = L"dataGridView_payment";
 			this->dataGridView_payment->Size = System::Drawing::Size(839, 546);
 			this->dataGridView_payment->TabIndex = 0;
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(1142, 558);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(79, 23);
+			this->button6->TabIndex = 15;
+			this->button6->Text = L"Sauvegarder";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &Form_Command::button6_Click);
 			// 
 			// Form_Command
 			// 
@@ -834,51 +847,72 @@ namespace POOProjet {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_payment))->EndInit();
 			this->ResumeLayout(false);
 
-			this->numericUpDown_article2->Minimum = -2147483647;
-			this->numericUpDown_article3->Minimum = 0;
-
-			this->numericUpDown_article2->Maximum = 2147483647;
-			this->numericUpDown_article3->Maximum = 1;
-
-			this->dataGridView_client2->ColumnCount = 7;
-			this->dataGridView_client2->Columns[0]->Name = "ID Adresse";
-			this->dataGridView_client2->Columns[1]->Name = "Numéro de rue";
-			this->dataGridView_client2->Columns[2]->Name = "Rue";
-			this->dataGridView_client2->Columns[3]->Name = "Ville";
-			this->dataGridView_client2->Columns[4]->Name = "Code postal";
-			this->dataGridView_client2->Columns[5]->Name = "Pays";
-			this->dataGridView_client2->Columns[6]->Name = "Information additionnel";
-
-			this->dataGridView_client3->ColumnCount = 7;
-			this->dataGridView_client3->Columns[0]->Name = "ID Adresse";
-			this->dataGridView_client3->Columns[1]->Name = "Numéro de rue";
-			this->dataGridView_client3->Columns[2]->Name = "Rue";
-			this->dataGridView_client3->Columns[3]->Name = "Ville";
-			this->dataGridView_client3->Columns[4]->Name = "Code postal";
-			this->dataGridView_client3->Columns[5]->Name = "Pays";
-			this->dataGridView_client3->Columns[6]->Name = "Information additionnel";
-
-			this->dataGridView_article2->ColumnCount = 11;
-			this->dataGridView_article2->Columns[0]->Name = "ID";
-			this->dataGridView_article2->Columns[1]->Name = "ID Item";
-			this->dataGridView_article2->Columns[2]->Name = "Type";
-			this->dataGridView_article2->Columns[3]->Name = "Nom";
-			this->dataGridView_article2->Columns[4]->Name = "Référence";
-			this->dataGridView_article2->Columns[5]->Name = "Quantité";
-			this->dataGridView_article2->Columns[6]->Name = "Réduction";
-			this->dataGridView_article2->Columns[7]->Name = "Prix /u";
-			this->dataGridView_article2->Columns[8]->Name = "TVA";
-			this->dataGridView_article2->Columns[9]->Name = "Prix HT";
-			this->dataGridView_article2->Columns[10]->Name = "Prix TTC";
-
-			this->dataGridView_payment->ColumnCount = 4;
-			this->dataGridView_payment->Columns[0]->Name = "ID";
-			this->dataGridView_payment->Columns[1]->Name = "Date du payment";
-			this->dataGridView_payment->Columns[2]->Name = "Montant";
-			this->dataGridView_payment->Columns[3]->Name = "Type";
-
 		}
 #pragma endregion
+	private: System::Void Form_Command_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->connection = gcnew Connection_DB();
+
+		this->numericUpDown_article2->Minimum = -2147483647;
+		this->numericUpDown_article3->Minimum = 0;
+
+		this->numericUpDown_article2->Maximum = 2147483647;
+		this->numericUpDown_article3->Maximum = 1;
+
+		this->dataGridView_client2->ColumnCount = 7;
+		this->dataGridView_client2->Columns[0]->Name = "ID Adresse";
+		this->dataGridView_client2->Columns[1]->Name = "Numéro de rue";
+		this->dataGridView_client2->Columns[2]->Name = "Rue";
+		this->dataGridView_client2->Columns[3]->Name = "Ville";
+		this->dataGridView_client2->Columns[4]->Name = "Code postal";
+		this->dataGridView_client2->Columns[5]->Name = "Pays";
+		this->dataGridView_client2->Columns[6]->Name = "Information additionnel";
+
+		this->dataGridView_client3->ColumnCount = 7;
+		this->dataGridView_client3->Columns[0]->Name = "ID Adresse";
+		this->dataGridView_client3->Columns[1]->Name = "Numéro de rue";
+		this->dataGridView_client3->Columns[2]->Name = "Rue";
+		this->dataGridView_client3->Columns[3]->Name = "Ville";
+		this->dataGridView_client3->Columns[4]->Name = "Code postal";
+		this->dataGridView_client3->Columns[5]->Name = "Pays";
+		this->dataGridView_client3->Columns[6]->Name = "Information additionnel";
+
+		this->dataGridView_article2->ColumnCount = 11;
+		this->dataGridView_article2->Columns[0]->Name = "ID";
+		this->dataGridView_article2->Columns[1]->Name = "ID Item";
+		this->dataGridView_article2->Columns[2]->Name = "Type";
+		this->dataGridView_article2->Columns[3]->Name = "Nom";
+		this->dataGridView_article2->Columns[4]->Name = "Référence";
+		this->dataGridView_article2->Columns[5]->Name = "Quantité";
+		this->dataGridView_article2->Columns[6]->Name = "Réduction";
+		this->dataGridView_article2->Columns[7]->Name = "Prix /u";
+		this->dataGridView_article2->Columns[8]->Name = "TVA";
+		this->dataGridView_article2->Columns[9]->Name = "Prix HT";
+		this->dataGridView_article2->Columns[10]->Name = "Prix TTC";
+
+		this->dataGridView_payment->ColumnCount = 4;
+		this->dataGridView_payment->Columns[0]->Name = "ID";
+		this->dataGridView_payment->Columns[1]->Name = "Date du payment";
+		this->dataGridView_payment->Columns[2]->Name = "Montant";
+		this->dataGridView_payment->Columns[3]->Name = "Type";
+
+
+		this->listBox_article->Items->Add("");
+		this->listBox_article->SelectedIndex = 0;
+		Row^ row = this->connection->selectRow("Select * From type", "Type", 0);
+		for (int i = 0; i < row->getDataSet()->Tables["Type"]->Rows->Count; i++) {
+			row->setRow(i);
+			this->listBox_article->Items->Add(row->getString(1));
+		}
+		row = this->connection->selectRow("SELECT * FROM Methode_Payment", "Methode_Payment", 0);
+		for (int i = 0; i < row->getDataSet()->Tables["Methode_Payment"]->Rows->Count; i++) {
+			row->setRow(i);
+			this->listBox_payment->Items->Add(row->getString(1));
+		}
+		this->listBox_payment->SelectedIndex = 0;
+
+
+	}
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ sqlRequest;
 		if (this->numericUpDown_client1->Text != "0" && this->numericUpDown_client1->Text != "") {
@@ -896,22 +930,6 @@ namespace POOProjet {
 		this->dataGridView_client1->DataSource = connection->select(sqlRequest, "Client");
 		this->dataGridView_client1->DataMember = "Client";
 	}
-	private: System::Void Form_Command_Load(System::Object^ sender, System::EventArgs^ e) {
-		this->connection = gcnew Connection_DB();
-		this->listBox_article->Items->Add("");
-		this->listBox_article->SelectedIndex = 0;
-		Row^ row = this->connection->selectRow("Select * From type", "Type", 0);
-		for (int i = 0; i < row->getDataSet()->Tables["Type"]->Rows->Count; i++) {
-			row->setRow(i);
-			this->listBox_article->Items->Add(row->getString(1));
-		}
-		row = this->connection->selectRow("SELECT * FROM Methode_Payment", "Methode_Payment", 0);
-		for (int i = 0; i < row->getDataSet()->Tables["Methode_Payment"]->Rows->Count; i++) {
-			row->setRow(i);
-			this->listBox_payment->Items->Add(row->getString(1));
-		}
-		this->listBox_payment->SelectedIndex = 0;
-	}
 
 	private: System::Void dataGridView_client1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 		String^ IDSelect = this->dataGridView_client1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
@@ -921,6 +939,7 @@ namespace POOProjet {
 		}
 		Client^ client = gcnew Client(Convert::ToInt32(IDSelect));
 		this->client = client;
+		this->command->getCommand()->setIDClient(client->getClientID());
 		this->numericUpDown_client2->Text = client->getClientID().ToString();
 		this->textBox_client3->Text = client->getPeople()->getLastName();
 		this->textBox_client4->Text = client->getPeople()->getFirstName();
@@ -1030,5 +1049,15 @@ namespace POOProjet {
 		return reste;
 
 	}
-	};
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		System::Windows::Forms::DialogResult result = MessageBox::Show("Voulez vous facturer la commande ?\nCette dernier ne sera plus modifible !", "Facture", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+		if (result == System::Windows::Forms::DialogResult::No) {
+			return;
+		}
+
+	}
+	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->command->save();
+	}
+};
 }

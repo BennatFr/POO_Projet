@@ -28,6 +28,7 @@ public:
 
 	void setIDCommand(int ID_Command);
 
+	void save();
 	/*int insert();
 	int update();
 	int del();*/
