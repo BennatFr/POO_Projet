@@ -2,13 +2,15 @@
 
 DB_Payment::DB_Payment() {
 	this->ID_Payment = 0;
+	this->amount = 0;
 	this->payment_Date = System::DateTime();
 	this->ID_Methode_Payment = 0;
 	this->ID_Command = 0;
 }
 
-DB_Payment::DB_Payment(int ID_Payment, System::DateTime payment_Date, int ID_Methode_Payment, int ID_Command) {
+DB_Payment::DB_Payment(int ID_Payment, float amount, System::DateTime payment_Date, int ID_Methode_Payment, int ID_Command) {
 	this->ID_Payment = ID_Payment;
+	this->amount = amount;
 	this->payment_Date = payment_Date;
 	this->ID_Methode_Payment = ID_Methode_Payment;
 	this->ID_Command = ID_Command;
@@ -16,6 +18,10 @@ DB_Payment::DB_Payment(int ID_Payment, System::DateTime payment_Date, int ID_Met
 
 int DB_Payment::getIDPayment() {
 	return this->ID_Payment;
+}
+
+float DB_Payment::getAmount() {
+	return this->amount;
 }
 
 System::DateTime DB_Payment::getPaymentDate() {
@@ -32,6 +38,10 @@ int DB_Payment::getIDCommand() {
 
 void DB_Payment::setIDPayment(int ID_Payment) {
 	this->ID_Payment = ID_Payment;
+}
+
+void DB_Payment::setAmount(float amount) {
+	this->amount = amount;
 }
 
 void DB_Payment::setPaymentdate(System::DateTime payment_Date) {

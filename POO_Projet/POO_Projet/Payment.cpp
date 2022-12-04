@@ -13,7 +13,7 @@ Payment::Payment(int ID_Payment) {
     sqlRequest = "SELECT * FROM Payment WHERE ID_Payment = " + ID_Payment;
     result = connection->selectRow(sqlRequest, "Payment", 0);
     //int ID_Payment, System::DateTime payment_Date, int ID_Methode_Payment, int ID_Command
-    this->payment = gcnew DB_Payment(result->getInt(0), result->getDateTime(1), result->getInt(2), result->getInt(3));
+    this->payment = gcnew DB_Payment(result->getInt(0), result->getInt(4), result->getDateTime(1), result->getInt(2), result->getInt(3));
 
     //DB_Methode_Payment
     sqlRequest = "SELECT * FROM Methode_Payment WHERE ID_Payment_Methode = " + result->getInt(2);
