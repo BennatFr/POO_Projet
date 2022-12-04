@@ -90,6 +90,46 @@ void Item::setIDItem(int ID_Item)
 	this->getPrice()->setIDItem(ID_Item);
 }
 
+int Item::getPriceUHT()
+{
+	return (int)((this->getPrice()->getPrice() - (this->getPrice()->getPrice() * this->getItem()->getDiscount())) * 1000);
+}
+
+int Item::getPriceUTTC()
+{
+	return (int)(this->getPriceUHT() + (this->getPriceUHT() * this->getPrice()->getVAT()));
+}
+
+int Item::getPriceHT()
+{
+	return this->getPriceUHT() * this->getItem()->getQuantity();
+}
+
+int Item::getPriceTTC()
+{
+	return this->getPriceUTTC() * this->getItem()->getQuantity();
+}
+
+float Item::getFloatPriceUHT()
+{
+	return ((float)(((int)(this->getPriceUHT() / 10))) / 100);
+}
+
+float Item::getFloatPriceUTTC()
+{
+	return ((float)(((int)(this->getPriceUTTC() / 10))) / 100);
+}
+
+float Item::getFloatPriceHT()
+{
+	return ((float)(((int)(this->getPriceHT() / 10))) / 100);
+}
+
+float Item::getFloatPriceTTC()
+{
+	return ((float)(((int)(this->getPriceTTC() / 10))) / 100);
+}
+
 int Item::insert()
 {
 	System::String^ sqlRequest;
@@ -159,7 +199,7 @@ int Item::update() {
 	}
 
 	if (this->getItem() != nullptr) {
-		sqlRequest = "UPDATE Item set name = '"+ this->getItem()->getName() +"', reference = '"+ this->getItem()->getReference() +"', replenishment = "+ this->getItem()->getReplenishment().ToString()->Replace(",", ".") +", stock = "+ this->getItem()->getStock().ToString()->Replace(",", ".") +", ID_Type =" + this->getItem()->getIDType();
+		sqlRequest = "UPDATE Item set name = '" + this->getItem()->getName() + "', reference = '" + this->getItem()->getReference() + "', replenishment = " + this->getItem()->getReplenishment().ToString()->Replace(",", ".") + ", stock = " + this->getItem()->getStock().ToString()->Replace(",", ".") + ", ID_Type =" + this->getItem()->getIDType();
 		connection->execute(sqlRequest);
 	}
 

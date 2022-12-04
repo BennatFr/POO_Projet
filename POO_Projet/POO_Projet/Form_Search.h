@@ -33,10 +33,8 @@ namespace POOProjet {
 			InitializeComponent();
 			String^ titleText = "[POO] v1.0 ";
 			this->typeOfResearch = typeOfResearch;
+			//this->formCmd = nullptr;
 			switch (typeOfResearch) {
-			case EnumVar::COMMAND:
-				this->Text = titleText + "Recherche Commande";
-				break;
 			case EnumVar::PERSONNEL:
 				this->Text = titleText + "Recherche Personnel";
 				this->label_research1->Text = "Id du Personnel";
@@ -289,7 +287,7 @@ namespace POOProjet {
 	private: System::Void dataGridView1_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 		String^ IDSelect = this->dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
 		if (IDSelect == "") {
-			MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Veuillez selectionner une ligne", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 		switch (this->typeOfResearch) {
@@ -303,6 +301,10 @@ namespace POOProjet {
 		case EnumVar::CLIENT:
 		{
 			Client^ client = gcnew Client(Convert::ToInt32(IDSelect));
+			/*if (this->formCmd == nullptr) {
+				this->formCmd->Set_Client(client);
+				return;
+			}*/
 			Form_Edit_Client^ formEditClient = gcnew Form_Edit_Client(client);
 			formEditClient->ShowDialog();
 			break;
@@ -368,9 +370,11 @@ namespace POOProjet {
 		   System::Void recherche() {
 			   String^ sqlRequest;
 			   std::string ID = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
-			   if (ID != "" && !is_number(ID)) {
-				   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				   return;
+			   if (ID != "") {
+				   if (!is_number(ID)) {
+						MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						return;
+				   }
 			   }
 			   switch (this->typeOfResearch) {
 			   case EnumVar::PERSONNEL:

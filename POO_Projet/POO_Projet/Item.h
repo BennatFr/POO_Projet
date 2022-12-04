@@ -29,6 +29,17 @@ public:
 	void setIDType(int ID_Type);
 	void setIDItem(int ID_Item);
 
+	int getPriceUHT();
+	int getPriceUTTC();
+	int getPriceHT();
+	int getPriceTTC();
+
+	float getFloatPriceUHT();
+	float getFloatPriceUTTC();
+	float getFloatPriceHT();
+	float getFloatPriceTTC();
+
+
 	int insert();
 	int update();
 };

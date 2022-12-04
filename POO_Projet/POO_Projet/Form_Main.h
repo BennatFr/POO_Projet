@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Form_Search.h"
+#include "Form_Command.h"
 #include "Global_Var.h"
 
 namespace POOProjet {
@@ -122,7 +123,6 @@ namespace POOProjet {
 			this->commande_ToolStripMenuItem->Name = L"commande_ToolStripMenuItem";
 			this->commande_ToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->commande_ToolStripMenuItem->Text = L"Commande";
-			this->commande_ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::commande_ToolStripMenuItem_Click);
 			// 
 			// personnel_ToolStripMenuItem
 			// 
@@ -247,16 +247,16 @@ namespace POOProjet {
 #pragma endregion
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	/*private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
 
 
-		/*POOProjet::Form_Search form_Search;
+		POOProjet::Form_Search form_Search;
 		form_Search.Text = "Search Commande";
-		form_Search.ShowDialog();*/
-	}
+		form_Search.ShowDialog();
+	}*/
 	private: System::Void personnel_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
@@ -272,8 +272,9 @@ namespace POOProjet {
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
 	}
-private: System::Void nouvelleCommandeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-
-}
+	private: System::Void nouvelleCommandeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Form_Command^ formCommand = gcnew Form_Command();
+		formCommand->ShowDialog();
+	}
 };
 }
