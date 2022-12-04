@@ -117,6 +117,27 @@
     <ClCompile Include="Form_Command.cpp">
       <Filter>Form\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="List_Item.cpp">
+      <Filter>List\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_Methode_Payment.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_Payment.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Payment.cpp">
+      <Filter>Regroupement\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="List_Payment.cpp">
+      <Filter>List\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DB_Command.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Regroupement\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -190,6 +211,27 @@
     </ClInclude>
     <ClInclude Include="Form_Command.h">
       <Filter>Form\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="List_Item.h">
+      <Filter>List\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Methode_Payment.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Payment.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Payment.h">
+      <Filter>Regroupement\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="List_Payment.h">
+      <Filter>List\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Command.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Regroupement\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

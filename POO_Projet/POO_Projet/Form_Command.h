@@ -3,6 +3,7 @@
 #include "Client.h"
 #include "Item.h"
 #include "Connection_DB.h"
+#include "Command.h"
 
 namespace POOProjet {
 
@@ -22,6 +23,8 @@ namespace POOProjet {
 		Form_Command(void)
 		{
 			InitializeComponent();
+
+			this->command = gcnew Command();
 
 			this->numericUpDown_article2->Minimum = -2147483647;
 			this->numericUpDown_article3->Minimum = 0;
@@ -72,6 +75,7 @@ namespace POOProjet {
 			}
 		}
 	private: Client^ client;
+	private: Command^ command;
 	private: Connection_DB^ connection;
 	private: System::Windows::Forms::TabControl^ tabControl1;
 	private: System::Windows::Forms::TabPage^ tabPage1;
@@ -638,9 +642,9 @@ namespace POOProjet {
 			this->label9->AutoSize = true;
 			this->label9->Location = System::Drawing::Point(993, 566);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(49, 13);
+			this->label9->Size = System::Drawing::Size(64, 13);
 			this->label9->TabIndex = 2;
-			this->label9->Text = L"Total HT";
+			this->label9->Text = L"Total (HT) : ";
 			// 
 			// label8
 			// 
@@ -648,9 +652,9 @@ namespace POOProjet {
 			this->label8->ForeColor = System::Drawing::Color::Red;
 			this->label8->Location = System::Drawing::Point(1082, 566);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(55, 13);
+			this->label8->Size = System::Drawing::Size(70, 13);
 			this->label8->TabIndex = 1;
-			this->label8->Text = L"Total TTC";
+			this->label8->Text = L"Total (TTC) : ";
 			// 
 			// dataGridView_article2
 			// 
@@ -898,6 +902,10 @@ namespace POOProjet {
 		this->dataGridView_article2->Rows[index]->Cells["Prix HT"]->Value = item->getFloatPriceHT();
 		this->dataGridView_article2->Rows[index]->Cells["Prix TTC"]->Value = item->getFloatPriceTTC();
 
+		this->command->getListItem()->setLast(item);
+
+		this->label9->Text = "Total (HT) : " + this->command->getCommandPriceHT() + "€";
+		this->label8->Text = "Total (TTC) : " + this->command->getCommandPriceTTC() + "€";
 	}
 	};
 }

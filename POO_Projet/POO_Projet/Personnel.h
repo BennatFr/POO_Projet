@@ -31,5 +31,3 @@ public:
 	int update();
 	int del();
 };
-
-
