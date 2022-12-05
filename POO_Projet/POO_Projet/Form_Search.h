@@ -132,22 +132,22 @@ namespace POOProjet {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(12, 12);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->dataGridView1->Location = System::Drawing::Point(9, 10);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(957, 300);
+			this->dataGridView1->Size = System::Drawing::Size(718, 244);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &Form_Search::dataGridView1_CellMouseDoubleClick);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(730, 486);
-			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button1->Location = System::Drawing::Point(548, 395);
+			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(136, 48);
+			this->button1->Size = System::Drawing::Size(102, 39);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Rechercher";
 			this->button1->UseVisualStyleBackColor = true;
@@ -157,102 +157,101 @@ namespace POOProjet {
 			// 
 			this->label_research1->AutoSize = true;
 			this->label_research1->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->label_research1->Location = System::Drawing::Point(8, 315);
+			this->label_research1->Location = System::Drawing::Point(6, 256);
+			this->label_research1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label_research1->Name = L"label_research1";
-			this->label_research1->Size = System::Drawing::Size(104, 16);
+			this->label_research1->Size = System::Drawing::Size(82, 13);
 			this->label_research1->TabIndex = 2;
 			this->label_research1->Text = L"label_research1";
 			// 
 			// textBox_research1
 			// 
-			this->textBox_research1->Location = System::Drawing::Point(12, 334);
-			this->textBox_research1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBox_research1->Location = System::Drawing::Point(9, 271);
+			this->textBox_research1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox_research1->Name = L"textBox_research1";
-			this->textBox_research1->Size = System::Drawing::Size(383, 22);
+			this->textBox_research1->Size = System::Drawing::Size(288, 20);
 			this->textBox_research1->TabIndex = 3;
 			// 
 			// dateTimePicker1
 			// 
 			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
-			this->dateTimePicker1->Location = System::Drawing::Point(833, 338);
-			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(4);
+			this->dateTimePicker1->Location = System::Drawing::Point(625, 275);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(135, 22);
+			this->dateTimePicker1->Size = System::Drawing::Size(102, 20);
 			this->dateTimePicker1->TabIndex = 4;
 			this->dateTimePicker1->Value = System::DateTime(2000, 1, 1, 0, 0, 0, 0);
 			// 
 			// dateTimePicker2
 			// 
 			this->dateTimePicker2->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
-			this->dateTimePicker2->Location = System::Drawing::Point(833, 370);
-			this->dateTimePicker2->Margin = System::Windows::Forms::Padding(4);
+			this->dateTimePicker2->Location = System::Drawing::Point(625, 301);
 			this->dateTimePicker2->Name = L"dateTimePicker2";
-			this->dateTimePicker2->Size = System::Drawing::Size(135, 22);
+			this->dateTimePicker2->Size = System::Drawing::Size(102, 20);
 			this->dateTimePicker2->TabIndex = 5;
 			// 
 			// button2
 			// 
 			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
-			this->button2->Location = System::Drawing::Point(924, 486);
-			this->button2->Margin = System::Windows::Forms::Padding(4);
+			this->button2->Location = System::Drawing::Point(693, 395);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(45, 47);
+			this->button2->Size = System::Drawing::Size(34, 38);
 			this->button2->TabIndex = 7;
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &Form_Search::button2_Click);
 			// 
 			// textBox_research2
 			// 
-			this->textBox_research2->Location = System::Drawing::Point(12, 379);
-			this->textBox_research2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBox_research2->Location = System::Drawing::Point(9, 308);
+			this->textBox_research2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox_research2->Name = L"textBox_research2";
-			this->textBox_research2->Size = System::Drawing::Size(383, 22);
+			this->textBox_research2->Size = System::Drawing::Size(288, 20);
 			this->textBox_research2->TabIndex = 8;
 			// 
 			// label_research2
 			// 
 			this->label_research2->AutoSize = true;
 			this->label_research2->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->label_research2->Location = System::Drawing::Point(8, 361);
+			this->label_research2->Location = System::Drawing::Point(6, 293);
+			this->label_research2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label_research2->Name = L"label_research2";
-			this->label_research2->Size = System::Drawing::Size(104, 16);
+			this->label_research2->Size = System::Drawing::Size(82, 13);
 			this->label_research2->TabIndex = 9;
 			this->label_research2->Text = L"label_research2";
 			// 
 			// textBox_research3
 			// 
-			this->textBox_research3->Location = System::Drawing::Point(12, 425);
-			this->textBox_research3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->textBox_research3->Location = System::Drawing::Point(9, 345);
+			this->textBox_research3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox_research3->Name = L"textBox_research3";
-			this->textBox_research3->Size = System::Drawing::Size(383, 22);
+			this->textBox_research3->Size = System::Drawing::Size(288, 20);
 			this->textBox_research3->TabIndex = 10;
 			// 
 			// label_research3
 			// 
 			this->label_research3->AutoSize = true;
 			this->label_research3->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->label_research3->Location = System::Drawing::Point(8, 406);
+			this->label_research3->Location = System::Drawing::Point(6, 330);
+			this->label_research3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label_research3->Name = L"label_research3";
-			this->label_research3->Size = System::Drawing::Size(104, 16);
+			this->label_research3->Size = System::Drawing::Size(82, 13);
 			this->label_research3->TabIndex = 11;
 			this->label_research3->Text = L"label_research3";
 			// 
 			// button3
 			// 
 			this->button3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.Image")));
-			this->button3->Location = System::Drawing::Point(871, 486);
-			this->button3->Margin = System::Windows::Forms::Padding(4);
+			this->button3->Location = System::Drawing::Point(653, 395);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(45, 47);
+			this->button3->Size = System::Drawing::Size(34, 38);
 			this->button3->TabIndex = 12;
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Form_Search::button3_Click);
 			// 
 			// Form_Search
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(981, 548);
+			this->ClientSize = System::Drawing::Size(736, 445);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label_research3);
 			this->Controls->Add(this->textBox_research3);
@@ -266,7 +265,7 @@ namespace POOProjet {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Form_Search";
 			this->Text = L"Form_Search";
 			this->Load += gcnew System::EventHandler(this, &Form_Search::Form_Search_Load);
@@ -309,14 +308,15 @@ namespace POOProjet {
 			formEditClient->ShowDialog();
 			break;
 		}
-			
-		case EnumVar::STOCK: {
+
+		case EnumVar::STOCK:
+		{
 			Item^ item = gcnew Item(Convert::ToInt32(IDSelect));
 			Form_Edit_Stock^ formEditStock = gcnew Form_Edit_Stock(item);
 			formEditStock->ShowDialog();
 			break;
 		}
-			
+
 		}
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -356,13 +356,24 @@ namespace POOProjet {
 			MessageBox::Show("Veuillez selectionner un utilisateur", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		} else {
-			System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
-			if (result == System::Windows::Forms::DialogResult::Yes) {
-				Client^ client = gcnew Client(Convert::ToInt32(IDPersonnelSelect));
-				client->del();
-				System::Windows::Forms::DialogResult result = MessageBox::Show("Le personnel n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				recherche();
+			System::Windows::Forms::DialogResult result;
+			switch (this->typeOfResearch) {
+			case EnumVar::PERSONNEL:
+				result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				if (result == System::Windows::Forms::DialogResult::Yes) {
+					Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
+					personnel->del();
+					MessageBox::Show("Le personnel n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+			case EnumVar::CLIENT:
+				result = MessageBox::Show("Supprimer le client n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				if (result == System::Windows::Forms::DialogResult::Yes) {
+					Client^ client = gcnew Client(Convert::ToInt32(IDPersonnelSelect));
+					client->del();
+					MessageBox::Show("Le client n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
 			}
+			recherche();
 		}
 	}
 
@@ -372,8 +383,8 @@ namespace POOProjet {
 			   std::string ID = msclr::interop::marshal_as<std::string>(this->textBox_research1->Text);
 			   if (ID != "") {
 				   if (!is_number(ID)) {
-						MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						return;
+					   MessageBox::Show("L'identifiant n'est pas un nombre", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					   return;
 				   }
 			   }
 			   switch (this->typeOfResearch) {

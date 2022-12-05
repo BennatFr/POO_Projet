@@ -14,19 +14,16 @@ namespace POOProjet {
 	/// <summary>
 	/// Description résumée de Form_Edit
 	/// </summary>
-	public ref class Form_Edit : public System::Windows::Forms::Form
-	{
+	public ref class Form_Edit : public System::Windows::Forms::Form {
 	public:
-		Form_Edit(void)
-		{
+		Form_Edit(void) {
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
 		}
 
-		Form_Edit(Personnel^ personnel)
-		{
+		Form_Edit(Personnel^ personnel) {
 			InitializeComponent();
 
 			this->personnel = personnel;
@@ -71,10 +68,8 @@ namespace POOProjet {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Form_Edit()
-		{
-			if (components)
-			{
+		~Form_Edit() {
+			if (components) {
 				delete components;
 			}
 		}
@@ -128,8 +123,7 @@ namespace POOProjet {
 		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
 		/// le contenu de cette méthode avec l'éditeur de code.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void) {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
@@ -404,8 +398,7 @@ namespace POOProjet {
 		int output;
 		if (this->Text == "[POO] v1.0 | Modification Personnel | N°0") {
 			output = this->personnel->insert();
-		}
-		else {
+		} else {
 			output = this->personnel->update();
 		}
 		switch (output) {
@@ -421,5 +414,5 @@ namespace POOProjet {
 			break;
 		}
 	}
-};
+	};
 }

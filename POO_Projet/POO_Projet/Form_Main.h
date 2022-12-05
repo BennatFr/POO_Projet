@@ -3,6 +3,7 @@
 #include "Form_Search.h"
 #include "Form_Command.h"
 #include "Global_Var.h"
+#include "Connection_DB.h"
 
 namespace POOProjet {
 
@@ -81,6 +82,8 @@ namespace POOProjet {
 		void InitializeComponent(void) {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->commande_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nouvelleCommandeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->rechercheToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->personnel_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->client_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->stock_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -94,8 +97,6 @@ namespace POOProjet {
 			this->valeurCommercialeDuStockToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->valeurDachatDuStockToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->facture_ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->nouvelleCommandeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->rechercheToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -123,6 +124,19 @@ namespace POOProjet {
 			this->commande_ToolStripMenuItem->Name = L"commande_ToolStripMenuItem";
 			this->commande_ToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->commande_ToolStripMenuItem->Text = L"Commande";
+			// 
+			// nouvelleCommandeToolStripMenuItem
+			// 
+			this->nouvelleCommandeToolStripMenuItem->Name = L"nouvelleCommandeToolStripMenuItem";
+			this->nouvelleCommandeToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->nouvelleCommandeToolStripMenuItem->Text = L"Nouvelle Commande";
+			this->nouvelleCommandeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::nouvelleCommandeToolStripMenuItem_Click);
+			// 
+			// rechercheToolStripMenuItem
+			// 
+			this->rechercheToolStripMenuItem->Name = L"rechercheToolStripMenuItem";
+			this->rechercheToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->rechercheToolStripMenuItem->Text = L"Recherche";
 			// 
 			// personnel_ToolStripMenuItem
 			// 
@@ -198,31 +212,20 @@ namespace POOProjet {
 			this->valeurCommercialeDuStockToolStripMenuItem->Name = L"valeurCommercialeDuStockToolStripMenuItem";
 			this->valeurCommercialeDuStockToolStripMenuItem->Size = System::Drawing::Size(232, 22);
 			this->valeurCommercialeDuStockToolStripMenuItem->Text = L"Valeur commerciale du stock";
+			this->valeurCommercialeDuStockToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::valeurCommercialeDuStockToolStripMenuItem_Click);
 			// 
 			// valeurDachatDuStockToolStripMenuItem
 			// 
 			this->valeurDachatDuStockToolStripMenuItem->Name = L"valeurDachatDuStockToolStripMenuItem";
 			this->valeurDachatDuStockToolStripMenuItem->Size = System::Drawing::Size(232, 22);
 			this->valeurDachatDuStockToolStripMenuItem->Text = L"Valeur d’achat du stock";
+			this->valeurDachatDuStockToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::valeurDachatDuStockToolStripMenuItem_Click);
 			// 
 			// facture_ToolStripMenuItem
 			// 
 			this->facture_ToolStripMenuItem->Name = L"facture_ToolStripMenuItem";
 			this->facture_ToolStripMenuItem->Size = System::Drawing::Size(58, 20);
 			this->facture_ToolStripMenuItem->Text = L"Facture";
-			// 
-			// nouvelleCommandeToolStripMenuItem
-			// 
-			this->nouvelleCommandeToolStripMenuItem->Name = L"nouvelleCommandeToolStripMenuItem";
-			this->nouvelleCommandeToolStripMenuItem->Size = System::Drawing::Size(187, 22);
-			this->nouvelleCommandeToolStripMenuItem->Text = L"Nouvelle Commande";
-			this->nouvelleCommandeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::nouvelleCommandeToolStripMenuItem_Click);
-			// 
-			// rechercheToolStripMenuItem
-			// 
-			this->rechercheToolStripMenuItem->Name = L"rechercheToolStripMenuItem";
-			this->rechercheToolStripMenuItem->Size = System::Drawing::Size(187, 22);
-			this->rechercheToolStripMenuItem->Text = L"Recherche";
 			// 
 			// MyForm
 			// 
@@ -247,16 +250,16 @@ namespace POOProjet {
 #pragma endregion
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-	/*private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
-		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
-		formSearch->ShowDialog();
+		   /*private: System::Void commande_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+			   EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
+			   Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+			   formSearch->ShowDialog();
 
 
-		POOProjet::Form_Search form_Search;
-		form_Search.Text = "Search Commande";
-		form_Search.ShowDialog();
-	}*/
+			   POOProjet::Form_Search form_Search;
+			   form_Search.Text = "Search Commande";
+			   form_Search.ShowDialog();
+		   }*/
 	private: System::Void personnel_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
@@ -276,5 +279,23 @@ namespace POOProjet {
 		Form_Command^ formCommand = gcnew Form_Command();
 		formCommand->ShowDialog();
 	}
+	private: System::Void valeurCommercialeDuStockToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		getValueStock(1);
+	}
+	private: System::Void valeurDachatDuStockToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		getValueStock(0.7);
+	}
+		   System::Void getValueStock(float coef) {
+			   Connection_DB^ cnx = gcnew Connection_DB();
+			   System::Data::DataSet^ result = cnx->select("SELECT * FROM Item INNER JOIN (SELECT top 1 * FROM Price ORDER BY date_Price DESC) as Price On Item.ID_Item = Price.ID_Item", "Stats");
+
+			   float price = 0;
+			   for (int i = 0; i < result->Tables[0]->Rows->Count; i++) {
+				   price += ((float)Convert::ToDecimal(result->Tables[0]->Rows[i]->ItemArray[4]->ToString())) * ((float)Convert::ToDecimal(result->Tables[0]->Rows[i]->ItemArray[7]->ToString()));
+			   }
+			   price = price * coef;
+			   MessageBox::Show("Valeur commerciale du stock : " + price + " €", "Statistique !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			   return;
+		   }
 };
 }

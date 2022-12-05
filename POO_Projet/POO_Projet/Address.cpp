@@ -10,9 +10,8 @@ Address::Address() {
 Address::Address(int idAddress, bool clientAddress) {
 	System::String^ sqlRequest;
 	if (clientAddress) {
-		sqlRequest = "SELECT AddressCC.ID_Address, AddressCC.ID_City, AddressCC.ID_Country, AddressCC.street_Number, AddressCC.street, AddressCC.additionnal_Data, AddressCC.name, AddressCC.name, AddressCC.postal_Number, Get_Client_Address.is_Billing FROM (SELECT AddressC.ID_Address, AddressC.ID_City, AddressC.ID_Country, AddressC.street_Number, AddressC.street, AddressC.additionnal_Data, AddressC.name, City.name AS nameCity , City.postal_Number FROM (SELECT Address.ID_Address, Address.ID_City, Address.ID_Country, Address.street_Number, Address.street, Address.additionnal_Data, Country.name FROM (SELECT * FROM Address WHERE ID_Address = " + idAddress + ") AS Address INNER JOIN Country ON Address.ID_Country = Country.ID_Country) AS AddressC INNER JOIN City ON AddressC.ID_City = City.ID_City) AS AddressCC INNER JOIN Get_Client_Address ON AddressCC.ID_Address = Get_Client_Address.ID_Address";
-	}
-	else {
+		sqlRequest = "SELECT AddressCC.ID_Address, AddressCC.ID_City, AddressCC.ID_Country, AddressCC.street_Number, AddressCC.street, AddressCC.additionnal_Data, AddressCC.nameCountry, AddressCC.nameCity, AddressCC.postal_Number, Get_Client_Address.is_Billing FROM (SELECT AddressC.ID_Address, AddressC.ID_City, AddressC.ID_Country, AddressC.street_Number, AddressC.street, AddressC.additionnal_Data, AddressC.nameCountry, City.name AS nameCity , City.postal_Number FROM (SELECT Address.ID_Address, Address.ID_City, Address.ID_Country, Address.street_Number, Address.street, Address.additionnal_Data, Country.name AS nameCountry FROM (SELECT * FROM Address WHERE ID_Address = " + idAddress + ") AS Address INNER JOIN Country ON Address.ID_Country = Country.ID_Country) AS AddressC INNER JOIN City ON AddressC.ID_City = City.ID_City) AS AddressCC INNER JOIN Get_Client_Address ON AddressCC.ID_Address = Get_Client_Address.ID_Address";
+	} else {
 		sqlRequest = "SELECT AddressC.ID_Address, AddressC.ID_City, AddressC.ID_Country, AddressC.street_Number, AddressC.street, AddressC.additionnal_Data, AddressC.name, City.name, City.postal_Number FROM (SELECT Address.ID_Address, Address.ID_City, Address.ID_Country, Address.street_Number, Address.street, Address.additionnal_Data, Country.name FROM (SELECT * FROM Address WHERE ID_Address = " + idAddress + ") AS Address INNER JOIN Country ON Address.ID_Country = Country.ID_Country) AS AddressC INNER JOIN City ON AddressC.ID_City = City.ID_City";
 	}
 	Row^ result = connection->selectRow(sqlRequest, "Address", 0);
@@ -101,8 +100,7 @@ int Address::save() {
 			sqlRequest = "SELECT TOP 1 * FROM Country ORDER BY ID_Country DESC";
 			result = connection->selectRow(sqlRequest, "Country", 0);
 			this->setIDCountry(result->getInt(0));
-		}
-		else {
+		} else {
 			sqlRequest = "SELECT * FROM Country WHERE name = '" + this->getCountry()->getName() + "'";
 			result = connection->selectRow(sqlRequest, "Country", 0);
 			this->setIDCountry(result->getInt(0));
@@ -118,8 +116,7 @@ int Address::save() {
 			sqlRequest = "SELECT TOP 1 * FROM City ORDER BY ID_City DESC";
 			result = connection->selectRow(sqlRequest, "City", 0);
 			this->setIDCity(result->getInt(0));
-		}
-		else {
+		} else {
 			sqlRequest = "UPDATE Country SET name = '" + this->getCountry()->getName() + "' WHERE ID_Country = " + this->getCountry()->getIDCountry();
 			connection->execute(sqlRequest);
 		}

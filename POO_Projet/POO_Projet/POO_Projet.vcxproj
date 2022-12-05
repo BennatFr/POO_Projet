@@ -153,6 +153,7 @@
     <ClCompile Include="Payment.cpp" />
     <ClCompile Include="Personnel.cpp" />
     <ClCompile Include="Row.cpp" />
+    <ClCompile Include="Stats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
@@ -199,6 +200,9 @@
     <ClInclude Include="Payment.h" />
     <ClInclude Include="Personnel.h" />
     <ClInclude Include="Row.h" />
+    <ClInclude Include="Stats.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form_Command.resx">

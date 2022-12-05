@@ -2,26 +2,25 @@
 
 using namespace System;
 
-Personnel::Personnel(){
+Personnel::Personnel() {
 	this->personnel = gcnew DB_Personnel();
 	this->address = gcnew Address();
 	this->people = gcnew DB_People();
 }
 
-Personnel::Personnel(int ID_Personnel){
+Personnel::Personnel(int ID_Personnel) {
 	this->address = gcnew Address(ID_Personnel, false);
 
 	//SELECT Personnel.ID_People, Personnel.ID_Personnel, Personnel.hire_Date, people.last_Name, People.first_Name FROM Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People
-	System::String^ sqlRequest = "SELECT Personnel.ID_Personnel, Personnel.ID_People, Personnel.ID_Superior, Personnel.ID_Address, Personnel.hire_Date, people.last_Name, People.first_Name FROM (SELECT * FROM Personnel WHERE ID_Personnel = "+ ID_Personnel +") AS Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People";
-	Row^ result = connection->selectRow(sqlRequest, "Personnel",0);
+	System::String^ sqlRequest = "SELECT Personnel.ID_Personnel, Personnel.ID_People, Personnel.ID_Superior, Personnel.ID_Address, Personnel.hire_Date, people.last_Name, People.first_Name FROM (SELECT * FROM Personnel WHERE ID_Personnel = " + ID_Personnel + ") AS Personnel INNER JOIN People ON Personnel.ID_People = People.ID_People";
+	Row^ result = connection->selectRow(sqlRequest, "Personnel", 0);
 	//int ID_Personnel, System::String^ hire_Date, int ID_Address, int ID_Superior, int ID_People
 	this->personnel = gcnew DB_Personnel(result->getInt(0), result->getDateTime(4), result->getInt(3), result->getInt(2), result->getInt(1));
 	//int ID_People, System::String^ last_Name, System::String^ first_Name
 	this->people = gcnew DB_People(result->getInt(1), result->getString(5), result->getString(6));
 }
 
-Personnel::Personnel(DB_Personnel^ personnel, Address^ address, DB_People^ people)
-{
+Personnel::Personnel(DB_Personnel^ personnel, Address^ address, DB_People^ people) {
 	this->personnel = personnel;
 	this->address = address;
 	this->people = people;
@@ -35,8 +34,7 @@ DB_Personnel^ Personnel::getPersonnel() {
 	return this->personnel;
 }
 
-Address^ Personnel::getAddress()
-{
+Address^ Personnel::getAddress() {
 	return this->address;
 }
 
@@ -48,8 +46,7 @@ void Personnel::setPersonnel(DB_Personnel^ personnel) {
 	this->personnel = personnel;
 }
 
-void Personnel::setAddress(Address^ address)
-{
+void Personnel::setAddress(Address^ address) {
 	this->address = address;
 }
 
@@ -71,11 +68,15 @@ void Personnel::setIDAddress(int ID_Address) {
 int Personnel::insert() {
 	System::String^ sqlRequest;
 	Row^ result;
-	sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + this->getPersonnel()->getIDSuperior();
-	result = connection->selectRow(sqlRequest, "Personnel", 0);
-	if (result->getInt(0) == 0) {
-		return 1;
+	int IDSuperior = this->getPersonnel()->getIDSuperior();
+	if (IDSuperior > 0) {
+		sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + IDSuperior;
+		result = connection->selectRow(sqlRequest, "Personnel", 0);
+		if (result->getInt(0) == 0) {
+			return 1;
+		}
 	}
+
 	this->getAddress()->insert(0);
 	this->setIDAddress(this->getAddress()->getAddress()->getIDAddress());
 
@@ -88,7 +89,12 @@ int Personnel::insert() {
 	}
 
 	if (this->getPersonnel() != nullptr) {
-		sqlRequest = "INSERT INTO Personnel VALUES ('" + this->getPersonnel()->getHireDate() + "', " + this->getPersonnel()->getIDAddress() + ", " + this->getPersonnel()->getIDSuperior() + ", " + this->getPersonnel()->getIDPeople() + ")";
+		if (IDSuperior > 0) {
+			sqlRequest = "INSERT INTO Personnel VALUES ('" + this->getPersonnel()->getHireDate() + "', " + this->getPersonnel()->getIDAddress() + ", " + this->getPersonnel()->getIDSuperior() + ", " + this->getPersonnel()->getIDPeople() + ")";
+
+		} else {
+			sqlRequest = "INSERT INTO Personnel VALUES ('" + this->getPersonnel()->getHireDate() + "', " + this->getPersonnel()->getIDAddress() + ", NULL, " + this->getPersonnel()->getIDPeople() + ")";
+		}
 		connection->execute(sqlRequest);
 		sqlRequest = "SELECT TOP 1 * FROM Personnel ORDER BY ID_Personnel DESC";
 		result = connection->selectRow(sqlRequest, "Personnel", 0);
@@ -100,10 +106,13 @@ int Personnel::insert() {
 int Personnel::update() {
 	System::String^ sqlRequest;
 	Row^ result;
-	sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + this->getPersonnel()->getIDSuperior();
-	result = connection->selectRow(sqlRequest, "Personnel", 0);
-	if (result->getInt(0) == 0) {
-		return 1;
+	int IDSuperior = this->getPersonnel()->getIDSuperior();
+	if (IDSuperior > 0) {
+		sqlRequest = "SELECT Count(*) FROM Personnel WHERE ID_Personnel = " + IDSuperior;
+		result = connection->selectRow(sqlRequest, "Personnel", 0);
+		if (result->getInt(0) == 0) {
+			return 1;
+		}
 	}
 	this->getAddress()->update();
 	this->setIDAddress(this->getAddress()->getAddress()->getIDAddress());
@@ -114,7 +123,12 @@ int Personnel::update() {
 	}
 
 	if (this->getPersonnel() != nullptr) {
-		sqlRequest = "UPDATE Personnel SET hire_Date = '" + this->getPersonnel()->getHireDate() + "', ID_Address = " + this->getPersonnel()->getIDAddress() + ", ID_People = " + this->getPersonnel()->getIDPeople() + ", ID_Superior = " + this->getPersonnel()->getIDSuperior() + " WHERE ID_Personnel = " + this->getPersonnel()->getIDPersonnel();
+		if (IDSuperior > 0) {
+			sqlRequest = "UPDATE Personnel SET hire_Date = '" + this->getPersonnel()->getHireDate() + "', ID_Address = " + this->getPersonnel()->getIDAddress() + ", ID_People = " + this->getPersonnel()->getIDPeople() + ", ID_Superior = " + this->getPersonnel()->getIDSuperior() + " WHERE ID_Personnel = " + this->getPersonnel()->getIDPersonnel();
+		} else {
+			sqlRequest = "UPDATE Personnel SET hire_Date = '" + this->getPersonnel()->getHireDate() + "', ID_Address = " + this->getPersonnel()->getIDAddress() + ", ID_People = " + this->getPersonnel()->getIDPeople() + ", ID_Superior = NULL WHERE ID_Personnel = " + this->getPersonnel()->getIDPersonnel();
+
+		}
 		connection->execute(sqlRequest);
 	}
 	return 0;

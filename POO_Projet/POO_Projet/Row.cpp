@@ -40,10 +40,18 @@ void Row::setRow(int row) {
 }
 
 System::String^ Row::getString(int column) {
+	if (this->dataSet->Tables[this->table]->Rows[this->row]->ItemArray[column] == System::DBNull::Value) {
+		return nullptr;
+	}
 	return this->dataSet->Tables[this->table]->Rows[this->row]->ItemArray[column]->ToString();
 }
 
 int Row::getInt(int column) {
+	System::String^ s = this->getString(column);
+	if (s == nullptr) {
+		return 0;
+	}
+	delete s;
 	return System::Convert::ToInt32(this->getString(column));
 }
 
@@ -52,6 +60,11 @@ float Row::getFloat(int column) {
 }
 
 bool Row::getBool(int column) {
+	System::String^ s = this->getString(column);
+	if (s == nullptr) {
+		return nullptr;
+	}
+	delete s;
 	return System::Convert::ToBoolean(this->getString(column));
 }
 
