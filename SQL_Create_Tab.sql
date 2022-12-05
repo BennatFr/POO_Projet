@@ -30,23 +30,23 @@ CREATE TABLE Type(
    PRIMARY KEY(ID_Type)
 );
 
-CREATE TABLE Bill(
-   ID_Bill INT IDENTITY(1, 1),
-   ID_Client INT NOT NULL,
-   client_Last_Name VARCHAR(50) NOT NULL,
-   client_First_Name VARCHAR(50) NOT NULL,
-   bill_Date DATETIME NOT NULL,
-   personnel_Fisrt_Name VARCHAR(50) NOT NULL,
-   personnel_Last_Name VARCHAR(50) NOT NULL,
-   PRIMARY KEY(ID_Bill)
-);
-
 CREATE TABLE Bill_Item(
    ID_Item INT IDENTITY(1, 1),
    reference VARCHAR(10) NOT NULL,
    name VARCHAR(50) NOT NULL,
    type VARCHAR(50) NOT NULL,
    PRIMARY KEY(ID_Item)
+);
+
+CREATE TABLE Bill_Address(
+   ID_Address INT IDENTITY(1, 1),
+   street_Number INT NOT NULL,
+   street VARCHAR(95) NOT NULL,
+   additionnal_Data VARCHAR(50),
+   country VARCHAR(56),
+   city VARCHAR(35),
+   postal_Number VARCHAR(10),
+   PRIMARY KEY(ID_Address)
 );
 
 CREATE TABLE Client(
@@ -56,27 +56,6 @@ CREATE TABLE Client(
    ID_People INT NOT NULL,
    PRIMARY KEY(ID_Client),
    FOREIGN KEY(ID_People) REFERENCES People(ID_People)
-);
-
-CREATE TABLE Command(
-   ID_Command INT IDENTITY(1, 1),
-   reference VARCHAR(20) NOT NULL,
-   date_Estimation DATETIME,
-   date_Issue DATE NOT NULL,
-   settlement_Balance DATE,
-   ID_Client INT NOT NULL,
-   PRIMARY KEY(ID_Command),
-   FOREIGN KEY(ID_Client) REFERENCES Client(ID_Client)
-);
-
-CREATE TABLE Payment(
-   ID_Payment INT IDENTITY(1, 1),
-   payment_Date DATETIME,
-   ID_Payment_Methode INT NOT NULL,
-   ID_Command INT NOT NULL,
-   PRIMARY KEY(ID_Payment),
-   FOREIGN KEY(ID_Payment_Methode) REFERENCES Methode_Payment(ID_Payment_Methode),
-   FOREIGN KEY(ID_Command) REFERENCES Command(ID_Command)
 );
 
 CREATE TABLE Item(
@@ -112,16 +91,57 @@ CREATE TABLE Price(
    FOREIGN KEY(ID_Item) REFERENCES Item(ID_Item)
 );
 
+CREATE TABLE Bill(
+   ID_Bill INT IDENTITY(1, 1),
+   ID_Client INT NOT NULL,
+   client_Last_Name VARCHAR(50) NOT NULL,
+   client_First_Name VARCHAR(50) NOT NULL,
+   bill_Date DATETIME NOT NULL,
+   personnel_Fisrt_Name VARCHAR(50) NOT NULL,
+   personnel_Last_Name VARCHAR(50) NOT NULL,
+   ID_Address INT NOT NULL,
+   ID_Address_1 INT NOT NULL,
+   PRIMARY KEY(ID_Bill),
+   FOREIGN KEY(ID_Address) REFERENCES Bill_Address(ID_Address),
+   FOREIGN KEY(ID_Address_1) REFERENCES Bill_Address(ID_Address)
+);
+
 CREATE TABLE Personnel(
    ID_Personnel INT IDENTITY(1, 1),
    hire_Date DATE NOT NULL,
    ID_Address INT NOT NULL,
-   ID_Superior INT,
+   ID_Personnel_1 INT,
    ID_People INT NOT NULL,
    PRIMARY KEY(ID_Personnel),
    FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
-   FOREIGN KEY(ID_Superior) REFERENCES Personnel(ID_Personnel),
+   FOREIGN KEY(ID_Personnel_1) REFERENCES Personnel(ID_Personnel),
    FOREIGN KEY(ID_People) REFERENCES People(ID_People)
+);
+
+CREATE TABLE Command(
+   ID_Command INT IDENTITY(1, 1),
+   reference VARCHAR(20) NOT NULL,
+   date_Estimation DATETIME,
+   date_Issue DATE NOT NULL,
+   settlement_Balance DATE,
+   ID_Address INT NOT NULL,
+   ID_Address_1 INT NOT NULL,
+   ID_Client INT NOT NULL,
+   PRIMARY KEY(ID_Command),
+   FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
+   FOREIGN KEY(ID_Address_1) REFERENCES Address(ID_Address),
+   FOREIGN KEY(ID_Client) REFERENCES Client(ID_Client)
+);
+
+CREATE TABLE Payment(
+   ID_Payment INT IDENTITY(1, 1),
+   payment_Date DATETIME,
+   amount DECIMAL(15,2),
+   ID_Payment_Methode INT NOT NULL,
+   ID_Command INT NOT NULL,
+   PRIMARY KEY(ID_Payment),
+   FOREIGN KEY(ID_Payment_Methode) REFERENCES Methode_Payment(ID_Payment_Methode),
+   FOREIGN KEY(ID_Command) REFERENCES Command(ID_Command)
 );
 
 CREATE TABLE Command_Contain(
