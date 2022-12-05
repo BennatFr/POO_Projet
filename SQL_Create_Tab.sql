@@ -20,7 +20,7 @@ CREATE TABLE City(
 
 CREATE TABLE Methode_Payment(
    ID_Payment_Methode INT IDENTITY(1, 1),
-   type VARCHAR(2),
+   type VARCHAR(20),
    PRIMARY KEY(ID_Payment_Methode)
 );
 
