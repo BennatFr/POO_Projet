@@ -908,9 +908,9 @@ private: System::Windows::Forms::Button^ button6;
 			row->setRow(i);
 			this->listBox_payment->Items->Add(row->getString(1));
 		}
-		this->listBox_payment->SelectedIndex = 0;
-
-
+		if (this->listBox_payment->Items->Count > 0) {
+			this->listBox_payment->SelectedIndex = 0;
+		}
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -993,8 +993,8 @@ private: System::Windows::Forms::Button^ button6;
 
 		Item^ item = gcnew Item(Convert::ToInt32(this->dataGridView_article1->Rows[indexSelection]->Cells[0]->Value));
 
-		item->getItem()->setQuantity((float)Convert::ToDecimal(this->numericUpDown_article2->Value));
-		item->getItem()->setDiscount((float)Convert::ToDecimal(this->numericUpDown_article3->Value));
+		item->getCommandContain()->setQuantity((float)Convert::ToDecimal(this->numericUpDown_article2->Value));
+		item->getCommandContain()->setDiscount((float)Convert::ToDecimal(this->numericUpDown_article3->Value));
 
 		this->dataGridView_article2->Rows[index]->Cells["ID Item"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[0]->Value;
 		this->dataGridView_article2->Rows[index]->Cells["Type"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[1]->Value;

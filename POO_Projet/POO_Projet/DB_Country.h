@@ -15,4 +15,3 @@ public:
 
 	bool verifName(System::String^ name);
 };
-

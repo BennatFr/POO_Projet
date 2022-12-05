@@ -138,6 +138,9 @@
     <ClCompile Include="Command.cpp">
       <Filter>Regroupement\Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="DB_Command_Contain.cpp">
+      <Filter>DB\Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form_Main.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Regroupement\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Command_Contain.h">
+      <Filter>DB\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,19 +6,15 @@ DB_Item::DB_Item() {
 	this->name = "";
 	this->replenishment = 0.0f;
 	this->stock = 0.0f;
-	this->quantity = 0.0f;
-	this->discount = 0.0f;
 	this->ID_Type = 0;
 }
 
-DB_Item::DB_Item(int ID_Item, System::String^ reference, System::String^ name, float replenishment, float stock, float quantity, float discount, int ID_Type) {
+DB_Item::DB_Item(int ID_Item, System::String^ reference, System::String^ name, float replenishment, float stock, int ID_Type) {
 	this->ID_Item = ID_Item;
 	this->reference = reference;
 	this->name = name;
 	this->replenishment = replenishment;
 	this->stock = stock;
-	this->quantity = quantity;
-	this->discount = discount;
 	this->ID_Type = ID_Type;
 }
 
@@ -40,14 +36,6 @@ float DB_Item::getReplenishment() {
 
 float DB_Item::getStock() {
 	return this->stock;
-}
-
-float DB_Item::getQuantity() {
-	return this->quantity;
-}
-
-float DB_Item::getDiscount() {
-	return this->discount;
 }
 
 int DB_Item::getIDType() {
@@ -72,14 +60,6 @@ void DB_Item::setReplenishment(float replenishment) {
 
 void DB_Item::setStock(float stock) {
 	this->stock = stock;
-}
-
-void DB_Item::setQuantity(float quantity) {
-	this->quantity = quantity;
-}
-
-void DB_Item::setDiscount(float discount) {
-	this->discount = discount;
 }
 
 void DB_Item::setIDType(int ID_Type) {

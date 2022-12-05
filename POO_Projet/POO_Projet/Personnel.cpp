@@ -20,6 +20,13 @@ Personnel::Personnel(int ID_Personnel){
 	this->people = gcnew DB_People(result->getInt(1), result->getString(5), result->getString(6));
 }
 
+Personnel::Personnel(DB_Personnel^ personnel, Address^ address, DB_People^ people)
+{
+	this->personnel = personnel;
+	this->address = address;
+	this->people = people;
+}
+
 int Personnel::getPersonnelID() {
 	return this->personnel->getIDPersonnel();
 }

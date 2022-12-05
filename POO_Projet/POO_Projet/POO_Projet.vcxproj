@@ -129,6 +129,7 @@
     <ClCompile Include="DB_Client.cpp" />
     <ClCompile Include="DB_Client_Address.cpp" />
     <ClCompile Include="DB_Command.cpp" />
+    <ClCompile Include="DB_Command_Contain.cpp" />
     <ClCompile Include="DB_Country.cpp" />
     <ClCompile Include="DB_Item.cpp" />
     <ClCompile Include="DB_Methode_Payment.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="DB_Client.h" />
     <ClInclude Include="DB_Client_Address.h" />
     <ClInclude Include="DB_Command.h" />
+    <ClInclude Include="DB_Command_Contain.h" />
     <ClInclude Include="DB_Country.h" />
     <ClInclude Include="DB_Item.h" />
     <ClInclude Include="DB_Methode_Payment.h" />

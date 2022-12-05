@@ -9,12 +9,14 @@ DB_Command::DB_Command() {
     this->ID_Client = 0;
 }
 
-DB_Command::DB_Command(int ID_Command, System::String^ reference, System::DateTime date_Estimation, System::DateTime date_Issue, System::DateTime settlement, int ID_Client) {
+DB_Command::DB_Command(int ID_Command, System::String^ reference, System::DateTime date_Estimation, System::DateTime date_Issue, System::DateTime settlement, int ID_Address_Billing, int ID_Address_Delivery, int ID_Client) {
     this->ID_Command = ID_Command;
     this->reference = reference;
     this->date_Estimation = date_Estimation;
     this->date_Issue = date_Issue;
     this->settlement = settlement;
+    this->ID_Address_Billing = ID_Address_Billing;
+    this->ID_Address_Delivery = ID_Address_Delivery;
     this->ID_Client = ID_Client;
 }
 
@@ -36,6 +38,14 @@ System::DateTime DB_Command::getDateIssue() {
 
 System::DateTime DB_Command::getSettlement() {
     return this->settlement;
+}
+
+int DB_Command::getIDAddressBilling() {
+    return this->ID_Address_Billing;
+}
+
+int DB_Command::getIDAddressDelivery() {
+    return this->ID_Address_Delivery;
 }
 
 int DB_Command::getIDClient() {
@@ -60,6 +70,14 @@ void DB_Command::setDateIssue(System::DateTime date_Issue) {
 
 void DB_Command::setSettlement(System::DateTime settlement) {
     this->settlement = settlement;
+}
+
+void DB_Command::setIDAddressBilling(int ID_Address_Billing) {
+    this->ID_Address_Billing = ID_Address_Billing;
+}
+
+void DB_Command::setIDAddressDelivery(int ID_Address_Delivery) {
+    this->ID_Address_Delivery = ID_Address_Delivery;
 }
 
 void DB_Command::setIDClient(int ID_Client) {
