@@ -110,11 +110,11 @@ CREATE TABLE Personnel(
    ID_Personnel INT IDENTITY(1, 1),
    hire_Date DATE NOT NULL,
    ID_Address INT NOT NULL,
-   ID_Personnel_1 INT,
+   ID_Superior INT,
    ID_People INT NOT NULL,
    PRIMARY KEY(ID_Personnel),
    FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
-   FOREIGN KEY(ID_Personnel_1) REFERENCES Personnel(ID_Personnel),
+   FOREIGN KEY(ID_Superior) REFERENCES Personnel(ID_Personnel),
    FOREIGN KEY(ID_People) REFERENCES People(ID_People)
 );
 
@@ -124,12 +124,12 @@ CREATE TABLE Command(
    date_Estimation DATETIME,
    date_Issue DATE NOT NULL,
    settlement_Balance DATE,
-   ID_Address INT NOT NULL,
-   ID_Address_1 INT NOT NULL,
+   ID_Address_Billing INT NOT NULL,
+   ID_Address_Delivery INT NOT NULL,
    ID_Client INT NOT NULL,
    PRIMARY KEY(ID_Command),
-   FOREIGN KEY(ID_Address) REFERENCES Address(ID_Address),
-   FOREIGN KEY(ID_Address_1) REFERENCES Address(ID_Address),
+   FOREIGN KEY(ID_Address_Billing) REFERENCES Address(ID_Address),
+   FOREIGN KEY(ID_Address_Delivery) REFERENCES Address(ID_Address),
    FOREIGN KEY(ID_Client) REFERENCES Client(ID_Client)
 );
 
