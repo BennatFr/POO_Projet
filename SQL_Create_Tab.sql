@@ -175,3 +175,8 @@ CREATE TABLE Bill_Contain(
    FOREIGN KEY(ID_Bill) REFERENCES Bill(ID_Bill),
    FOREIGN KEY(ID_Item) REFERENCES Bill_Item(ID_Item)
 );
+
+INSERT INTO Methode_Payment(type) VALUES
+('CB'),
+('Espèce'),
+('Chèque');
