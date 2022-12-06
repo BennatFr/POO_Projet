@@ -121,7 +121,7 @@ CREATE TABLE Personnel(
 CREATE TABLE Command(
    ID_Command INT IDENTITY(1, 1),
    reference VARCHAR(20) NOT NULL,
-   date_Estimation DATETIME,
+   date_Estimation DATE,
    date_Issue DATE NOT NULL,
    settlement_Balance DATE,
    ID_Address_Billing INT NOT NULL,
