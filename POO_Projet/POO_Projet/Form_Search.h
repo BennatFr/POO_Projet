@@ -64,10 +64,13 @@ namespace POOProjet {
 			case EnumVar::COMMAND:
 				this->Text = titleText + "Recherche Commande";
 				this->label_research1->Text = "Id de la commande";
+				this->textBox_research2->Hide();
+				this->textBox_research3->Hide();
 				this->label_research2->Hide();
 				this->label_research3->Hide();
 				this->dateTimePicker1->Hide();
 				this->dateTimePicker2->Hide();
+				this->button2->Hide();
 				break;
 			default:
 				this->Text = titleText + "Erreur";
@@ -459,6 +462,8 @@ namespace POOProjet {
 			   case EnumVar::STOCK:
 				   if (ID != "") {
 					   sqlRequest = gcnew String(("SELECT ID_Item, Type.name as type, Item.name, reference, stock, replenishment FROM (SELECT * FROM Item WHERE ID_Item = " + ID + ") as Item INNER JOIN Type ON Item.ID_Type = Type.ID_Type;").c_str());
+				   } else {
+
 				   }
 				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Stock");
 				   this->dataGridView1->DataMember = "Stock";

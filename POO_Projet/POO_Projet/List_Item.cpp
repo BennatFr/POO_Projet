@@ -60,6 +60,24 @@ void List_Item::set(Item^ item, int i) {
     }
 }
 
+void List_Item::del(int i) {
+    if (i == 0) {
+        this->delFirst();
+    } if (i >= this->getSize()) {
+        //this->delLast()
+    }
+}
+
+void List_Item::delFirst() {
+    if (this->next == nullptr || this->value) {
+        this->value = nullptr;
+    } else {
+        List_Item^ nxt = this->next;
+        this->next = nxt->next;
+        this->value = nxt->value;
+    }
+}
+
 Item^ List_Item::getFirst()
 {
     return this->value;

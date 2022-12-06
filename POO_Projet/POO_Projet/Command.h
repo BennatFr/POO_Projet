@@ -31,8 +31,7 @@ public:
 	void setIDCommand(int ID_Command);
 
 	void save();
-	/*int insert();
-	int update();
-	int del();*/
+	int delItem(int ID_Item);
+	int delItems();
 };
 

@@ -32,8 +32,8 @@ Command::Command(int ID_Command) {
 	for (int i = 0; i < dataSet->Tables["Command_Contain"]->Rows->Count; i++) {
 		int ID_Item = System::Convert::ToInt32(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[2]->ToString());
 		int ID_Command_Contain = System::Convert::ToInt32(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[0]->ToString());
-		float quantity = (float) System::Convert::ToDecimal(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[3]->ToString());
-		float discount = (float) System::Convert::ToDecimal(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[4]->ToString());
+		float quantity = (float)System::Convert::ToDecimal(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[3]->ToString());
+		float discount = (float)System::Convert::ToDecimal(dataSet->Tables["Command_Contain"]->Rows[i]->ItemArray[4]->ToString());
 		this->list_Item->setLast(gcnew Item(ID_Item));
 		this->getListItem()->getLast()->getCommandContain()->setIDCommand(ID_Command);
 		this->getListItem()->getLast()->getCommandContain()->setIDContain(ID_Command_Contain);
@@ -122,8 +122,27 @@ void Command::save() {
 
 		for (int i = 0; i < this->getListPayment()->getSize(); i++) {
 			Payment^ payment = this->getListPayment()->get(i);
-			sqlRequest = "INSERT INTO Payment VALUES ('" + payment->getPayment()->getPaymentDate() + "', " + payment->getPayment()->getAmount() + ", " + payment->getMethodePayment()->getIDMethodePayment() + ", "+ payment->getPayment()->getIDCommand() + ")";
+			sqlRequest = "INSERT INTO Payment VALUES ('" + payment->getPayment()->getPaymentDate() + "', " + payment->getPayment()->getAmount() + ", " + payment->getMethodePayment()->getIDMethodePayment() + ", " + payment->getPayment()->getIDCommand() + ")";
 			connection->execute(sqlRequest);
 		}
 	}
+}
+
+int Command::delItem(int ID_Contain) {
+	if(this->command->getIDCommand()==0){
+		return 1;
+	}
+	if (ID_Contain == 0) {
+		return 0;
+	}
+	System::String^ sqlRequest = "DELETE FROM Command_Contain WHERE ID_Command_Contain = " + ID_Contain;
+	connection->execute(sqlRequest);
+}
+
+int Command::delItems() {
+	if (this->command->getIDCommand() == 0) {
+		return 1;
+	}
+	System::String^ sqlRequest = "DELETE FROM Command_Contain WHERE ID_Command = " + this->getCommand()->getIDCommand();
+	connection->execute(sqlRequest);
 }

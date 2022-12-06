@@ -15,6 +15,10 @@ public:
 	void setLast(Item^ item);
 	void set(Item^ item, int i);
 
+	void del(int i);
+	void delFirst();
+	//void delLast();
+
 	Item^ getFirst();
 	Item^ getLast();
 	Item^ get(int i);
