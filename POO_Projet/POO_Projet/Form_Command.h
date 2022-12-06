@@ -26,6 +26,20 @@ namespace POOProjet {
 
 		}
 
+		Form_Command(Command^ command) {
+			InitializeComponent();
+
+			this->command = command;
+			int ID_Client = this->command->getCommand()->getIDClient();
+			if (ID_Client != 0) {
+				this->client = gcnew Client(ID_Client);
+				affichageClient(ID_Client);
+			}
+			
+
+
+		}
+
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
@@ -124,7 +138,7 @@ namespace POOProjet {
 	private: System::Windows::Forms::Label^ label22;
 	private: System::Windows::Forms::Label^ label24;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker_payment1;
-private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ button6;
 
 
 	protected:
@@ -937,37 +951,8 @@ private: System::Windows::Forms::Button^ button6;
 			MessageBox::Show("Veuillez selectionner une ligne", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
-		Client^ client = gcnew Client(Convert::ToInt32(IDSelect));
-		this->client = client;
-		this->command->getCommand()->setIDClient(client->getClientID());
-		this->numericUpDown_client2->Text = client->getClientID().ToString();
-		this->textBox_client3->Text = client->getPeople()->getLastName();
-		this->textBox_client4->Text = client->getPeople()->getFirstName();
-		this->dateTimePicker_client1->Value = client->getClient()->getBirthdate();
-		this->dateTimePicker_client2->Value = client->getClient()->getFirstBuyWebsite();
+		affichageClient(Convert::ToInt32(IDSelect));
 
-		this->dataGridView_client2->Rows->Clear();
-		this->dataGridView_client3->Rows->Clear();
-		Address^ address;
-		System::Windows::Forms::DataGridView^ dataGridView;
-		int index;
-		for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
-			address = this->client->getListAddress()->get(i);
-			if (!address->getClientAddress()->isBilling()) {
-				dataGridView = this->dataGridView_client2;
-			} else {
-				dataGridView = this->dataGridView_client3;
-			}
-			index = dataGridView->Rows->Count;
-			dataGridView->Rows->Add();
-			dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
-			dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
-			dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
-			dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
-			dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
-			dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
-			dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
-		}
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ sqlRequest;
@@ -1040,16 +1025,22 @@ private: System::Windows::Forms::Button^ button6;
 		}
 	}
 
-	float restePayer() {
-		float reste = this->command->getCommandPriceTTC();
+		   float restePayer() {
+			   float reste = this->command->getCommandPriceTTC();
 
-		for (int i = 0; i < this->command->getListPayment()->getSize(); i++) {
-			reste -= this->command->getListPayment()->get(i)->getPayment()->getAmount();
-		}
-		return reste;
+			   for (int i = 0; i < this->command->getListPayment()->getSize(); i++) {
+				   reste -= this->command->getListPayment()->get(i)->getPayment()->getAmount();
+			   }
+			   return reste;
 
-	}
+		   }
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		for (int i = 0; i < this->command->getListPayment()->getSize(); i++) {
+			if (System::DateTime::Now < this->command->getListPayment()->get(i)->getPayment()->getPaymentDate()) {
+				MessageBox::Show("Certains payements ne sont toujours pas perçus. (n°" + i + ")", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+		}
 		System::Windows::Forms::DialogResult result = MessageBox::Show("Voulez vous facturer la commande ?\nCette dernier ne sera plus modifible !", "Facture", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 		if (result == System::Windows::Forms::DialogResult::No) {
 			return;
@@ -1057,7 +1048,68 @@ private: System::Windows::Forms::Button^ button6;
 
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ ref = "" + this->client->getPeople()->getFirstName()[1] + this->client->getPeople()->getFirstName()[2];
+		ref += System::DateTime::Now.Year;
+		for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
+			if (this->client->getListAddress()->get(i)->getAddress()->getIDAddress() == this->command->getCommand()->getIDAddressDelivery()) {
+				ref += this->client->getListAddress()->get(i)->getCity()->getName()[0] + this->client->getListAddress()->get(i)->getCity()->getName()[1] + this->client->getListAddress()->get(i)->getCity()->getName()[2];
+			}
+		}
+		ref += System::DateTime::Now.Millisecond;
+		this->command->getCommand()->setReference(ref);
 		this->command->save();
 	}
-};
+
+		   System::Void affichageClient(int ID) {
+			   Client^ client = gcnew Client(ID);
+			   this->client = client;
+
+			   this->dataGridView_client2->Rows->Clear();
+			   this->dataGridView_client3->Rows->Clear();
+			   Address^ address;
+			   System::Windows::Forms::DataGridView^ dataGridView;
+			   int index;
+			   for (int i = 0; i < this->client->getListAddress()->getSize(); i++) {
+				   address = this->client->getListAddress()->get(i);
+				   if (!address->getClientAddress()->isBilling()) {
+					   dataGridView = this->dataGridView_client2;
+				   } else {
+					   dataGridView = this->dataGridView_client3;
+				   }
+				   index = dataGridView->Rows->Count;
+				   dataGridView->Rows->Add();
+				   dataGridView->Rows[index]->Cells["ID Adresse"]->Value = address->getAddress()->getIDAddress();
+				   dataGridView->Rows[index]->Cells["Numéro de rue"]->Value = address->getAddress()->getStreetNumber();
+				   dataGridView->Rows[index]->Cells["Rue"]->Value = address->getAddress()->getStreet();
+				   dataGridView->Rows[index]->Cells["Ville"]->Value = address->getCity()->getName();
+				   dataGridView->Rows[index]->Cells["Code postal"]->Value = address->getCity()->getPostalNumber();
+				   dataGridView->Rows[index]->Cells["Pays"]->Value = address->getCountry()->getName();
+				   dataGridView->Rows[index]->Cells["Information additionnel"]->Value = address->getAddress()->getAdditionnalData();
+			   }
+			   if (this->dataGridView_client2->Rows->Count > 0) {
+				   this->command->getCommand()->setIDAddressDelivery(Convert::ToInt32(this->dataGridView_client2->Rows[0]->Cells["ID Adresse"]->Value));
+			   } else {
+				   this->dataGridView_client2->Rows->Clear();
+				   this->dataGridView_client3->Rows->Clear();
+				   MessageBox::Show("Ce client ne possède pas d'adresse de livraison.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+			   if (this->dataGridView_client3->Rows->Count > 0) {
+				   this->command->getCommand()->setIDAddressBilling(Convert::ToInt32(this->dataGridView_client3->Rows[0]->Cells["ID Adresse"]->Value));
+			   } else {
+				   this->dataGridView_client2->Rows->Clear();
+				   this->dataGridView_client3->Rows->Clear();
+				   MessageBox::Show("Ce client ne possède pas d'adresse de facturation.", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   return;
+			   }
+
+
+			   this->command->getCommand()->setIDClient(client->getClientID());
+			   this->numericUpDown_client2->Text = client->getClientID().ToString();
+			   this->textBox_client3->Text = client->getPeople()->getLastName();
+			   this->textBox_client4->Text = client->getPeople()->getFirstName();
+			   this->dateTimePicker_client1->Value = client->getClient()->getBirthdate();
+			   this->dateTimePicker_client2->Value = client->getClient()->getFirstBuyWebsite();
+		   }
+	};
 }

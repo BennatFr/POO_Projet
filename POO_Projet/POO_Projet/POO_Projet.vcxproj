@@ -153,7 +153,7 @@
     <ClCompile Include="Payment.cpp" />
     <ClCompile Include="Personnel.cpp" />
     <ClCompile Include="Row.cpp" />
-    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="Form_Stats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
@@ -200,7 +200,7 @@
     <ClInclude Include="Payment.h" />
     <ClInclude Include="Personnel.h" />
     <ClInclude Include="Row.h" />
-    <ClInclude Include="Stats.h">
+    <ClInclude Include="Form_Stats.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -222,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Search.resx">
       <DependentUpon>Form_Search.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Stats.resx">
+      <DependentUpon>Form_Stats.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

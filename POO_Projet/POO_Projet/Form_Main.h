@@ -4,6 +4,7 @@
 #include "Form_Command.h"
 #include "Global_Var.h"
 #include "Connection_DB.h"
+#include "Form_Stats.h"
 
 namespace POOProjet {
 
@@ -137,6 +138,7 @@ namespace POOProjet {
 			this->rechercheToolStripMenuItem->Name = L"rechercheToolStripMenuItem";
 			this->rechercheToolStripMenuItem->Size = System::Drawing::Size(187, 22);
 			this->rechercheToolStripMenuItem->Text = L"Recherche";
+			this->rechercheToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::rechercheToolStripMenuItem_Click);
 			// 
 			// personnel_ToolStripMenuItem
 			// 
@@ -188,6 +190,7 @@ namespace POOProjet {
 			this->réapprovisionnementToolStripMenuItem->Name = L"réapprovisionnementToolStripMenuItem";
 			this->réapprovisionnementToolStripMenuItem->Size = System::Drawing::Size(232, 22);
 			this->réapprovisionnementToolStripMenuItem->Text = L"Réapprovisionnement produit";
+			this->réapprovisionnementToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::réapprovisionnementToolStripMenuItem_Click);
 			// 
 			// totalDesAchatsClientToolStripMenuItem
 			// 
@@ -297,5 +300,14 @@ namespace POOProjet {
 			   MessageBox::Show("Valeur commerciale du stock : " + price + " €", "Statistique !", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			   return;
 		   }
-};
+	private: System::Void réapprovisionnementToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Form_Stats^ formStats = gcnew Form_Stats(1);
+		formStats->ShowDialog();
+	}
+	private: System::Void rechercheToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
+		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
+		formSearch->ShowDialog();
+	}
+	};
 }

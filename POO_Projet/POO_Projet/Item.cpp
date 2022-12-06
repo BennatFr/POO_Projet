@@ -27,6 +27,9 @@ Item::Item(int ID_Item) {
 	result = connection->selectRow(sqlRequest, "Price", 0);
 	//int ID_Price, float price, float VAT, System::DateTime date_Price, int ID_Item
 	this->price = gcnew DB_Price(result->getInt(0), result->getFloat(1), result->getFloat(2), result->getDateTime(3), result->getInt(4));
+
+	this->command_Contain = gcnew DB_Command_Contain();
+	this->command_Contain->setIDItem(ID_Item);
 }
 
 Item::Item(int ID_Item, int ID_Command, int row) {
@@ -219,5 +222,25 @@ int Item::update() {
 		sqlRequest = "INSERT INTO Price VALUES (" + this->getPrice()->getPrice().ToString()->Replace(",", ".") + ", " + this->getPrice()->getVAT().ToString()->Replace(",", ".") + ", '" + this->getPrice()->getDatePrice() + "', " + this->getPrice()->getIDItem() + ")";
 		connection->execute(sqlRequest);
 	}
+	return 0;
+}
+
+int Item::del() {
+	System::String^ sqlRequest;
+	Row^ result;
+	sqlRequest = "SELECT Count(*) FROM Item WHERE ID_Item = " + this->getItemID();
+	result = connection->selectRow(sqlRequest, "Item", 0);
+	if (result->getInt(0) == 0) {
+		return 1;
+	}
+
+	sqlRequest = "DELETE FROM Command_Contain WHERE ID_Item = " + this->getItemID();
+	connection->execute(sqlRequest);
+	
+	sqlRequest = "DELETE FROM Price WHERE ID_Item = " + this->getItemID();
+	connection->execute(sqlRequest);
+
+	sqlRequest = "DELETE FROM Item WHERE ID_Item = " + this->getItemID();
+	connection->execute(sqlRequest);
 	return 0;
 }

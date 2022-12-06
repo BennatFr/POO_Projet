@@ -8,9 +8,11 @@
 #include "Form_Edit.h"
 #include "Form_Edit_Client.h"
 #include "Form_Edit_Stock.h"
+#include "Form_Command.h"
 #include "Personnel.h"
 #include "Client.h"
 #include "Item.h"
+#include "Command.h"
 
 namespace POOProjet {
 	using namespace System;
@@ -56,6 +58,14 @@ namespace POOProjet {
 				this->label_research1->Text = "Id de l'article";
 				this->label_research2->Text = "Nom de l'article";
 				this->label_research3->Text = "Référence de l'article";
+				this->dateTimePicker1->Hide();
+				this->dateTimePicker2->Hide();
+				break;
+			case EnumVar::COMMAND:
+				this->Text = titleText + "Recherche Commande";
+				this->label_research1->Text = "Id de la commande";
+				this->label_research2->Hide();
+				this->label_research3->Hide();
 				this->dateTimePicker1->Hide();
 				this->dateTimePicker2->Hide();
 				break;
@@ -133,7 +143,8 @@ namespace POOProjet {
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(9, 10);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView1->MultiSelect = false;
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 51;
@@ -145,7 +156,7 @@ namespace POOProjet {
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(548, 395);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(102, 39);
 			this->button1->TabIndex = 1;
@@ -167,7 +178,7 @@ namespace POOProjet {
 			// textBox_research1
 			// 
 			this->textBox_research1->Location = System::Drawing::Point(9, 271);
-			this->textBox_research1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox_research1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox_research1->Name = L"textBox_research1";
 			this->textBox_research1->Size = System::Drawing::Size(288, 20);
 			this->textBox_research1->TabIndex = 3;
@@ -202,7 +213,7 @@ namespace POOProjet {
 			// textBox_research2
 			// 
 			this->textBox_research2->Location = System::Drawing::Point(9, 308);
-			this->textBox_research2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox_research2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox_research2->Name = L"textBox_research2";
 			this->textBox_research2->Size = System::Drawing::Size(288, 20);
 			this->textBox_research2->TabIndex = 8;
@@ -221,7 +232,7 @@ namespace POOProjet {
 			// textBox_research3
 			// 
 			this->textBox_research3->Location = System::Drawing::Point(9, 345);
-			this->textBox_research3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox_research3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox_research3->Name = L"textBox_research3";
 			this->textBox_research3->Size = System::Drawing::Size(288, 20);
 			this->textBox_research3->TabIndex = 10;
@@ -265,7 +276,7 @@ namespace POOProjet {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Form_Search";
 			this->Text = L"Form_Search";
 			this->Load += gcnew System::EventHandler(this, &Form_Search::Form_Search_Load);
@@ -316,6 +327,13 @@ namespace POOProjet {
 			formEditStock->ShowDialog();
 			break;
 		}
+		case EnumVar::COMMAND:
+		{
+			Command^ command = gcnew Command(Convert::ToInt32(IDSelect));
+			Form_Command^ formEditStock = gcnew Form_Command(command);
+			formEditStock->ShowDialog();
+			break;
+		}
 
 		}
 	}
@@ -359,20 +377,37 @@ namespace POOProjet {
 			System::Windows::Forms::DialogResult result;
 			switch (this->typeOfResearch) {
 			case EnumVar::PERSONNEL:
-				result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				result = MessageBox::Show("Supprimer le personnel n°" + IDPersonnelSelect + " ?", "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 				if (result == System::Windows::Forms::DialogResult::Yes) {
 					Personnel^ personnel = gcnew Personnel(Convert::ToInt32(IDPersonnelSelect));
 					personnel->del();
 					MessageBox::Show("Le personnel n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 			case EnumVar::CLIENT:
-				result = MessageBox::Show("Supprimer le client n°" + IDPersonnelSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				result = MessageBox::Show("Supprimer le client n°" + IDPersonnelSelect + " ?", "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 				if (result == System::Windows::Forms::DialogResult::Yes) {
 					Client^ client = gcnew Client(Convert::ToInt32(IDPersonnelSelect));
 					client->del();
 					MessageBox::Show("Le client n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
+			case EnumVar::STOCK:
+				result = MessageBox::Show("Supprimer l'article n°" + IDPersonnelSelect + " ?", "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+				if (result == System::Windows::Forms::DialogResult::Yes) {
+					String^ sqlRequest = "SELECT Count(*) FROM Command_Contain WHERE ID_Item = " + IDPersonnelSelect;
+					Row^ resultRow = this->connection->selectRow(sqlRequest, "Command_Contain", 0);
+					if (resultRow->getInt(0) == 1) {
+						result = MessageBox::Show("L'article n°" + IDPersonnelSelect + " se trouve dans des commandes non facturées.\nSi vous continuez, les articles seront supprimé des commandes.\nVoulez-vous continuer ?", "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
+						if (result == System::Windows::Forms::DialogResult::No) {
+							return;
+						}
+					}
+					Item^ item = gcnew Item(Convert::ToInt32(IDPersonnelSelect));
+					item->del();
+					MessageBox::Show("L'article n°" + IDPersonnelSelect + " a était supprimé", "Succés !", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+
 			}
+
 			recherche();
 		}
 	}
@@ -427,7 +462,14 @@ namespace POOProjet {
 				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Stock");
 				   this->dataGridView1->DataMember = "Stock";
 				   break;
+			   case EnumVar::COMMAND:
+				   if (ID != "") {
+					   sqlRequest = gcnew String(("SELECT * FROM Command WHERE ID_Command = " + ID).c_str());
+				   }
+				   this->dataGridView1->DataSource = connection->select(sqlRequest, "Command");
+				   this->dataGridView1->DataMember = "Command";
 			   }
+
 		   }
 	};
 }

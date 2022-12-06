@@ -47,5 +47,6 @@ public:
 
 	int insert();
 	int update();
+	int del();
 };
 

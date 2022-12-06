@@ -373,7 +373,6 @@ namespace POOProjet {
 		System::Void recherchePrice(){
 			Connection_DB^ connection = gcnew Connection_DB();
 			System::String^ sqlRequest;
-			Row^ result;
 			sqlRequest = "SELECT Price, VAT, date_Price FROM Price WHERE ID_Item = "+this->item->getItemID() + " ORDER BY date_Price DESC";
 			this->dataGridView1->DataSource = connection->select(sqlRequest, "Price");
 			this->dataGridView1->DataMember = "Price";

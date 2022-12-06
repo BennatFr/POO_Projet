@@ -141,7 +141,7 @@
     <ClCompile Include="DB_Command_Contain.cpp">
       <Filter>DB\Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Stats.cpp">
+    <ClCompile Include="Form_Stats.cpp">
       <Filter>Form\Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -242,7 +242,7 @@
     <ClInclude Include="DB_Command_Contain.h">
       <Filter>DB\Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Stats.h">
+    <ClInclude Include="Form_Stats.h">
       <Filter>Form\Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
