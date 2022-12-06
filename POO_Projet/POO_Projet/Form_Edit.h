@@ -356,7 +356,7 @@ namespace POOProjet {
 			this->Controls->Add(this->textBox1);
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form_Edit";
-			this->Text = L"Form_Edit";
+			this->Text = L"v";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

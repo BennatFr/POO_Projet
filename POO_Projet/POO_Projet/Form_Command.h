@@ -932,6 +932,12 @@ namespace POOProjet {
 			this->dataGridView_article2->Rows[i]->Cells["ID"]->Value = this->command->getListItem()->get(i)->getCommandContain()->getIDContain();
 		}
 
+		for (int i = 0; i < this->command->getListPayment()->getSize(); i++) {
+			this->dataGridView_payment->Rows->Add();
+			affichagePayment(this->command->getListPayment()->get(i), i);
+			this->dataGridView_payment->Rows[i]->Cells["ID"]->Value = this->command->getListPayment()->get(i)->getIDPayment();
+		}
+
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1017,9 +1023,7 @@ namespace POOProjet {
 			int index = this->dataGridView_payment->Rows->Count;
 			this->dataGridView_payment->Rows->Add();
 
-			this->dataGridView_payment->Rows[index]->Cells["Date du payment"]->Value = payment->getPayment()->getPaymentDate();
-			this->dataGridView_payment->Rows[index]->Cells["Montant"]->Value = payment->getPayment()->getAmount();
-			this->dataGridView_payment->Rows[index]->Cells["Type"]->Value = this->listBox_payment->SelectedItems[0]->ToString();
+			affichagePayment(payment, index);
 		}
 	}
 
@@ -1128,6 +1132,12 @@ namespace POOProjet {
 			   this->dataGridView_article2->Rows[index]->Cells["TVA"]->Value = item->getFloatPriceUTTC();
 			   this->dataGridView_article2->Rows[index]->Cells["Prix HT"]->Value = item->getFloatPriceHT();
 			   this->dataGridView_article2->Rows[index]->Cells["Prix TTC"]->Value = item->getFloatPriceTTC();
+		   }
+
+		   System::Void affichagePayment(Payment^ payment, int index) {
+			   this->dataGridView_payment->Rows[index]->Cells["Date du payment"]->Value = payment->getPayment()->getPaymentDate();
+			   this->dataGridView_payment->Rows[index]->Cells["Montant"]->Value = payment->getPayment()->getAmount();
+			   this->dataGridView_payment->Rows[index]->Cells["Type"]->Value = payment->getMethodePayment()->getType();
 		   }
 	};
 }

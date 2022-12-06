@@ -267,20 +267,24 @@ namespace POOProjet {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::PERSONNEL);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
+		delete formSearch;
 	}
 	private: System::Void client_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::CLIENT);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
+		delete formSearch;
 	}
 	private: System::Void stock_ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::STOCK);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
+		delete formSearch;
 	}
 	private: System::Void nouvelleCommandeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		Form_Command^ formCommand = gcnew Form_Command();
 		formCommand->ShowDialog();
+		delete formCommand;
 	}
 	private: System::Void valeurCommercialeDuStockToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		getValueStock(1);
@@ -308,6 +312,7 @@ namespace POOProjet {
 		EnumVar::type_Seach clicInfo = EnumVar::type_Seach(EnumVar::COMMAND);
 		Form_Search^ formSearch = gcnew Form_Search(clicInfo);
 		formSearch->ShowDialog();
+		delete formSearch;
 	}
 	};
 }

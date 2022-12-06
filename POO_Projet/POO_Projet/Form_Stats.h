@@ -28,7 +28,22 @@ namespace POOProjet {
 			InitializeComponent();
 			if (i == 1) {
 				Connection_DB^ cnx = gcnew Connection_DB();
-				this->dataGridView1->DataSource = cnx->select("SELECT * FROM Item WHERE stock <= replenishment", "Item");
+				this->dataGridView1->ColumnCount = 5;
+				this->dataGridView1->Columns[0]->Name = "ID Item";
+				this->dataGridView1->Columns[1]->Name = "Référence";
+				this->dataGridView1->Columns[2]->Name = "Nom";
+				this->dataGridView1->Columns[3]->Name = "Réapprovisionnement";
+				this->dataGridView1->Columns[4]->Name = "Stock";
+				this->dataGridView1->ReadOnly = true;
+				System::Data::DataSet^ dataset = cnx->select("SELECT * FROM Item WHERE stock <= replenishment", "Item");
+				for (int i = 0; i < dataset->Tables["Item"]->Rows->Count; i++) {
+					this->dataGridView1->Rows->Add();
+					this->dataGridView1->Rows[i]->Cells["ID Item"]->Value = dataset->Tables["Item"]->Rows[i]->ItemArray[0];
+					this->dataGridView1->Rows[i]->Cells["Référence"]->Value = dataset->Tables["Item"]->Rows[i]->ItemArray[1];
+					this->dataGridView1->Rows[i]->Cells["Nom"]->Value = dataset->Tables["Item"]->Rows[i]->ItemArray[2];
+					this->dataGridView1->Rows[i]->Cells["Réapprovisionnement"]->Value = dataset->Tables["Item"]->Rows[i]->ItemArray[3];
+					this->dataGridView1->Rows[i]->Cells["Stock"]->Value = dataset->Tables["Item"]->Rows[i]->ItemArray[4];
+				}
 			}
 			//this->dataGridView1->DataMember = s;
 		}
