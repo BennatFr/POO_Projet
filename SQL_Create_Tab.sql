@@ -145,11 +145,12 @@ CREATE TABLE Payment(
 );
 
 CREATE TABLE Command_Contain(
+   ID_Command_Contain INT IDENTITY(1, 1),
    ID_Command INT,
    ID_Item INT,
    quantity DECIMAL(13,3) NOT NULL,
    discount DECIMAL(5,2),
-   PRIMARY KEY(ID_Command, ID_Item),
+   PRIMARY KEY(ID_Command, ID_Item, ID_Command_Contain),
    FOREIGN KEY(ID_Command) REFERENCES Command(ID_Command),
    FOREIGN KEY(ID_Item) REFERENCES Item(ID_Item)
 );
