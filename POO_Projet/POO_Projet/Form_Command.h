@@ -30,14 +30,6 @@ namespace POOProjet {
 			InitializeComponent();
 
 			this->command = command;
-			int ID_Client = this->command->getCommand()->getIDClient();
-			if (ID_Client != 0) {
-				this->client = gcnew Client(ID_Client);
-				affichageClient(ID_Client);
-			}
-			
-
-
 		}
 
 	protected:
@@ -928,6 +920,18 @@ namespace POOProjet {
 		if (this->listBox_payment->Items->Count > 0) {
 			this->listBox_payment->SelectedIndex = 0;
 		}
+
+		int ID_Client = this->command->getCommand()->getIDClient();
+		if (ID_Client != 0) {
+			this->client = gcnew Client(ID_Client);
+			affichageClient(ID_Client);
+		}
+		for (int i = 0; i < this->command->getListItem()->getSize(); i++) {
+			this->dataGridView_article2->Rows->Add();
+			affichageItem(this->command->getListItem()->get(i), i);
+			this->dataGridView_article2->Rows[i]->Cells["ID"]->Value = this->command->getListItem()->get(i)->getCommandContain()->getIDContain();
+		}
+
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -984,16 +988,7 @@ namespace POOProjet {
 		item->getCommandContain()->setQuantity((float)Convert::ToDecimal(this->numericUpDown_article2->Value));
 		item->getCommandContain()->setDiscount((float)Convert::ToDecimal(this->numericUpDown_article3->Value));
 
-		this->dataGridView_article2->Rows[index]->Cells["ID Item"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[0]->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Type"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[1]->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Nom"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[2]->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Référence"]->Value = this->dataGridView_article1->Rows[indexSelection]->Cells[3]->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Quantité"]->Value = this->numericUpDown_article2->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Réduction"]->Value = this->numericUpDown_article3->Value;
-		this->dataGridView_article2->Rows[index]->Cells["Prix /u"]->Value = item->getFloatPriceUHT();
-		this->dataGridView_article2->Rows[index]->Cells["TVA"]->Value = item->getFloatPriceUTTC();
-		this->dataGridView_article2->Rows[index]->Cells["Prix HT"]->Value = item->getFloatPriceHT();
-		this->dataGridView_article2->Rows[index]->Cells["Prix TTC"]->Value = item->getFloatPriceTTC();
+		affichageItem(item, index);
 
 		this->command->getListItem()->setLast(item);
 
@@ -1044,6 +1039,10 @@ namespace POOProjet {
 				return;
 			}
 		}
+		if (restePayer() > 0) {
+			MessageBox::Show("Pour facture la commande, il faut la solder.", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
 		System::Windows::Forms::DialogResult result = MessageBox::Show("Voulez vous facturer la commande ?\nCette dernier ne sera plus modifible !", "Facture", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 		if (result == System::Windows::Forms::DialogResult::No) {
 			return;
@@ -1061,6 +1060,9 @@ namespace POOProjet {
 		ref += System::DateTime::Now.Millisecond;
 		this->command->getCommand()->setReference(ref);
 		this->command->save();
+
+		MessageBox::Show("La commande a été sauvegardée !", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close();
 	}
 
 		   System::Void affichageClient(int ID) {
@@ -1113,6 +1115,19 @@ namespace POOProjet {
 			   this->textBox_client4->Text = client->getPeople()->getFirstName();
 			   this->dateTimePicker_client1->Value = client->getClient()->getBirthdate();
 			   this->dateTimePicker_client2->Value = client->getClient()->getFirstBuyWebsite();
+		   }
+
+		   System::Void affichageItem(Item^ item, int index) {
+			   this->dataGridView_article2->Rows[index]->Cells["ID Item"]->Value = item->getItemID();
+			   this->dataGridView_article2->Rows[index]->Cells["Type"]->Value = item->getType()->getName();
+			   this->dataGridView_article2->Rows[index]->Cells["Nom"]->Value = item->getItem()->getName();
+			   this->dataGridView_article2->Rows[index]->Cells["Référence"]->Value = item->getItem()->getReference();
+			   this->dataGridView_article2->Rows[index]->Cells["Quantité"]->Value = item->getCommandContain()->getQuantity();
+			   this->dataGridView_article2->Rows[index]->Cells["Réduction"]->Value = item->getCommandContain()->getDiscount();
+			   this->dataGridView_article2->Rows[index]->Cells["Prix /u"]->Value = item->getFloatPriceUHT();
+			   this->dataGridView_article2->Rows[index]->Cells["TVA"]->Value = item->getFloatPriceUTTC();
+			   this->dataGridView_article2->Rows[index]->Cells["Prix HT"]->Value = item->getFloatPriceHT();
+			   this->dataGridView_article2->Rows[index]->Cells["Prix TTC"]->Value = item->getFloatPriceTTC();
 		   }
 	};
 }

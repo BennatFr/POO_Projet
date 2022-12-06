@@ -16,7 +16,7 @@ Payment::Payment(int ID_Payment) {
     this->payment = gcnew DB_Payment(result->getInt(0), result->getFloat(2), result->getDateTime(1), result->getInt(3), result->getInt(4));
 
     //DB_Methode_Payment
-    sqlRequest = "SELECT * FROM Methode_Payment WHERE ID_Payment_Methode = " + result->getInt(2);
+    sqlRequest = "SELECT * FROM Methode_Payment WHERE ID_Payment_Methode = " + result->getInt(3);
     result = connection->selectRow(sqlRequest, "Methode_Payment", 0);
     //int ID_Methode_Payment, System::String^ type
     this->methode_Payment = gcnew DB_Methode_Payment(result->getInt(0), result->getString(1));
