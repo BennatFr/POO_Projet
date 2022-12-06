@@ -10,6 +10,10 @@ DB_Country::DB_Country(int ID_Country, System::String^ name) {
 	this->name = name;
 }
 
+DB_Country::~DB_Country() {
+	delete name;
+}
+
 int DB_Country::getIDCountry() {
 	return this->ID_Country;
 }

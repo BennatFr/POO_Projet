@@ -18,6 +18,11 @@ DB_Item::DB_Item(int ID_Item, System::String^ reference, System::String^ name, f
 	this->ID_Type = ID_Type;
 }
 
+DB_Item::~DB_Item() {
+	delete reference;
+	delete name;
+}
+
 int DB_Item::getIDItem() {
 	return this->ID_Item;
 }

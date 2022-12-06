@@ -14,11 +14,9 @@ namespace POOProjet {
 	/// <summary>
 	/// Description résumée de Form_Edit_Client
 	/// </summary>
-	public ref class Form_Edit_Client : public System::Windows::Forms::Form
-	{
+	public ref class Form_Edit_Client : public System::Windows::Forms::Form {
 	public:
-		Form_Edit_Client(void)
-		{
+		Form_Edit_Client(void) {
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -78,11 +76,10 @@ namespace POOProjet {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~Form_Edit_Client()
-		{
-			if (components)
-			{
+		~Form_Edit_Client() {
+			if (components) {
 				delete components;
+				delete client;
 			}
 		}
 	private: Client^ client;
@@ -117,8 +114,7 @@ namespace POOProjet {
 		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
 		/// le contenu de cette méthode avec l'éditeur de code.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void) {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -378,8 +374,7 @@ namespace POOProjet {
 			   if (IDAddressSelect == "") {
 				   MessageBox::Show("Veuillez selectionner une addresse", "Erreur !", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				   return;
-			   }
-			   else {
+			   } else {
 				   System::Windows::Forms::DialogResult result = MessageBox::Show("Supprimer l'address n°" + IDAddressSelect, "Suppression !", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 				   if (result == System::Windows::Forms::DialogResult::Yes) {
 					   Address^ address = gcnew Address(Convert::ToInt32(IDAddressSelect), true);
@@ -401,8 +396,7 @@ namespace POOProjet {
 				   address = this->client->getListAddress()->get(i);
 				   if (!address->getClientAddress()->isBilling()) {
 					   dataGridView = this->dataGridView1;
-				   }
-				   else {
+				   } else {
 					   dataGridView = this->dataGridView2;
 				   }
 				   index = dataGridView->Rows->Count;
@@ -428,8 +422,7 @@ namespace POOProjet {
 				   }
 				   if (row->Cells["ID Adresse"]->Value == "") {
 					   IDAddress = 0;
-				   }
-				   else {
+				   } else {
 					   IDAddress = Convert::ToInt32(row->Cells["ID Adresse"]->Value);
 				   }
 				   DB_Address^ address = gcnew DB_Address(IDAddress, Convert::ToInt32(row->Cells["Numéro de rue"]->Value->ToString()), row->Cells["Rue"]->Value->ToString(), row->Cells["Information additionnel"]->Value->ToString(), 0, 0);

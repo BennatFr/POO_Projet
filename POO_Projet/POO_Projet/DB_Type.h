@@ -7,6 +7,8 @@ public:
 	DB_Type();
 	DB_Type(int ID_Type, System::String^ name);
 
+	~DB_Type();
+
 	int getIDType();
 	System::String^ getName();
 

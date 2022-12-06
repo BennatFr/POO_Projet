@@ -42,6 +42,13 @@ Command::Command(int ID_Command) {
 	}
 }
 
+Command::~Command() {
+	delete connection;
+	delete command;
+	delete list_Item;
+	delete list_Payment;
+}
+
 int Command::getCommandID() {
 	return this->command->getIDCommand();
 }

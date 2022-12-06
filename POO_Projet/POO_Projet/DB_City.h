@@ -8,6 +8,8 @@ public:
 	DB_City();
 	DB_City(int ID_City, System::String^ name, System::String^ postal_number);
 
+	~DB_City();
+
 	int getIDCity();
 	System::String^ getName();
 	System::String^ getPostalNumber();

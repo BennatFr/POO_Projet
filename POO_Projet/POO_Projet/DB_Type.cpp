@@ -10,6 +10,10 @@ DB_Type::DB_Type(int ID_Type, System::String^ name) {
 	this->name = name;
 }
 
+DB_Type::~DB_Type() {
+	delete name;
+}
+
 int DB_Type::getIDType() {
 	return this->ID_Type;
 }

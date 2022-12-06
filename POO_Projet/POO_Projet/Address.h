@@ -21,6 +21,8 @@ public:
 	Address(DB_Address^ address, DB_City^ city, DB_Country^ country);
 	Address(DB_Address^ address, DB_City^ city, DB_Country^ country, DB_Client_Address^ client_Address);
 
+	~Address();
+
 	DB_Address^ getAddress();
 	DB_City^ getCity();
 	DB_Country^ getCountry();

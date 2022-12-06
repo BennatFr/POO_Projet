@@ -13,7 +13,7 @@ public:
 	DB_Command();
 	DB_Command(int ID_Command, System::String^ reference, System::DateTime date_Estimation, System::DateTime date_Issue, System::DateTime settlement, int ID_Address_Billing, int ID_Address_Delivery, int ID_Client);
 
-	//~DB_Command();
+	~DB_Command();
 
 	int getIDCommand();
 	System::String^ getReference();

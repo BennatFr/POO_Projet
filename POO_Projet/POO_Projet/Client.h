@@ -15,6 +15,8 @@ public:
 	Client();
 	Client(int ID_Client);
 
+	~Client();
+
 	int getClientID();
 
 	DB_Client^ getClient();

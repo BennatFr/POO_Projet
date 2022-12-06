@@ -14,6 +14,11 @@ DB_People::DB_People(int ID_People, System::String^ last_Name, System::String^ f
 	this->first_Name = first_Name;
 }
 
+DB_People::~DB_People() {
+	delete last_Name;
+	delete last_Name;
+}
+
 int DB_People::getIDPeople()
 {
 	return this->ID_People;

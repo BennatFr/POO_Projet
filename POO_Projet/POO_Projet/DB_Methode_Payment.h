@@ -7,6 +7,8 @@ public:
 	DB_Methode_Payment();
 	DB_Methode_Payment(int ID_Methode_Payment, System::String^ type);
 
+	~DB_Methode_Payment();
+
 	int getIDMethodePayment();
 	System::String^ getType();
 

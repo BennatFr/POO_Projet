@@ -18,6 +18,11 @@ List_Address::List_Address(List_Address^ listAddress, Address^ address) {
     this->value = address;
 }
 
+List_Address::~List_Address() {
+    delete next;
+    delete value;
+}
+
 void List_Address::setFirst(Address^ address)
 {
     if (this->value == nullptr) {

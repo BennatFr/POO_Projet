@@ -9,6 +9,8 @@ public:
 	List_Payment(Payment^ payment);
 	List_Payment(List_Payment^ listPayment, Payment^ payment);
 
+	~List_Payment();
+
 	void setFirst(Payment^ payment);
 	void setLast(Payment^ payment);
 	void set(Payment^ payment, int i);

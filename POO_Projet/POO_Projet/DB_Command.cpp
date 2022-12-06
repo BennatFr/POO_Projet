@@ -20,6 +20,10 @@ DB_Command::DB_Command(int ID_Command, System::String^ reference, System::DateTi
     this->ID_Client = ID_Client;
 }
 
+DB_Command::~DB_Command() {
+    delete reference;
+}
+
 int DB_Command::getIDCommand() {
     return this->ID_Command;
 }

@@ -11,6 +11,8 @@ public:
 	DB_Item();
 	DB_Item(int ID_Item, System::String^ reference, System::String^ name, float replenishment, float stock, int ID_Type);
 
+	~DB_Item();
+
 	int getIDItem();
 	System::String^ getReference();
 	System::String^ getName();

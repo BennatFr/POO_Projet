@@ -9,6 +9,8 @@ public:
 	List_Address(Address^ address);
 	List_Address(List_Address^ listAddress, Address^ address);
 
+	~List_Address();
+
 	void setFirst(Address^ address);
 	void setLast(Address^ address);
 	void set(Address^ address, int i);

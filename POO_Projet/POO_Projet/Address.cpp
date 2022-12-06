@@ -40,6 +40,14 @@ Address::Address(DB_Address^ address, DB_City^ city, DB_Country^ country, DB_Cli
 	this->client_Address = client_Address;
 }
 
+Address::~Address() {
+	delete connection;
+	delete address;
+	delete city;
+	delete country;
+	delete client_Address;
+}
+
 DB_Address^ Address::getAddress() {
 	return this->address;
 }

@@ -7,6 +7,8 @@ public:
 	DB_Country();
 	DB_Country(int ID_Country, System::String^ name);
 
+	~DB_Country();
+
 	int getIDCountry();
 	System::String^ getName();
 

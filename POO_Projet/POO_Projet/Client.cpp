@@ -22,6 +22,13 @@ Client::Client(int ID_Client) {
 	this->people = gcnew DB_People(result->getInt(3), result->getString(5), result->getString(6));
 }
 
+Client::~Client() {
+	delete connection;
+	delete client;
+	delete people;
+	delete list_Address;
+}
+
 int Client::getClientID() {
 	return this->getClient()->getIDClient();
 }

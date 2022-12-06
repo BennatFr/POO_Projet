@@ -9,6 +9,8 @@ public:
 	List_Item(Item^ item);
 	List_Item(List_Item^ listItem, Item^ item);
 
+	~List_Item();
+
 	void setFirst(Item^ item);
 	void setLast(Item^ item);
 	void set(Item^ item, int i);

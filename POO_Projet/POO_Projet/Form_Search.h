@@ -82,6 +82,7 @@ namespace POOProjet {
 		~Form_Search() {
 			if (components) {
 				delete components;
+				delete connection;
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;

@@ -18,6 +18,11 @@ List_Item::List_Item(List_Item^ listItem, Item^ item) {
     this->value = item;
 }
 
+List_Item::~List_Item() {
+    delete next;
+    delete value;
+}
+
 void List_Item::setFirst(Item^ item)
 {
     if (this->value == nullptr) {

@@ -20,6 +20,8 @@ public:
 	Item(DB_Price^ price, DB_Item^ item, DB_Type^ type);
 	Item(DB_Price^ price, DB_Item^ item, DB_Type^ type, DB_Command_Contain^ command_Contain);
 
+	~Item();
+
 	DB_Price^ getPrice();
 	DB_Item^ getItem();
 	DB_Type^ getType();

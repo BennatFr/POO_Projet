@@ -10,6 +10,10 @@ DB_Methode_Payment::DB_Methode_Payment(int ID_Methode_Payment, System::String^ t
 	this->type = type;
 }
 
+DB_Methode_Payment::~DB_Methode_Payment() {
+	delete type;
+}
+
 int DB_Methode_Payment::getIDMethodePayment() {
 	return this->ID_Methode_Payment;
 }

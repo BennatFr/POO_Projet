@@ -56,6 +56,14 @@ Item::Item(DB_Price^ price, DB_Item^ item, DB_Type^ type, DB_Command_Contain^ co
 	this->command_Contain = command_Contain;
 }
 
+Item::~Item() {
+	delete connection;
+	delete price;
+	delete item;
+	delete type;
+	delete command_Contain;
+}
+
 DB_Price^ Item::getPrice() {
 	return this->price;
 }

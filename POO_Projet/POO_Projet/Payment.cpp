@@ -27,6 +27,12 @@ Payment::Payment(DB_Methode_Payment^ methode_Payment, DB_Payment^ payment) {
     this->payment = payment;
 }
 
+Payment::~Payment() {
+    delete connection;
+    delete methode_Payment;
+    delete payment;
+}
+
 int Payment::getIDPayment() {
     return this->getPayment()->getIDPayment();
 }

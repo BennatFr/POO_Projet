@@ -26,6 +26,13 @@ Personnel::Personnel(DB_Personnel^ personnel, Address^ address, DB_People^ peopl
 	this->people = people;
 }
 
+Personnel::~Personnel() {
+	delete connection;
+	delete personnel;
+	delete address;
+	delete people;
+}
+
 int Personnel::getPersonnelID() {
 	return this->personnel->getIDPersonnel();
 }

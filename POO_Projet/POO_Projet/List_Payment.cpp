@@ -18,6 +18,11 @@ List_Payment::List_Payment(List_Payment^ listPayment, Payment^ payment) {
     this->value = payment;
 }
 
+List_Payment::~List_Payment() {
+    delete next;
+    delete value;
+}
+
 void List_Payment::setFirst(Payment^ payment) {
     if (this->value == nullptr) {
         this->value = payment;

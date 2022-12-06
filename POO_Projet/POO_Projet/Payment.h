@@ -14,6 +14,8 @@ public:
 	Payment(int ID_Payment);
 	Payment(DB_Methode_Payment^ methode_Payment, DB_Payment^ payment);
 
+	~Payment();
+
 	int getIDPayment();
 	DB_Methode_Payment^ getMethodePayment();
 	DB_Payment^ getPayment();

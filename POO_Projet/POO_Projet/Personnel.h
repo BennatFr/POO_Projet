@@ -16,6 +16,8 @@ public:
 	Personnel(int ID_Personnel);
 	Personnel(DB_Personnel^ personnel, Address^ address, DB_People^ people);
 
+	~Personnel();
+
 	int getPersonnelID();
 	DB_Personnel^ getPersonnel();
 	Address^ getAddress();

@@ -14,6 +14,8 @@ public:
 	Command();
 	Command(int ID_Command);
 
+	~Command();
+
 	int getCommandID();
 	float getCommandPriceHT();
 	float getCommandPriceTTC();

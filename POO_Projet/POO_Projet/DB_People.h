@@ -8,6 +8,8 @@ public:
 	DB_People();
 	DB_People(int ID_People, System::String^ last_Name, System::String^ first_Name);
 
+	~DB_People();
+
 	int getIDPeople();
 	System::String^ getLastName();
 	System::String^ getFirstName();

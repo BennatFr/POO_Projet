@@ -81,6 +81,7 @@ namespace POOProjet {
 			if (components)
 			{
 				delete components;
+				delete item;
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;

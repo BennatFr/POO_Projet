@@ -14,6 +14,11 @@ DB_City::DB_City(int ID_City, System::String^ name, System::String^ postal_numbe
 	this->postal_number = postal_number;
 }
 
+DB_City::~DB_City() {
+	delete name;
+	delete postal_number;
+}
+
 int DB_City::getIDCity() {
 	return this->ID_City;
 }

@@ -47,6 +47,9 @@ namespace POOProjet {
 		~Form_Command() {
 			if (components) {
 				delete components;
+				delete client;
+				delete command;
+				delete connection;
 			}
 		}
 	private: Client^ client;
