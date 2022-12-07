@@ -258,7 +258,7 @@ namespace POOProjet {
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(156, 23);
 			this->button2->TabIndex = 13;
-			this->button2->Text = L"Ajouter une addresse";
+			this->button2->Text = L"Ajouter une adresse";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button2_Click);
 			// 
@@ -268,7 +268,7 @@ namespace POOProjet {
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(156, 23);
 			this->button3->TabIndex = 14;
-			this->button3->Text = L"Ajouter une addresse";
+			this->button3->Text = L"Ajouter une adresse";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button3_Click);
 			// 
@@ -278,7 +278,7 @@ namespace POOProjet {
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(172, 23);
 			this->button4->TabIndex = 15;
-			this->button4->Text = L"Supprimer une addresse";
+			this->button4->Text = L"Supprimer une adresse";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button4_Click);
 			// 
@@ -288,7 +288,7 @@ namespace POOProjet {
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(172, 23);
 			this->button5->TabIndex = 16;
-			this->button5->Text = L"Supprimer une addresse";
+			this->button5->Text = L"Supprimer une adresse";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form_Edit_Client::button5_Click);
 			// 
